@@ -1,0 +1,246 @@
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "ViewBacsDetailsGridView";
+        settings.CallbackRouteValues = new { Controller = "BacsDetails", Action = "BacsDetailsGridViewPartial", headerrecid = Request.Params["headerrecid"] };
+        //settings.SettingsEditing.BatchUpdateRouteValues = new { Controller = "BacsDetails", Action = "BatchUpdatePartial", headerrecid = Request.Params["headerrecid"] };
+        //settings.SettingsEditing.Mode = GridViewEditingMode..Batch;
+        //settings.SettingsEditing.BatchEditSettings.EditMode = GridViewBatchEditMode.Cell;
+        //settings.SettingsEditing.BatchEditSettings.StartEditAction = GridViewBatchStartEditAction.Click;
+
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowNewButtonInHeader = false;
+        settings.CommandColumn.Width = System.Web.UI.WebControls.Unit.Pixel(30);
+        settings.CommandColumn.MinWidth = 25;
+        settings.SettingsEditing.ShowModelErrorsForEditors = true;
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Auto;
+        settings.Settings.VerticalScrollableHeight = 675;
+        //settings.Settings.GridLines = System.Web.UI.WebControls.GridLines.None;
+
+        //settings.SettingsBehavior.AllowFocusedRow = true;
+        settings.SettingsPager.Mode = GridViewPagerMode.ShowAllRecords;
+        //settings.SettingsPager.PageSize = 20;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = true;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 600;
+
+        //settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        //settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        //settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        //settings.ClientSideEvents.BatchEditStartEditing = "OnBatchStartEdit";
+
+        settings.KeyFieldName = "DetailRecid";
+
+        //settings.HtmlRowPrepared = (s, e) =>
+        //{
+        //    if (e.KeyValue != null)
+        //    {
+        //        if (Convert.ToString(e.GetValue("StatusFlag")) == "2")
+        //        {
+        //            e.Row.BackColor = System.Drawing.Color.LightGray;
+        //            //e.Row.ForeColor = System.Drawing.Color.Salmon;
+        //        }
+        //    }
+        //};
+
+        //GridViewCommandColumnCustomButton btnDeactivate = new GridViewCommandColumnCustomButton();
+        //btnDeactivate.ID = "btnDeactivate";
+        //btnDeactivate.Image.Url = "~/Content/Img/Delete_Icon_16.png";
+        //btnDeactivate.Image.ToolTip = "De-activate";
+        //settings.CommandColumn.CustomButtons.Add(btnDeactivate);
+
+        //GridViewCommandColumnCustomButton btnReactivate = new GridViewCommandColumnCustomButton();
+        //btnReactivate.ID = "btnReactivate";
+        //btnReactivate.Image.Url = "~/Content/Img/Button_Refresh_Icon_16.png";
+        //btnReactivate.Image.ToolTip = "Re-activate";
+        //settings.CommandColumn.CustomButtons.Add(btnReactivate);
+
+        //settings.CommandColumn.SetHeaderCaptionTemplateContent(c =>
+        //{
+        //    Html.DevExpress().HyperLink(hl =>
+        //    {
+        //        hl.Name = "hlNewOD_"; // + c.KeyValue.ToString();
+        //        hl.NavigateUrl = "javascript:;";
+        //        hl.Properties.Text = "New";
+        //        hl.ToolTip = "New";
+        //        hl.Properties.ImageUrl = "~/Content/Img/Button_Add_Icon_16.png";
+        //        hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ {0}.AddNewRow(); }}", settings.Name);
+        //    }).Render();
+        //});
+
+        //settings.ClientSideEvents.CustomButtonClick = string.Format("function(s, e) {{ OrderDetailLineClick(s, e, '{0}' ); }}", DevExpressHelper.GetUrl(new { Controller = "OrderDetail", Action = "ReActivateOrderLine" }));
+
+        //settings.Columns.Add(column =>
+        //{
+        //    column.Name = "ComColumn";
+        //    column.Caption = "#";
+        //    column.Width = 40;
+        //    column.EditFormSettings.Visible = DefaultBoolean.False;
+        //    column.VisibleIndex = 0;
+        //    column.SetHeaderTemplateContent(c =>
+        //    {
+        //        Html.DevExpress().HyperLink(hl =>
+        //        {
+        //            hl.Name = "hlNewOD_"; // + c.KeyValue.ToString();
+        //            hl.NavigateUrl = "javascript:;";
+        //            hl.Properties.Text = "New";
+        //            hl.ToolTip = "New";
+        //            hl.Properties.ImageUrl = "~/Content/Img/Button_Add_Icon_16.png";
+        //            hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ {0}.AddNewRow(); }}", settings.Name);
+        //        }).Render();
+        //    });
+        //column.SetDataItemTemplateContent(c =>
+        //{
+        //    Html.DevExpress().HyperLink(hl =>
+        //    {
+        //        hl.Name = "hlDeleteOD_" + c.VisibleIndex; //c.KeyValue.ToString();
+        //        hl.NavigateUrl = "javascript:;";
+        //        hl.Properties.Text = "Delete";
+        //        hl.ToolTip = "De-activate";
+        //        hl.Properties.ImageUrl = "~/Content/Img/Delete_Icon_16.png";
+        //        hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ if (confirm({2})) {0}.DeleteRow('{1}'); }}", settings.Name, c.VisibleIndex, "'Confirm De-active?'");
+        //    }).Render();
+        //});
+        //});
+        //settings.CustomButtonInitialize = (s, e) =>
+        //{
+        //    if (e.CellType == GridViewTableCommandCellType.Filter) return;
+        //    //MVCxGridView g = s as MVCxGridView;
+        //    //string AllreadyActive = "";
+        //    //AllreadyActive = (string)(g.GetRowValues(e.VisibleIndex, "ActiveFlag").ToString()) ?? "0";
+
+        //    if (e.ButtonID == "btnDeactivate")
+        //    {
+        //        e.Text = "";
+        //        if (User.IsInRole("Admin") || User.IsInRole("SOPSupervisor") || User.IsInRole("SOPBackoff"))
+        //        {
+        //            //if (AllreadyActive == "1")
+        //            //{
+        //            e.Visible = DefaultBoolean.True;
+        //            //}
+        //            //else
+        //            //{
+        //            //    e.Visible = DefaultBoolean.False;
+        //            //}
+
+        //        }
+        //        else
+        //        {
+        //            e.Visible = DefaultBoolean.False;
+        //        }
+
+        //    }
+        //    if (e.ButtonID == "btnReactivate")
+        //    {
+        //        e.Text = "";
+        //        if (User.IsInRole("Admin") || User.IsInRole("SOPSupervisor") || User.IsInRole("SOPBackoff"))
+        //        {
+        //            //if (AllreadyActive == "No")
+        //            //{
+        //            e.Visible = DefaultBoolean.True;
+        //            //}
+        //            //else
+        //            //{
+        //            //    e.Visible = DefaultBoolean.False;
+        //            //}
+
+        //        }
+        //        else
+        //        {
+        //            e.Visible = DefaultBoolean.False;
+        //        }
+
+        //    }
+        //};
+
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "CustomerNo";
+            c.Caption = "Customer No";
+            c.Width = 40;
+            c.VisibleIndex = 2;
+            c.EditFormSettings.Visible = DefaultBoolean.False;
+            c.AdaptivePriority = 1;
+        });
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "SortingCode";
+            c.Caption = "Sorting Code";
+            c.Width = 40;
+            c.VisibleIndex = 3;
+            c.EditFormSettings.Visible = DefaultBoolean.False;
+            c.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "BankAccountNo";
+            c.Caption = "Bank Account No";
+            c.Width = 42;
+            c.VisibleIndex = 4;
+            c.EditFormSettings.Visible = DefaultBoolean.False;
+            c.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "BankAccountName";
+            c.Caption = "Bank Account Name";
+            c.Width = 82;
+            c.VisibleIndex = 5;
+            c.EditFormSettings.Visible = DefaultBoolean.False;
+            c.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "ClaimedAmount";
+            c.Caption = "Claimed Amount";
+            c.ColumnType = MVCxGridViewColumnType.TextBox;
+            c.PropertiesEdit.DisplayFormatString = "{0:C}";
+            c.BatchEditModifiedCellStyle.BackColor = System.Drawing.Color.DarkCyan;
+            c.BatchEditModifiedCellStyle.ForeColor = System.Drawing.Color.White;
+            c.Width = 40;
+            c.VisibleIndex = 6;
+            c.AdaptivePriority = 1;
+        });
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "SecondClaim";
+            c.Caption = "Second Claim";
+            c.Width = 82;
+            c.VisibleIndex = 7;
+            c.EditFormSettings.Visible = DefaultBoolean.False;
+            c.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(c => { c.FieldName = "FirstClaim"; c.Caption = "First Claim"; c.Width = 150; c.Visible = false; c.AdaptivePriority = 2; });
+        settings.Columns.Add(c => { c.FieldName = "NewBankMandate"; c.Caption = "New Bank Mandate"; c.Width = 150; c.Visible = false; c.AdaptivePriority = 2; });
+        settings.Columns.Add(c => { c.FieldName = "LastChangedBy"; c.Caption = "Last Changed By"; c.Width = 150; c.Visible = false; c.AdaptivePriority = 2; });
+        settings.Columns.Add(c => { c.FieldName = "LastChangedDate"; c.Caption = "Last Changed Date"; c.Width = 150; c.Visible = false; c.AdaptivePriority = 2; });
+        settings.Columns.Add(c => { c.FieldName = "CreatedBy"; c.Caption = "Created By"; c.Width = 150; c.Visible = false; c.AdaptivePriority = 2; });
+        settings.Columns.Add(c => { c.FieldName = "CreatedDate"; c.Caption = "Created Date"; c.Width = 150; c.Visible = false; c.AdaptivePriority = 2; });
+
+
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "ClaimedAmount").DisplayFormat = "{0:C}";
+        settings.Settings.ShowFooter = true;
+        settings.CellEditorInitialize = (s, e) =>
+        {
+            ASPxEdit editor = (ASPxEdit)e.Editor;
+            editor.ValidationSettings.Display = Display.Dynamic;
+        };
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://hovismillingportal.azurewebsites.net/Content/Img/HoVIS_New_IS_Logo_SMALL.png" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+
+    @Scripts.Render("~/bundles/jquery")
+
+    @Html.DevExpress().GetScripts(
+        new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+        //new Script { ExtensionSuite = ExtensionSuite.HtmlEditor },
+        new Script { ExtensionSuite = ExtensionSuite.GridView },
+        new Script { ExtensionSuite = ExtensionSuite.PivotGrid },
+        new Script { ExtensionSuite = ExtensionSuite.Editors },
+        new Script { ExtensionSuite = ExtensionSuite.Chart },
+        new Script { ExtensionSuite = ExtensionSuite.Report },
+        //new Script { ExtensionSuite = ExtensionSuite.Scheduler },
+        //new Script { ExtensionSuite = ExtensionSuite.TreeList },
+        //new Script { ExtensionSuite = ExtensionSuite.Spreadsheet },
+        //new Script { ExtensionSuite = ExtensionSuite.RichEdit },
+        //new Script { ExtensionSuite = ExtensionSuite.SpellChecker },
+        new Script { ExtensionType = ExtensionType.WebDocumentViewer },
+        new Script { ExtensionType = ExtensionType.Menu }
+    )
+    @Html.DevExpress().GetStyleSheets(
+        new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
+        //new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.GridView },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.PivotGrid },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Chart },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Report },
+        //new StyleSheet { ExtensionSuite = ExtensionSuite.Scheduler },
+        //new StyleSheet { ExtensionSuite = ExtensionSuite.TreeList },
+        //new StyleSheet { ExtensionSuite = ExtensionSuite.Spreadsheet },
+        //new StyleSheet { ExtensionSuite = ExtensionSuite.RichEdit },
+        //new StyleSheet { ExtensionSuite = ExtensionSuite.SpellChecker },
+        new StyleSheet { ExtensionType = ExtensionType.WebDocumentViewer },
+        new StyleSheet { ExtensionType = ExtensionType.Menu }
+    )
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-fixed-top navbar-custom">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Milling Portal", "Index", "Home", new { area = "" }, new { @class = "HeaderNavImage" })
+                @*@Html.ActionLink("ISC Portal", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown show-on-hover">
+                        <a data-toggle="dropdown" href="#">
+                            Home
+                        </a>
+                        <ul class="dropdown-menu sidebar text-white">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown show-on-hover">
+                        <a data-toggle="dropdown" href="#">
+                            Bacs
+                        </a>
+                        <ul class="dropdown-menu sidebar text-white">
+                            <li>@Html.ActionLink("Customers", "Index", "BacsCustomer")</li>
+                            <li>@Html.ActionLink("Bacs Transactions", "Index", "BacsDetails")</li>
+                            <li>@Html.ActionLink("MasterData - DD Frequency", "DDFrequencyIndex", "BacsMasterData")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown show-on-hover">
+                        <a data-toggle="dropdown" href="#">
+                            UMQC
+                        </a>
+                        <ul class="dropdown-menu sidebar text-white">
+                            <li>@Html.ActionLink("Master Data - Std Name", "ResultNameIndex", "UMQC")</li>
+                            <li>@Html.ActionLink("Master Data - Std Targets", "StandardsMasterIndex", "UMQC")</li>
+                            <li>@Html.ActionLink("Test Data", "TestHeaderIndex", "UMQC")</li>
+                            <li>@Html.ActionLink("Search Test Data", "IndexV2", "UMQC")</li>
+                            <li>@Html.ActionLink("Report - Standard Test by Recipe", "IndexProdStandard", "Reports")</li>
+                            <li>@Html.ActionLink("Graph - No Of Tests Between dates", "IndexNoOfTests", "Reports")</li>
+                        </ul>
+                    </li>
+                    @*<li class="dropdown show-on-hover">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            Changes
+        </a>
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink("Change List", "Index", "Change")</li>
+            <li>@Html.ActionLink("New Change", "Create", "Change")</li>
+            <li>@Html.ActionLink("Report - By Category", "IndexChangeCat", "Reports")</li>
+            <li>@Html.ActionLink("Report - By Type", "IndexChangeType", "Reports")</li>
+            <li>@Html.ActionLink("Report - By Priority", "IndexChangePriority", "Reports")</li>
+        </ul>
+    </li>
+    <li class="dropdown show-on-hover">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            Activity Trackers
+        </a>
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink("Activity Tracker", "Index", "Tracker")</li>
+            <li>@Html.ActionLink("Project Activity Tracker", "Index", "TrackerProjects")</li>
+            <li>@Html.ActionLink("Problem Activity Tracker", "Index", "TrackerProblems")</li>
+            <li>@Html.ActionLink("Logistics Activity Tracker", "Index", "TrackerLogistics")</li>
+        </ul>
+    </li>
+    <li class="dropdown show-on-hover">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            Tracker History/Reports
+        </a>
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink("History Activity Tracker", "IndexHistory", "Tracker")</li>
+            <li>@Html.ActionLink("History Project Activity Tracker", "IndexHistory", "TrackerProjects")</li>
+            <li>@Html.ActionLink("History Problem Activity Tracker", "IndexHistory", "TrackerProblems")</li>
+            <li>@Html.ActionLink("Leaderboard", "IndexLead", "Reports")</li>
+        </ul>
+    </li>
+    <li class="dropdown show-on-hover">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            Major Break Downs
+        </a>
+        <ul class="dropdown-menu">
+            @if (User.IsInRole("Admin") || User.IsInRole("MajorBDUserBB"))
+            {
+                <li>@Html.ActionLink("Bakery Major Break Down Log", "IndexBB", "MajorBreakDown")</li>
+            }
+            @if (User.IsInRole("Admin") || User.IsInRole("MajorBDUserRH"))
+            {
+                <li>@Html.ActionLink("Mills Major Break Down Log", "IndexRH", "MajorBreakDown")</li>
+            }
+            <li>@Html.ActionLink("Major Break Down Report", "IndexBDBySite", "Reports")</li>
+        </ul>
+    </li>
+    @if (User.IsInRole("Admin"))
+    {
+    <li class="dropdown show-on-hover">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            Master Data
+        </a>
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink("Approval Group", "ApprovalGroupIndex", "MasterData")</li>
+            <li>@Html.ActionLink("Approval Templates", "ApprovalTemplateIndex", "MasterData")</li>
+            <li>@Html.ActionLink("Agent Groups", "AgentGroupIndex", "MasterData")</li>
+            <li>@Html.ActionLink("Agents", "AgentIndex", "MasterData")</li>
+        </ul>
+    </li>
+    }*@
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="dropdown show-on-hover">
+                            <a href="@Url.Action("Index", "ApplicationUser", new { area = "" }, null)" data-toggle="dropdown">
+                                <i class="fa fa-user"></i>
+                                <span>Users</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="@Url.Action("IndexList", "ApplicationUser", new { area = "" }, null)">
+                                        <span>List Users</span>
+                                    </a>
+                                </li>
+                                @*<li>
+                                    <a href="@Url.Action("New", "ApplicationUser", new { area = "" }, null)">
+                                        <span>Add New User</span>
+                                    </a>
+                                </li>*@
+                            </ul>
+                        </li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Hovis Milling Portal</p>
+        </footer>
+    </div>
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,163 @@
+﻿@model HovisMillingPortal.Models.t_Milling_Bacs_Header
+
+@{
+    ViewBag.Title = "Create Bacs Submission";
+}
+
+<section class="panel panel-default">
+    @*<header class="panel-heading">Create Order</header>*@
+    <div class="panel-body">
+@using (Html.BeginForm("Create", "BacsDetails", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.DevExpress().ValidationSummary().GetHtml()
+    @Html.ValidationMessage("CustomError")
+    @Html.HiddenFor(model => model.LastChangedBy)
+    @Html.HiddenFor(model => model.LastChangedDate)
+    @Html.HiddenFor(model => model.CreatedBy)
+    @Html.HiddenFor(model => model.CreatedDate)
+    @Html.HiddenFor(model => model.SentBy)
+    @Html.HiddenFor(model => model.SentDate)
+
+    @Html.DevExpress().FormLayout(s =>
+{
+    s.Name = "BacsHeaderformLayout";
+    s.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+    s.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 800;
+    s.ControlStyle.CssClass = "formLayout";
+    s.ColCount = 1;
+    s.UseDefaultPaddings = true;
+    s.AlignItemCaptionsInAllGroups = true;
+
+    s.Items.AddGroupItem(m =>
+    {
+        m.Caption = "Bacs Master Data";
+        m.ColCount = 4;
+        m.GroupBoxDecoration = GroupBoxDecoration.Box;
+        m.SettingsItemCaptions.HorizontalAlign = FormLayoutHorizontalAlign.Left;
+
+        m.Items.Add(j => j.BacsID, item =>
+        {
+            item.Caption = "BacsID";
+            item.CaptionCellStyle.CssClass = "textbox";
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.TextBox;
+            item.NestedExtension().TextBox(i =>
+            {
+                i.ShowModelErrors = true;
+                //i.ClientEnabled = false;
+                //i.ReadOnly = true;
+            });
+        });
+
+        m.Items.Add(j => j.StageFlag, item =>
+        {
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.ComboBox;
+
+            item.NestedExtension().ComboBox(i =>
+            {
+                i.Properties.DataSource = ViewBag.StageFlag;
+                i.Properties.ClientSideEvents.Init = "function(s,e){if(s.GetValue()==' '){ s.SetValue(null);}}";
+                i.Properties.NullText = "-- Please Select --";
+                i.Properties.NullDisplayText = "-- Please Select --";
+                i.ShowModelErrors = true;
+                //i.ClientEnabled = false;
+                //i.ReadOnly = true;
+                //i.Properties.DropDownButton.Visible = false;
+            });
+        });
+
+        m.Items.Add(j => j.DDFrequency, item =>
+        {
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.ComboBox;
+
+            item.NestedExtension().ComboBox(i =>
+            {
+                i.Properties.DataSource = ViewBag.DDFrequency;
+                i.Properties.ClientSideEvents.Init = "function(s,e){if(s.GetValue()==' '){ s.SetValue(null);}}";
+                i.Properties.NullText = "-- Please Select --";
+                i.Properties.NullDisplayText = "-- Please Select --";
+                i.ShowModelErrors = true;
+                //i.ClientEnabled = false;
+                //i.ReadOnly = true;
+                //i.Properties.DropDownButton.Visible = false;
+            });
+        });
+
+        m.Items.Add(j => j.PaymentDate, item =>
+        {
+            //item.Caption = "DeliveryDate";
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.DateEdit;
+            item.NestedExtension().DateEdit(i =>
+            {
+                i.ShowModelErrors = true;
+                //i.ClientEnabled = false;
+                //i.ReadOnly = true;
+                //i.Properties.DropDownButton.Visible = false;
+            });
+        });
+        m.Items.Add(j => j.MasterBankSortCode, item =>
+        {
+            item.Caption = "Master Bank Sort Code";
+            item.CaptionCellStyle.CssClass = "textbox";
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.TextBox;
+            item.NestedExtension().TextBox(i =>
+            {
+                i.ShowModelErrors = true;
+                //i.ClientEnabled = false;
+                //i.ReadOnly = true;
+            });
+        });
+        m.Items.Add(j => j.MasterBankAccountNo, item =>
+        {
+            item.Caption = "Bank Account No";
+            item.CaptionCellStyle.CssClass = "textbox";
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.TextBox;
+            item.NestedExtension().TextBox(i =>
+            {
+                i.ShowModelErrors = true;
+                //i.ClientEnabled = false;
+                //i.ReadOnly = true;
+            });
+        });
+
+        m.Items.Add(j => j.MasterBankAccountName, item =>
+        {
+            item.Caption = "Bank Account Name";
+            item.CaptionCellStyle.CssClass = "textbox";
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.TextBox;
+            item.NestedExtension().TextBox(i =>
+            {
+                i.ShowModelErrors = true;
+                //i.ClientEnabled = false;
+                //i.ReadOnly = true;
+            });
+        });
+    });
+
+    s.Items.AddGroupItem(m =>
+    {
+        m.Caption = "Options";
+        m.ColCount = 3;
+        //m.UseDefaultPaddings = false;
+        //m.Paddings.PaddingTop = System.Web.UI.WebControls.Unit.Pixel(0);
+        m.GroupBoxDecoration = GroupBoxDecoration.Box;
+        m.SettingsItemCaptions.HorizontalAlign = FormLayoutHorizontalAlign.Left;
+
+        m.Items.Add(i =>
+        {
+            i.ShowCaption = DefaultBoolean.False;
+            i.Width = 70;
+            i.HorizontalAlign = FormLayoutHorizontalAlign.Center;
+            i.NestedExtension().Button(j =>
+            {
+                j.Name = "Save";
+                j.Text = "Generate Bacs Details";
+                j.UseSubmitBehavior = true;
+            });
+        });
+    });
+
+}).Bind(Model).GetHtml()
+}
+</div>
+</section>

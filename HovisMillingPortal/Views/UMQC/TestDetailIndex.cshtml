@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Test Detail Results Data";
+}
+@*<div>
+    <input type="button" id="btBacsDetailsShowCustomizationWindow" value="Show Customization Window" class="btn btn-success btn-xs"/> |
+    <input type="button" id="btBacsDetailsShowCustomFilterWindow" value="Show Custom Filter" class="btn btn-success btn-xs" />
+</div>*@
+@*@Html.Partial("ViewHeader", null, new ViewDataDictionary { { "resultheaderrecid", ViewBag.resultheaderrecid } })*@
+@*@Html.Partial("ViewHeader",null, new ViewDataDictionary(ViewData) { { "resultheaderrecid", ViewBag.resultheaderrecid } })*@
+@*@Html.Action("ViewHeader")
+
+@Html.Action("TestDetailGridViewPartial")*@
+
+@Html.DevExpress().CallbackPanel(settings =>
+{
+    settings.Name = "MainCallbackPanel";
+    settings.CallbackRouteValues = new { Controller = "UMQC", Action = "TestDetailIndex", resultheaderrecid = ViewBag.resultheaderrecid };
+    settings.ControlStyle.CssClass = "mainCallbackPanel";
+
+    settings.SetContent(() =>
+    {
+        Html.RenderPartial("MainContent", new { resultheaderrecid = ViewBag.resultheaderrecid });
+    });
+    //settings.ClientSideEvents.EndCallback = "MainCallbackPanel_EndCallback";
+}
+).GetHtml()

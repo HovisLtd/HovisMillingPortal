@@ -1,0 +1,31 @@
+﻿<div class="customersDetailsMainContainer">
+    <div class="ordersPagesContainer">
+        @*@if (Model != null)
+        {*@
+            @Html.DevExpress().PageControl(settings =>
+       {
+           settings.Name = "DetailsPageControl";
+           settings.ControlStyle.CssClass = "custGridViewDetailsPages";
+           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+           if (ViewBag.FunctionValue == 1)
+           {
+               settings.TabPages.Add("Segregations", "Segregations").SetContent(() =>
+               {
+                   Html.RenderAction("SegregationDetailGridViewPartial", "UMQC");
+               });
+           }
+           settings.TabPages.Add("Qualities", "Qualities").SetContent(() =>
+           {
+               Html.RenderAction("QualitiesDetailGridViewPartial", "UMQC");
+           });
+           if (ViewBag.FunctionValue == 1)
+           {
+               settings.TabPages.Add("Others", "Others").SetContent(() =>
+               {
+                   Html.RenderAction("OthersDetailGridViewPartial", "UMQC");
+               });
+           }
+       }).GetHtml()
+        @*}*@
+    </div>
+</div>

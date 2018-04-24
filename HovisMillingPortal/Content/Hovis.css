@@ -1,0 +1,113 @@
+﻿html, body {
+    margin: 0;
+    height: 100%;
+    min-width: 100%;
+}
+
+.container {
+    min-width: 100%;
+    /* width: 1170px; */
+}
+
+.panel-body .table-responsive .EntryFormTable > tbody > tr > td {
+    padding: 4px;
+    line-height: 1.4285;
+    vertical-align: middle;
+    border-top: 0px;
+}
+
+.panel-body .table-responsive .EntryFormTable label {
+    color:black;
+}
+
+.field-validation-error {
+    color:red;
+}
+
+.navbar-custom {
+    background-color:#9CC525;
+    color:black !important;
+    border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color:#ffffff;
+}
+
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+    color: #ffffff !important;
+    background-color:transparent;
+}
+.navbar-custom .navbar-brand {
+    color:black;
+}
+
+.navbar-custom .navbar-toggle .icon-bar {
+    background-color: black;
+}
+
+/*.navbar-custom .navbar-nav > li > a {
+    color: black;
+}*/
+
+.nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    color: black;
+    background-color: #eee;
+}
+
+a.HeaderNavImage {
+    background: url('Img/HoVIS_New_IS_Logo_SMALL.png') no-repeat top left;
+    display: block;
+    width: 70px;
+    height: 50px;
+    text-indent: -9999px; /* hides the link text*/
+    padding-left:0px;
+}
+
+a.HeaderNavImage img {
+    max-width: 100%;
+    height: auto;
+    width: auto\9;
+}
+
+.panel .panel-default .panel-body .form-group .col-lg-3 .BlackDivText .label {
+    color:black;
+}
+
+.Customlabel  {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color:black;
+    padding-top:4px;
+}
+
+.dxeEditArea_Youthful.dxeDisabled_Youthful {
+    color: black !important;
+}
+
+.header .avatar {
+    width: 30px;
+}
+
+.Ordersheadertext {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 5px;
+    margin-right: 2px;
+}
+
+.HovisMenu {
+    margin-top: 22px;
+    vertical-align:bottom;
+    /*height:50px;*/
+    min-height:50px;
+}
+
+@media screen and (max-width: 800px) {
+  .hideControl {
+    display: none;
+  }
+}

@@ -1,0 +1,21 @@
+﻿@Html.DevExpress().CallbackPanel(settings =>
+{
+    settings.Name = "DetailsCallbackPanel";
+    settings.CallbackRouteValues = new { Controller = "UMQC", Action = "DetailCallbackPanel" };
+    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.Collapsible = true;
+    settings.SettingsAdaptivity.CollapseAtWindowInnerHeight = 500;
+    settings.SettingsCollapsing.ExpandEffect = PanelExpandEffect.PopupToTop;
+    settings.SettingsCollapsing.AnimationType = AnimationType.Slide;
+    settings.SettingsCollapsing.ExpandButton.Position = PanelExpandButtonPosition.Far;
+    //settings.ControlStyle.CssClass = "custGridViewDetailsPanel";
+    settings.Styles.ExpandBar.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.Styles.ExpandedPanel.CssClass = "expanded";
+    settings.ClientSideEvents.BeginCallback = "DetailsCallbackPanel_BeginCallback";  //****This is important to pass Params****** 
+
+    settings.SetContent(() =>
+    {
+        Html.RenderAction("DetailPageControl", "UMQC");
+    });
+
+}).GetHtml()

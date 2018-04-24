@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Site Authorisation";
+}
+@model HovisMillingPortal.ViewModels.SiteAuthModel
+<script type="text/javascript">
+    function OnClick() {
+        var selectedItems = checkBoxList1.GetSelectedValues();
+        alert(selectedItems.toString());
+    }
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.DevExpress().FormLayout(s =>
+    @Html.DevExpress().CheckBoxList(
+    settings =>
+    {
+        settings.Name = "checkBoxList1";
+        settings.Properties.ValueField = "ID";
+        settings.Properties.ValueType = typeof(int);
+        settings.Properties.TextField = "Name";
+
+        settings.PreRender = (sender, e) =>
+        {
+            ASPxCheckBoxList cbl = (ASPxCheckBoxList)sender;
+            foreach (ListEditItem item in cbl.Items)
+            {
+                item.Selected = Model.Authorised.Contains((int)item.Value);
+            }
+        };
+
+    }).BindList(ViewData["UnSelectedList"]).GetHtml()
+    < input type = "submit" value = "Post" />
+}
+@*<input type="button" onclick="OnClick();" value="Get Selected Items" />*@

@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Test Details";
+}
+<div class="row">
+    <div class="col-md-3">
+        <table>
+            <tr>
+                <td>
+                    <input type="button" id="btShowCustomizationTestD" value="Show Customization Window" class="btn btn-sm btn-success" />
+                </td>
+                <td> | </td>
+                <td>
+                    <input type="button" id="btShowCustomFilterTestD" value="Show Custom Filter" class="btn btn-sm btn-success" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-9">
+        <table>
+            <tr>
+                @using (Html.BeginForm("IndexV2", "UMQC", FormMethod.Post))
+                {
+                    <td><h6 class="Ordersheadertext">----Change the review date here----</h6></td>
+                            <td>
+                                @Html.DevExpress().DateEdit(settings =>
+                                    {
+                                        settings.Name = "TestDDateEdit";
+                                        settings.Date = Convert.ToDateTime(ViewBag.TestDDateEdit);
+                                    }).GetHtml()
+                            </td>
+                            <td>
+                                @Html.DevExpress().Button(settings =>
+                               {
+                                   settings.Name = "TestDButton";
+                                   settings.Text = "Review";
+                                   settings.UseSubmitBehavior = true;
+                                   settings.ControlStyle.CssClass = "btn btn-sm btn-success";
+                                   settings.Init += (s, e) =>
+                                   {
+                                       ((MVCxButton)s).Native = true;
+                                   };
+                               }).GetHtml()
+
+                            </td>
+                }
+            </tr>
+        </table>
+    </div>
+</div>
+@Html.DevExpress().CallbackPanel(settings =>
+{
+    settings.Name = "MainCallbackPanel";
+    settings.CallbackRouteValues = new { Controller = "UMQC", Action = "IndexV2" , TestDDateEdit = ViewBag.TestDDateEdit };
+    settings.ControlStyle.CssClass = "mainCallbackPanel";
+
+    settings.SetContent(() =>
+    {
+        Html.RenderPartial("MainContentTestD", new { TestDDateEdit = ViewBag.TestDDateEdit });
+    });
+    //settings.ClientSideEvents.EndCallback = "MainCallbackPanel_EndCallback";
+}
+).GetHtml()
+
+

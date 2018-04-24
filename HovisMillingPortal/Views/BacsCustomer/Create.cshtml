@@ -1,0 +1,217 @@
+﻿@model HovisMillingPortal.Models.t_Milling_Bacs_Customers
+
+@{
+    ViewBag.Title = "Create Customer";
+}
+
+<section class="panel panel-default">
+    @*<header class="panel-heading">Create Order</header>*@
+    <div class="panel-body">
+@using (Html.BeginForm("Create", "BacsCustomer", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.DevExpress().ValidationSummary().GetHtml()
+    @Html.ValidationMessage("CustomError")
+    @Html.HiddenFor(model => model.LastChangedBy)
+    @Html.HiddenFor(model => model.LastChangedDate)
+    @Html.HiddenFor(model => model.CreatedBy)
+    @Html.HiddenFor(model => model.CreatedDate)
+
+    @Html.DevExpress().FormLayout(s =>
+{
+    s.Name = "customereditformLayout";
+    s.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+    s.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 800;
+    s.ControlStyle.CssClass = "formLayout";
+    s.ColCount = 1;
+    s.UseDefaultPaddings = true;
+    s.AlignItemCaptionsInAllGroups = true;
+
+    s.Items.AddGroupItem(m =>
+    {
+        m.Caption = "Customer Master Data";
+        m.ColCount = 4;
+        m.GroupBoxDecoration = GroupBoxDecoration.Box;
+        m.SettingsItemCaptions.HorizontalAlign = FormLayoutHorizontalAlign.Left;
+
+        m.Items.Add(j => j.CustomerNo, item =>
+        {
+            item.Caption = "CustomerNo";
+            item.CaptionCellStyle.CssClass = "textbox";
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.TextBox;
+            item.NestedExtension().TextBox(i =>
+            {
+                i.ShowModelErrors = true;
+                //i.ClientEnabled = false;
+                //i.ReadOnly = true;
+            });
+        });
+        m.Items.Add(j => j.SortingCode, item =>
+        {
+            item.Caption = "SortingCode";
+            item.CaptionCellStyle.CssClass = "textbox";
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.TextBox;
+            item.NestedExtension().TextBox(i =>
+            {
+                i.ShowModelErrors = true;
+                i.Properties.MaxLength = 6;
+                i.Properties.MaskSettings.Mask = "00-00-00";
+                i.Properties.MaskSettings.IncludeLiterals = MaskIncludeLiteralsMode.None;
+                i.Properties.MaskSettings.ErrorText = "Invalid Sort Code";
+                i.Properties.ValidationSettings.Display = Display.Dynamic;
+                //i.Properties.MaskSettings.Mask = Mask
+                i.Properties.DisplayFormatString = " 00 - 00 - 00 ";
+                i.Properties.DisplayFormatInEditMode = true;
+                //i.Properties.NullDisplayText = "__-__-__";
+                //i..DisplayFormatString = "dd/MM/yyyy HH:mm";
+                //i.ClientEnabled = false;
+                //i.ReadOnly = true;
+            });
+
+        });
+        m.Items.Add(j => j.BankAccountNo, item =>
+        {
+            item.Caption = "BankAccountNo";
+            item.CaptionCellStyle.CssClass = "textbox";
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.TextBox;
+            item.NestedExtension().TextBox(i =>
+            {
+                i.ShowModelErrors = true;
+                i.Properties.MaxLength = 8;
+                i.Properties.MaskSettings.Mask = "00000000";
+                //i.ClientEnabled = false;
+                //i.ReadOnly = true;
+            });
+        });
+
+        m.Items.Add(j => j.BankAccountName, item =>
+        {
+            item.Caption = "BankAccountName";
+            item.CaptionCellStyle.CssClass = "textbox";
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.TextBox;
+            item.NestedExtension().TextBox(i =>
+            {
+                i.ShowModelErrors = true;
+                //i.ClientEnabled = false;
+                //i.ReadOnly = true;
+            });
+        });
+
+        m.Items.Add(j => j.Status, item =>
+        {
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.ComboBox;
+
+            item.NestedExtension().ComboBox(i =>
+            {
+                i.Properties.DataSource = ViewBag.Status;
+                i.Properties.ClientSideEvents.Init = "function(s,e){if(s.GetValue()==' '){ s.SetValue(null);}}";
+                i.Properties.NullText = "-- Please Select --";
+                i.Properties.NullDisplayText = "-- Please Select --";
+                i.ShowModelErrors = true;
+                //i.ClientEnabled = false;
+                //i.ReadOnly = true;
+                //i.Properties.DropDownButton.Visible = false;
+            });
+        });
+
+        m.Items.Add(j => j.BankMandateDate, item =>
+        {
+            item.Caption = "BankMandateDate";
+            item.CaptionCellStyle.CssClass = "textbox";
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.TextBox;
+            item.NestedExtension().TextBox(i =>
+            {
+                i.ShowModelErrors = true;
+                //i.ClientEnabled = false;
+                //i.ReadOnly = true;
+            });
+        });
+
+        m.Items.Add(j => j.DDFrequency, item =>
+        {
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.ComboBox;
+
+            item.NestedExtension().ComboBox(i =>
+            {
+                i.Properties.DataSource = ViewBag.DDFrequency;
+                i.Properties.ClientSideEvents.Init = "function(s,e){if(s.GetValue()==' '){ s.SetValue(null);}}";
+                i.Properties.NullText = "-- Please Select --";
+                i.Properties.NullDisplayText = "-- Please Select --";
+                i.ShowModelErrors = true;
+                //i.ClientEnabled = false;
+                //i.ReadOnly = true;
+                //i.Properties.DropDownButton.Visible = false;
+            });
+        });
+
+        m.Items.Add(j => j.NewBankMandate, item =>
+        {
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.ComboBox;
+
+            item.NestedExtension().ComboBox(i =>
+            {
+                i.Properties.DataSource = ViewBag.NewBankMandate;
+                i.Properties.ClientSideEvents.Init = "function(s,e){if(s.GetValue()==' '){ s.SetValue(null);}}";
+                i.Properties.NullText = "-- Please Select --";
+                i.Properties.NullDisplayText = "-- Please Select --";
+                i.ShowModelErrors = true;
+                //i.ClientEnabled = false;
+                //i.ReadOnly = true;
+                //i.Properties.DropDownButton.Visible = false;
+            });
+        });
+
+        m.Items.Add(j => j.FirstClaim, item =>
+        {
+            //item.Caption = "Contact No";
+            item.CaptionCellStyle.CssClass = "textbox";
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.TextBox;
+            item.NestedExtension().TextBox(i =>
+            {
+                i.ShowModelErrors = true;
+                //i.ClientEnabled = false;
+                //i.ReadOnly = true;
+            });
+        });
+
+        m.Items.Add(j => j.SecondClaim, item =>
+        {
+            //item.Caption = "Contact No";
+            item.CaptionCellStyle.CssClass = "textbox";
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.TextBox;
+            item.NestedExtension().TextBox(i =>
+            {
+                i.ShowModelErrors = true;
+                //i.ClientEnabled = false;
+                //i.ReadOnly = true;
+            });
+        });
+    });
+
+    s.Items.AddGroupItem(m =>
+    {
+        m.Caption = "Options";
+        m.ColCount = 3;
+        //m.UseDefaultPaddings = false;
+        //m.Paddings.PaddingTop = System.Web.UI.WebControls.Unit.Pixel(0);
+        m.GroupBoxDecoration = GroupBoxDecoration.Box;
+        m.SettingsItemCaptions.HorizontalAlign = FormLayoutHorizontalAlign.Right;
+
+        m.Items.Add(i =>
+        {
+            i.ShowCaption = DefaultBoolean.False;
+            i.Width = 70;
+            i.HorizontalAlign = FormLayoutHorizontalAlign.Center;
+            i.NestedExtension().Button(j =>
+            {
+                j.Name = "Save";
+                j.Text = "Create";
+                j.UseSubmitBehavior = true;
+            });
+        });
+    });
+
+}).Bind(Model).GetHtml()
+}
+</div>
+</section>

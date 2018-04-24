@@ -1,0 +1,256 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "TestHeaderGrid";
+        settings.CallbackRouteValues = new { Controller = "UMQC", Action = "TestHeaderGridViewPartial" };
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.Width = System.Web.UI.WebControls.Unit.Pixel(80);
+        settings.CommandColumn.MinWidth = 80;
+        //settings.SettingsCommandButton.NewButton.ButtonType = GridCommandButtonRenderMode.Image;
+        //settings.SettingsCommandButton.NewButton.Image.Url = "~/Content/Img/Button_Add_Icon_16.png";
+
+        GridViewCommandColumnCustomButton btnViewDetail = new GridViewCommandColumnCustomButton();
+        btnViewDetail.ID = "btnViewDetail";
+        btnViewDetail.Image.Url = "~/Content/Img/Edit_Icon_16.png";
+        btnViewDetail.Image.ToolTip = "View/Edit Details";
+        settings.CommandColumn.CustomButtons.Add(btnViewDetail);
+
+        GridViewCommandColumnCustomButton btnGenGetKey = new GridViewCommandColumnCustomButton();
+        btnGenGetKey.ID = "btnGenGetKey";
+        btnGenGetKey.Image.Url = "~/Content/Img/Document_Add_Icon_16.png";
+        btnGenGetKey.Image.ToolTip = "Generate based on header";
+        settings.CommandColumn.CustomButtons.Add(btnGenGetKey);
+
+        settings.CommandColumn.SetHeaderCaptionTemplateContent(c => {
+            Html.DevExpress().HyperLink(hl =>
+            {
+                hl.Name = "hlNew_"; // + c.KeyValue.ToString();
+                hl.NavigateUrl = "javascript:;";
+                hl.Properties.Text = "New";
+                hl.ToolTip = "New Test Record";
+                hl.Properties.ImageUrl = "~/Content/Img/Button_Add_Icon_16.png";
+                hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ window.location.href = '{0}' }}", DevExpressHelper.GetUrl(new { Controller = "UMQC", Action = "Create" }));
+            }).Render();
+        });
+
+        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowNewButtonInHeader = false;
+
+        settings.ClientSideEvents.CustomButtonClick = string.Format("function(s, e) {{ TestHeaderbtn(s, e, '{0}','{1}'); }}", DevExpressHelper.GetUrl(new { Controller = "UMQC", Action = "TestDetailIndex" }), DevExpressHelper.GetUrl(new { Controller = "UMQC", Action = "GenerateNew" }));
+
+        settings.CustomButtonInitialize = (s, e) =>
+        {
+            if (e.CellType == GridViewTableCommandCellType.Filter) return;
+
+            MVCxGridView g = s as MVCxGridView;
+            //var NeedsAuthorise = g.GetRowValues(e.VisibleIndex, "StageFlag").ToString();
+            if (e.ButtonID == "btnViewDetail")
+            {
+                e.Text = "";
+            }
+            if (e.ButtonID == "btnGenGetKey")
+            {
+                e.Text = "";
+            }
+        };
+
+        //settings.HtmlRowPrepared = (s, e) =>
+        //{
+        //    if (e.KeyValue != null)
+        //    {
+        //        if (Convert.ToString(e.GetValue("RejectedFlag")) == "1")
+        //        {
+        //            e.Row.BackColor = System.Drawing.Color.IndianRed;
+        //            //e.Row.ForeColor = System.Drawing.Color.Salmon;
+        //        }
+        //        if (Convert.ToString(e.GetValue("StageFlag")) == "3")
+        //        {
+        //            e.Row.BackColor = System.Drawing.Color.LightSeaGreen;
+        //            //e.Row.ForeColor = System.Drawing.Color.Salmon;
+        //        }
+        //        if (Convert.ToString(e.GetValue("StageFlag")) == "4")
+        //        {
+        //            e.Row.BackColor = System.Drawing.Color.LightGreen;
+        //            //e.Row.ForeColor = System.Drawing.Color.Salmon;
+        //        }
+        //        if (Convert.ToString(e.GetValue("StageFlag")) == "2")
+        //        {
+        //            e.Row.BackColor = System.Drawing.Color.Orange;
+        //            //e.Row.ForeColor = System.Drawing.Color.Salmon;
+        //        }
+        //    }
+        //};
+
+        settings.KeyFieldName = "ResultHeaderRecid";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+        //settings.SettingsBehavior.ColumnResizeMode = ColumnResizeMode.Disabled;
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsBehavior.AutoFilterRowInputDelay = 3600;
+
+        settings.SettingsCookies.Enabled = true;
+        settings.SettingsCookies.CookiesID = "TestHeaderGridLayout";
+
+        //settings.ClientSideEvents.CustomizationWindowCloseUp = "BacsHeaderGrid_CustomizationWindowCloseUp";
+        settings.SettingsPager.PageSize = 20;
+
+        //settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        //settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        //settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        //settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        //settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = true;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 600;
+
+        //settings.HtmlDataCellPrepared = (sender, e) =>
+        //{
+        //    if (e.DataColumn.FieldName == "AccountName")
+        //        if (e.CellValue != null)
+        //            e.Cell.ToolTip = e.CellValue.ToString();
+        //    if (e.DataColumn.FieldName == "Address1")
+        //        if (e.CellValue != null)
+        //            e.Cell.ToolTip = e.CellValue.ToString();
+        //};
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Flour Grade";
+            column.FieldName = "ResultProductRecid";
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            column.Settings.SortMode = DevExpress.XtraGrid.ColumnSortMode.DisplayText;
+            column.SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+            //column.Settings.FilterMode = ColumnFilterMode.DisplayText;
+            var comboBoxProperties = (ComboBoxProperties)column.PropertiesEdit;
+            comboBoxProperties.TextField = "RecipeDesc";
+            comboBoxProperties.ValueField = "ProductMasterRecid";
+            comboBoxProperties.ValueType = typeof(int);
+            comboBoxProperties.DataSource = ViewData["Recipe"];
+            //column.EditFormSettings.Visible = DefaultBoolean.False;
+            //column.Width = 290;
+            column.AdaptivePriority = 1;
+            column.VisibleIndex = 1;
+            column.CellStyle.Wrap = DefaultBoolean.False;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ResultPlantRecid";
+            column.Caption = "Plant";
+            //column.Width = 80;
+            column.Visible = true;
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            comboBoxProperties.DataSource = ViewBag.Plant;
+            comboBoxProperties.ValueType = typeof(int);
+            column.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ResultFuncRecid";
+            column.Caption = "Function";
+            column.Visible = true;
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            comboBoxProperties.DataSource = ViewBag.Function;
+            comboBoxProperties.ValueType = typeof(int);
+            column.AdaptivePriority = 2;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ResultCreationDate";
+            column.Caption = "Created";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var dateeditProperties = column.PropertiesEdit as DateEditProperties;
+            dateeditProperties.DisplayFormatString = "dd/MM/yyyy HH:mm";
+            //column.Width = 80;
+            //column.Visible = false;
+            column.AdaptivePriority = 1;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ResultShiftRecid";
+            column.Caption = "Shift";
+            column.Visible = true;
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            comboBoxProperties.DataSource = ViewBag.Shift;
+            comboBoxProperties.ValueType = typeof(int);
+            column.AdaptivePriority = 2;
+        });
+
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "ResultJobNo";
+            //c.Width = 80;
+            //c.VisibleIndex = 2;
+            c.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "ResultBinNumber";
+            //c.Width = 80;
+            //c.VisibleIndex = 3;
+            c.AdaptivePriority = 2;
+            c.Visible = true;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ResultRunStart";
+            column.Caption = "Run Start";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var dateeditProperties = column.PropertiesEdit as DateEditProperties;
+            dateeditProperties.DisplayFormatString = "dd/MM/yyyy HH:mm";
+            column.AdaptivePriority = 2;
+            //column.Width = 80;
+            //column.Visible = false;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ResultRunEnd";
+            column.Caption = "Run End";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var dateeditProperties = column.PropertiesEdit as DateEditProperties;
+            dateeditProperties.DisplayFormatString = "dd/MM/yyyy HH:mm";
+            column.AdaptivePriority = 2;
+            //column.Width = 80;
+        });
+
+        settings.Columns.Add(c => { c.FieldName = "ResultCreatedBy"; c.Caption = "CreatedBy"; c.Visible = false; c.AdaptivePriority = 2; });
+        settings.Columns.Add(c => { c.FieldName = "ResultLastChangedBy"; c.Caption = "LastChangedBy"; c.Visible = false; c.AdaptivePriority = 2; });
+        settings.Columns.Add(c => { c.FieldName = "ResultTestTaken"; c.Caption = "Time test taken"; c.Visible = false; c.AdaptivePriority = 2; });
+        settings.Columns.Add(c => { c.FieldName = "WheatfeedBinNumber"; c.Caption = "Wheat feed Bin"; c.Visible = false; c.AdaptivePriority = 2; });
+        settings.Columns.Add(c => { c.FieldName = "GristVersionNumber"; c.Caption = "Grist Version No"; c.Visible = false; c.AdaptivePriority = 2; });
+        settings.Columns.Add(c => { c.FieldName = "ConcessionDesc"; c.Caption = "Concession Description"; c.Visible = false; c.AdaptivePriority = 2; });
+        settings.Columns.Add(c => { c.FieldName = "ExcludeAverages"; c.Caption = "Exclude Averages"; c.Visible = false; c.AdaptivePriority = 2; });
+        settings.Columns.Add(c => { c.FieldName = "plannedJobtonnage"; c.Caption = "Planned Job tonnage"; c.Visible = false; c.AdaptivePriority = 2; });
+        settings.Columns.Add(c => { c.FieldName = "finalJobtonnage"; c.Caption = "Final Job tonnage"; c.Visible = false; c.AdaptivePriority = 2; });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ResultLastChangedDate";
+            column.Caption = "Last Changed Date";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var dateeditProperties = column.PropertiesEdit as DateEditProperties;
+            dateeditProperties.DisplayFormatString = "dd/MM/yyyy HH:mm";
+            column.AdaptivePriority = 2;
+            //column.Width = 80;
+            column.Visible = false;
+        });
+
+        //settings.Columns.Add(c => { c.FieldName = "t_SOP_Customer_Group.CustGroupDesc"; c.Visible = false; });
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

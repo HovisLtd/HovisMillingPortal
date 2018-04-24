@@ -1,0 +1,218 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "ApplicationUserOverviewGrid";
+        settings.CallbackRouteValues = new { Controller = "ApplicationUser", Action = "GridViewPartial" };
+
+        //settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "ApplicationUsers", Action = "GridViewPartialAddNew" };
+        //settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ApplicationUsers", Action = "GridViewPartialUpdate" };
+        //settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ApplicationUsers", Action = "GridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        settings.CommandColumn.AdaptivePriority = 1;
+        settings.CommandColumn.CustomButtons.Column.Width = System.Web.UI.WebControls.Unit.Pixel(95);
+        settings.CommandColumn.CustomButtons.Column.MinWidth = 95;
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+
+        settings.KeyFieldName = "Id";
+
+        settings.SettingsPager.Visible = true;
+        settings.SettingsPager.PageSize = 15;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = false;
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+
+        settings.SettingsCookies.Enabled = true;
+        settings.SettingsCookies.CookiesID = "ApplicationUserOverviewGrid";
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 600;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = true;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 600;
+
+        //settings.Columns.Add(column =>
+        //{
+        //    column.Name = "ComColumn";
+        //    //column.Caption = "#";
+        //    column.SetHeaderTemplateContent(c =>
+        //    {
+        //        //Html.DevExpress().HyperLink(hl =>
+        //        //{
+        //        //    hl.Name = "hlNewD_"; // + c.KeyValue.ToString();
+        //        //    hl.NavigateUrl = "javascript:;";
+        //        //    hl.Properties.Text = "New";
+        //        //    hl.ToolTip = "New";
+        //        //    hl.Properties.ImageUrl = "~/Content/Img/Button_Add_Icon_16.png";
+        //        //    hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ {0}.AddNewRow(); }}", settings.Name);
+        //        //}).Render();
+        //    });
+        //    column.SetDataItemTemplateContent(c =>
+        //    {
+        //        Html.DevExpress().HyperLink(hl =>
+        //        {
+        //            hl.Name = "hlEditD_" + c.KeyValue.ToString();
+        //            hl.NavigateUrl = "javascript:;";
+        //            hl.Properties.Text = "Edit Dates";
+        //            hl.ToolTip = "Edit";
+        //            hl.Properties.ImageUrl = "~/Content/Img/Edit_Icon_16.png";
+        //            hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ {0}.StartEditRow('{1}'); }}", settings.Name, c.VisibleIndex);
+        //        }).Render();
+        //        ViewContext.Writer.Write(" ");
+        //        Html.DevExpress().HyperLink(hl =>
+        //        {
+        //            hl.Name = "hlDeleteD_" + c.KeyValue.ToString();
+        //            hl.NavigateUrl = "javascript:;";
+        //            hl.Properties.Text = "Delete";
+        //            hl.ToolTip = "Delete";
+        //            hl.Properties.ImageUrl = "~/Content/Img/Delete_Icon_16.png";
+        //            hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ if (confirm({2})) {0}.DeleteRow('{1}'); }}", settings.Name, c.VisibleIndex, "'Confirm Delete?'");
+        //            //hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ {0}.DeleteRow('{1}'); }}", settings.Name, c.VisibleIndex);
+        //        }).Render();
+        //    });
+        //    column.SetEditItemTemplateContent(c =>
+        //    {
+
+        //    });
+
+        //    column.Width = 60;
+        //});
+
+        GridViewCommandColumnCustomButton btnEditRoles = new GridViewCommandColumnCustomButton();
+        btnEditRoles.ID = "btnEditRoles";
+        btnEditRoles.Image.Url = "~/Content/Img/Edit_Icon_16.png";
+        btnEditRoles.Image.ToolTip = "Edit Roles";
+        settings.CommandColumn.CustomButtons.Add(btnEditRoles);
+
+        GridViewCommandColumnCustomButton btnDelUser = new GridViewCommandColumnCustomButton();
+        btnDelUser.ID = "btnDelUser";
+        btnDelUser.Image.Url = "~/Content/Img/Delete_Icon_16.png";
+        btnDelUser.Image.ToolTip = "Delete User";
+        settings.CommandColumn.CustomButtons.Add(btnDelUser);
+
+        GridViewCommandColumnCustomButton btnSiteUser = new GridViewCommandColumnCustomButton();
+        btnSiteUser.ID = "btnSiteUser";
+        btnSiteUser.Image.Url = "~/Content/Img/Open_Folder_Add_Icon_16.png";
+        btnSiteUser.Image.ToolTip = "Authorise Site";
+        settings.CommandColumn.CustomButtons.Add(btnSiteUser);
+
+        GridViewCommandColumnCustomButton btnPlantUser = new GridViewCommandColumnCustomButton();
+        btnPlantUser.ID = "btnPlantUser";
+        btnPlantUser.Image.Url = "~/Content/Img/Open_Folder_Info_Icon_16.png";
+        btnPlantUser.Image.ToolTip = "Authorise Plant";
+        settings.CommandColumn.CustomButtons.Add(btnPlantUser);
+
+        //settings.CommandColumn.Width = 60;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowNewButtonInHeader = false;
+
+        //settings.ClientSideEvents.CustomButtonClick = string.Format("function(s, e) {{ CustomCutOffbtn(s, e, '{0}'); }}", DevExpressHelper.GetUrl(new { Controller = "CutOffProcess", Action = "CutOffByCustomerGroup" }));
+        settings.ClientSideEvents.CustomButtonClick = string.Format("function(s, e) {{ UserRolesClick(s, e, '{0}', '{1}', '{2}', '{3}'); }}", DevExpressHelper.GetUrl(new { Controller = "ApplicationUser", Action = "Edit" }), DevExpressHelper.GetUrl(new { Controller = "ApplicationUser", Action = "Delete" }), DevExpressHelper.GetUrl(new { Controller = "SitePlantAuth", Action = "IndexBySite" }), DevExpressHelper.GetUrl(new { Controller = "SitePlantAuth", Action = "IndexByPlant" }));
+
+        settings.CustomButtonInitialize = (s, e) =>
+        {
+            if (e.CellType == GridViewTableCommandCellType.Filter) return;
+
+            MVCxGridView g = s as MVCxGridView;
+            //string AllreadySubmitted = "";
+            //var AllreadySubmitted = (string)(g.GetRowValues(e.VisibleIndex, "CutOffRunBy").ToString()) ?? "";
+            //var Buttonid = "hlStanOrd_" + e.VisibleIndex.ToString();
+
+            if (e.ButtonID == "btnEditRoles")
+            {
+                e.Text = "";
+                if (User.IsInRole("Admin"))
+                    e.Visible = DefaultBoolean.True;
+                else
+                    e.Visible = DefaultBoolean.False;
+            }
+            if (e.ButtonID == "btnDelUser")
+            {
+                e.Text = "";
+                if (User.IsInRole("Admin"))
+                    e.Visible = DefaultBoolean.True;
+                else
+                    e.Visible = DefaultBoolean.False;
+            }
+            if (e.ButtonID == "btnSiteUser")
+            {
+                e.Text = "";
+                if (User.IsInRole("Admin"))
+                    e.Visible = DefaultBoolean.True;
+                else
+                    e.Visible = DefaultBoolean.False;
+            }
+            if (e.ButtonID == "btnPlantUser")
+            {
+                e.Text = "";
+                if (User.IsInRole("Admin"))
+                    e.Visible = DefaultBoolean.True;
+                else
+                    e.Visible = DefaultBoolean.False;
+            }
+        };
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Email";
+            column.Caption = "Email Address";
+            column.ColumnType = MVCxGridViewColumnType.TextBox;
+            var textBoxProperties = column.PropertiesEdit as TextBoxProperties;
+            //column.Width = 150;
+            column.CellStyle.Wrap = DefaultBoolean.False;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+            column.AllowTextTruncationInAdaptiveMode = false;
+            column.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "FirstName";
+            column.Caption = "First Name";
+            column.ColumnType = MVCxGridViewColumnType.TextBox;
+            var textBoxProperties = column.PropertiesEdit as TextBoxProperties;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+            //comboBoxProperties.DataSource = ViewBag.HolType;
+            //comboBoxProperties.ValueType = typeof(int);
+            column.AllowTextTruncationInAdaptiveMode = false;
+            column.AdaptivePriority = 3;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "LastName";
+            column.Caption = "Last Name";
+            column.ColumnType = MVCxGridViewColumnType.TextBox;
+            var textBoxProperties = column.PropertiesEdit as TextBoxProperties;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+            //column.Width = 250;
+            column.CellStyle.Wrap = DefaultBoolean.False;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.AllowTextTruncationInAdaptiveMode = false;
+            column.AdaptivePriority = 3;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "CreatedDate";
+            column.Caption = "Date Added";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var dateEditProperties = column.PropertiesEdit as DateEditProperties;
+            //comboBoxProperties.DataSource = ViewBag.HolType;
+            //comboBoxProperties.ValueType = typeof(int);
+            //column.Visible = true;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.AllowTextTruncationInAdaptiveMode = false;
+            column.AdaptivePriority = 2;
+        });
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

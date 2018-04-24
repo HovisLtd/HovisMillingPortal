@@ -1,0 +1,6 @@
+﻿@if (1 == 1)
+{
+    Html.RenderAction("ViewHeaderPartial", new { resultheaderrecid = ViewBag.resultheaderrecid });
+    //Html.RenderAction("GridView_Detail", "OrderHeader", new { DefHeaderID = "Yes" });
+}
+@Html.Partial("DetailCallbackPanel")

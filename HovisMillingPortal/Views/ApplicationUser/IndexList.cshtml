@@ -1,0 +1,17 @@
+﻿@model HovisMillingPortal.ViewModels.ApplicationUserOverviewViewModel
+@{
+    ViewBag.Title = "User List";
+}
+@using HovisMillingPortal.Helpers
+@Html.Alerts()
+<p class="lead">Once new users have authenticated to Google they will appear in the list below and can be assigned a role</p>
+@*<a href="@Url.Action("New")" class="btn btn-success">Add New</a>*@
+@using (Html.BeginForm("IndexList", "ApplicationUser"))
+{
+    @Html.DevExpress().ValidationSummary().GetHtml()
+    @Html.ValidationMessage("CustomError")
+    @Html.HiddenFor(m => m.NewUserButton)
+}
+@Html.Action("GridViewPartial", "ApplicationUser")
+
+

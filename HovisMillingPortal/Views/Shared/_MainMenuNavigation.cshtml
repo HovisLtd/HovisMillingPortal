@@ -1,0 +1,166 @@
+﻿@Html.DevExpress().Panel(settings =>
+{
+    settings.Name = "TopPanel";
+    settings.FixedPosition = PanelFixedPosition.WindowTop;
+    settings.Styles.Panel.Paddings.Padding = System.Web.UI.WebControls.Unit.Parse("0px");
+    settings.SetContent(() =>
+    {
+        ViewContext.Writer.Write("<div class='row' style='vertical-align:Bottom'><div class='col-md-1'>");
+
+        @Html.DevExpress().Menu(
+          s =>
+          {
+              s.Name = "mIcon";
+              s.EnableHotTrack = true;
+              s.EnableAnimation = true;
+              s.ShowAsToolbar = true;
+              s.Orientation = System.Web.UI.WebControls.Orientation.Horizontal;
+              s.Width = System.Web.UI.WebControls.Unit.Parse("100%");
+              s.SettingsAdaptivity.Enabled = false;
+              s.Styles.Style.CssClass = "hideControl";
+              s.Styles.Style.BackColor = System.Drawing.Color.Transparent;
+              s.Styles.Style.Border.BorderWidth = 0;
+
+              s.Items.Add(item =>
+              {
+                  item.Text = "";
+                  item.Name = "Milling Portal";
+                  item.AdaptivePriority = 0;
+                  item.NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "Home", Action = "Index" });
+                  item.Image.Url = "~/Content/img/HoVIS_New_IS_Logo_SMALL.png";
+              });
+          }).GetHtml();
+
+        ViewContext.Writer.Write("</div><div class='col-md-7 HovisMenu'>");
+
+        @Html.DevExpress().Menu(
+          s =>
+          {
+              s.Name = "mFeatures";
+              //s.AllowSelectItem = true;
+              s.EnableHotTrack = true;
+              s.EnableAnimation = true;
+              //s.ShowAsToolbar = true;
+              s.Orientation = System.Web.UI.WebControls.Orientation.Horizontal;
+              s.Width = System.Web.UI.WebControls.Unit.Parse("100%");
+              //s.Height = System.Web.UI.WebControls.Unit.Parse("55px");
+              //s.ClientSideEvents.Init = "onMenuInit";
+              //s.EnableAdaptivity = true;
+              s.SettingsAdaptivity.Enabled = true;
+              s.SettingsAdaptivity.EnableAutoHideRootItems = true;
+              s.SettingsAdaptivity.EnableCollapseToSideMenu = true;
+              s.SettingsAdaptivity.CollapseToSideMenuAtWindowInnerWidth = 600;
+              //s.ItemLinkMode = ItemLinkMode.ContentBounds;
+              //s.AutoSeparators = AutoSeparatorMode.None;
+              s.Styles.Style.BackColor = System.Drawing.Color.Transparent;
+              //s.Styles.Style.VerticalAlign = System.Web.UI.WebControls.VerticalAlign.Bottom;
+              s.Styles.Style.Border.BorderWidth = 0;
+
+              s.Items.Add(item =>
+              {
+                  item.Text = "Home";
+                  item.ItemStyle.VerticalAlign = System.Web.UI.WebControls.VerticalAlign.Middle;
+                  item.Items.Add("About", "About", null, DevExpressHelper.GetUrl(new { Controller = "Home", Action = "About" }));
+                  item.Items.Add("Contact", "Contact", null, DevExpressHelper.GetUrl(new { Controller = "Home", Action = "Contact" }));
+              });
+              s.Items.Add(item =>
+              {
+                  item.Text = "Bacs";
+                  item.Items.Add("Customers", "Customers", null, DevExpressHelper.GetUrl(new { Controller = "BacsCustomer", Action = "Index" }));
+                  item.Items.Add("Bacs Transactions", "Bacs Transactions", null, DevExpressHelper.GetUrl(new { Controller = "BacsDetails", Action = "Index" }));
+                  item.Items.Add("Bacs Audit Details", "Bacs Audit Details", null, DevExpressHelper.GetUrl(new { Controller = "BacsDetails", Action = "IndexAudit" }));
+                  item.Items.Add("MasterData - DD Frequency", "MasterData - DD Frequency", null, DevExpressHelper.GetUrl(new { Controller = "BacsMasterData", Action = "DDFrequencyIndex" }));
+              });
+              s.Items.Add(item =>
+              {
+                  item.Text = "PQMS";
+                  item.Items.Add("Enter Data", "Enter Data", null, DevExpressHelper.GetUrl(new { Controller = "UMQC", Action = "TestHeaderIndex" }));
+                  item.Items.Add("Search Data", "Search Data", null, DevExpressHelper.GetUrl(new { Controller = "UMQC", Action = "IndexV2" }));
+                  item.Items.Add(subItem =>
+                  {
+                      subItem.Text = "Reports & Graphs";
+                      subItem.Items.Add("Report - Standard attribute by flour grade", "Report - Standard attribute by flour grade", null, DevExpressHelper.GetUrl(new { Controller = "Reports", Action = "IndexProdStandard" }));
+                      subItem.Items.Add("Graph - No Of attributes Between dates", "Graph - No Of attributes Between dates", null, DevExpressHelper.GetUrl(new { Controller = "Reports", Action = "IndexNoOfTests" }));
+                  });
+                  if (User.IsInRole("Admin") || User.IsInRole("UMQCAdmin"))
+                  {
+                      item.Items.Add(subItem =>
+                      {
+                          subItem.Text = "Master Data";
+                          subItem.Items.Add("Master Data - change ticker", "Master Data - change ticker", null, DevExpressHelper.GetUrl(new { Controller = "ticker", Action = "tickerIndex" }));
+                          subItem.Items.Add("Master Data - Std Name", "Master Data - Std Name", null, DevExpressHelper.GetUrl(new { Controller = "UMQC", Action = "ResultNameIndex" }));
+                          subItem.Items.Add("Master Data - Restrict attribute by Function", "Master Data - Restrict attribute by Function", null, DevExpressHelper.GetUrl(new { Controller = "UMQC", Action = "IndexTestByFunction" }));
+                          subItem.Items.Add("Master Data - Std Targets", "Master Data - Std Targets", null, DevExpressHelper.GetUrl(new { Controller = "UMQC", Action = "StandardsMasterIndex" }));
+                          subItem.Items.Add("Master Data - Maintain Shifts", "Master Data - Maintain Shifts", null, DevExpressHelper.GetUrl(new { Controller = "UMQC", Action = "IndexShift" }));
+                          subItem.Items.Add("Master Data - Maintain Plant", "Master Data - Maintain Plant", null, DevExpressHelper.GetUrl(new { Controller = "UMQC", Action = "IndexPlant" }));
+                          subItem.Items.Add("Master Data - Maintain Site", "Master Data - Maintain Site", null, DevExpressHelper.GetUrl(new { Controller = "UMQC", Action = "IndexSite" }));
+                      });
+                  }
+              });
+
+              if (User.IsInRole("Admin"))
+              {
+                  s.Items.Add(item =>
+                  {
+                      item.Text = "Users Maintenance";
+                      item.Items.Add("List Users", "List Users", null, DevExpressHelper.GetUrl(new { Controller = "ApplicationUser", Action = "IndexList" }));
+                  });
+              }
+          }).GetHtml();
+        ViewContext.Writer.Write("</div><div class='col-md-2'>");
+        //ViewContext.Writer.Write("</div><div class='col-md-2' style='float: right'>");
+        ViewContext.Writer.Write("</div><div class='col-md-2 pull-right HovisMenu'>");
+
+        if (Request.IsAuthenticated)
+        {
+            //using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-collapse" }))
+            //{
+            //@Html.AntiForgeryToken();
+
+            @Html.DevExpress().Menu(s2 =>
+            {
+                s2.Name = "menuLogOff";
+                s2.Orientation = System.Web.UI.WebControls.Orientation.Horizontal;
+                s2.Width = System.Web.UI.WebControls.Unit.Parse("100%");
+                s2.Height = System.Web.UI.WebControls.Unit.Parse("100%");
+                s2.Styles.Style.BackColor = System.Drawing.Color.Transparent;
+                s2.EnableAdaptivity = true;
+                s2.SettingsAdaptivity.EnableAutoHideRootItems = true;
+                s2.SettingsAdaptivity.EnableCollapseToSideMenu = true;
+                //s.Styles.Style.VerticalAlign = System.Web.UI.WebControls.VerticalAlign.Bottom;
+                s2.Styles.Style.Border.BorderWidth = 0;
+                s2.Items.Add(item =>
+                {
+                    item.Text = "Hello " + User.Identity.Name + "!";
+                    item.ItemStyle.VerticalAlign = System.Web.UI.WebControls.VerticalAlign.Middle;
+                    item.Items.Add("Log Off", "Log Off", null, DevExpressHelper.GetUrl(new { Controller = "Account", Action = "LogOff" }));
+                });
+            }).GetHtml();
+            //}
+        }
+        else
+        {
+            @Html.DevExpress().Menu(s2 =>
+            {
+                s2.Name = "menuLogOn";
+                s2.Orientation = System.Web.UI.WebControls.Orientation.Horizontal;
+                s2.Width = System.Web.UI.WebControls.Unit.Parse("100%");
+                s2.Height = System.Web.UI.WebControls.Unit.Parse("100%");
+                s2.Styles.Style.BackColor = System.Drawing.Color.Transparent;
+                s2.EnableAdaptivity = true;
+                s2.SettingsAdaptivity.EnableAutoHideRootItems = true;
+                s2.SettingsAdaptivity.EnableCollapseToSideMenu = true;
+                //s.Styles.Style.VerticalAlign = System.Web.UI.WebControls.VerticalAlign.Bottom;
+                s2.Styles.Style.Border.BorderWidth = 0;
+                s2.Items.Add(item =>
+                {
+                    item.Text = "Log On";
+                    item.ItemStyle.VerticalAlign = System.Web.UI.WebControls.VerticalAlign.Middle;
+                    item.Items.Add("Log On", "Log On", null, DevExpressHelper.GetUrl(new { Controller = "Account", Action = "LogIn" }));
+                });
+            }).GetHtml();
+        }
+
+        ViewContext.Writer.Write("</div></div>");
+    });
+}).GetHtml()

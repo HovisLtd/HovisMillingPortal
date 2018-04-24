@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Bacs Audit Details";
+}
+<div class="row">
+    <div class="col-md-3">
+        <table>
+            <tr>
+                @*<td>
+        <input type="button" id="btShowCustomizationAudit" value="Show Customization Window" class="btn btn-sm btn-success" />
+    </td>
+    <td> | </td>
+    <td>
+        <input type="button" id="btShowCustomFilterAudit" value="Show Custom Filter" class="btn btn-sm btn-success" />
+    </td>*@
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-9">
+        <table>
+            <tr>
+                @using (Html.BeginForm("IndexAudit", "BacsDetails", FormMethod.Post))
+                {
+                    <td><h6 class="Ordersheadertext">----Change the review date here----</h6></td>
+                            <td>
+                                @Html.DevExpress().DateEdit(settings =>
+                                    {
+                                        settings.Name = "AuditDateEdit";
+                                        settings.Date = Convert.ToDateTime(ViewBag.AuditDateEdit);
+                                    }).GetHtml()
+                            </td>
+                            <td>
+                                @Html.DevExpress().Button(settings =>
+                               {
+                                   settings.Name = "AuditButton";
+                                   settings.Text = "Review";
+                                   settings.UseSubmitBehavior = true;
+                                   settings.ControlStyle.CssClass = "btn btn-sm btn-success";
+                                   settings.Init += (s, e) =>
+                                   {
+                                       ((MVCxButton)s).Native = true;
+                                   };
+                               }).GetHtml()
+
+                            </td>
+                }
+            </tr>
+        </table>
+    </div>
+</div>
+@Html.DevExpress().CallbackPanel(settings =>
+{
+    settings.Name = "MainCallbackPanel";
+    settings.CallbackRouteValues = new { Controller = "BacsDetails", Action = "IndexAudit" , AuditDateEdit = ViewBag.AuditDateEdit };
+    settings.ControlStyle.CssClass = "mainCallbackPanel";
+
+    settings.SetContent(() =>
+    {
+        Html.RenderPartial("MainContentAudit", new { AuditDateEdit = ViewBag.AuditDateEdit });
+    });
+    //settings.ClientSideEvents.EndCallback = "MainCallbackPanel_EndCallback";
+}
+).GetHtml()
+
+

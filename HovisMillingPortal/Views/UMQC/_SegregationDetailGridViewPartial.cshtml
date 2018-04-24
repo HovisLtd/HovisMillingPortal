@@ -1,0 +1,321 @@
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "SegregationDetailsGridView";
+        settings.CallbackRouteValues = new { Controller = "UMQC", Action = "SegregationDetailGridViewPartial", resultheaderrecid = Request.Params["resultheaderrecid"] };
+        settings.SettingsEditing.BatchUpdateRouteValues = new { Controller = "UMQC", Action = "SegregationBatchUpdatePartial", resultheaderrecid = Request.Params["resultheaderrecid"] };
+        settings.SettingsEditing.Mode = GridViewEditingMode.Batch;
+        settings.SettingsEditing.BatchEditSettings.EditMode = GridViewBatchEditMode.Cell;
+        settings.SettingsEditing.BatchEditSettings.StartEditAction = GridViewBatchStartEditAction.Click;
+
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowNewButtonInHeader = false;
+        settings.CommandColumn.Width = System.Web.UI.WebControls.Unit.Pixel(30);
+        settings.CommandColumn.MinWidth = 30;
+        settings.SettingsEditing.ShowModelErrorsForEditors = true;
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Auto;
+        settings.Settings.VerticalScrollableHeight = 250;
+        //settings.Settings.GridLines = System.Web.UI.WebControls.GridLines.None;
+
+        //settings.SettingsBehavior.AllowFocusedRow = true;
+        settings.SettingsPager.Mode = GridViewPagerMode.ShowAllRecords;
+        //settings.SettingsPager.PageSize = 20;
+
+        //settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        //settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        //settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        //settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        //settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = true;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 600;
+
+        //settings.ClientSideEvents.BatchEditStartEditing = "OnBatchStartEdit";
+
+        settings.KeyFieldName = "ResultDetailRecid";
+
+        //settings.HtmlRowPrepared = (s, e) =>
+        //{
+        //    if (e.KeyValue != null)
+        //    {
+        //        //if (Convert.ToString(e.GetValue("ActiveFlag")) == "0")
+        //        if (Convert.ToDecimal(e.GetValue("ResultActualScore")) > Convert.ToDecimal(e.GetValue("ResultMaxScore")))
+        //        {
+        //            e.Row.BackColor = System.Drawing.Color.Salmon;
+        //            //e.Row.ForeColor = System.Drawing.Color.Salmon;
+        //        }
+        //        if (Convert.ToDecimal(e.GetValue("ResultActualScore")) >= Convert.ToDecimal(e.GetValue("ResultMinScore")) & Convert.ToDecimal(e.GetValue("ResultActualScore")) <= Convert.ToDecimal(e.GetValue("ResultMaxScore")))
+        //        {
+        //            //e.Row.BackColor = System.Drawing.Color.Orange;
+        //            e.Row.BackColor = System.Drawing.Color.LightGreen;
+        //            //e.Row.ForeColor = System.Drawing.Color.Salmon;
+        //        }
+        //        if (Convert.ToDecimal(e.GetValue("ResultActualScore")) < Convert.ToDecimal(e.GetValue("ResultMinScore")))
+        //        {
+        //            e.Row.BackColor = System.Drawing.Color.Salmon;
+        //            //e.Row.ForeColor = System.Drawing.Color.Salmon;
+        //        }
+        //    }
+        //};
+
+        settings.HtmlDataCellPrepared = (sender, e) =>
+        {
+
+            if (e.DataColumn.FieldName == "ResultActualScore")
+            {
+                if (Convert.ToDecimal(e.GetValue("ResultActualScore")) > Convert.ToDecimal(e.GetValue("ResultMaxScore")))
+                {
+                    if (Convert.ToDecimal(e.GetValue("ResultActualScore")) == Convert.ToDecimal("0"))
+                    {
+                        e.Cell.BackColor = System.Drawing.Color.White;
+                    }
+                    else
+                    {
+                        if (e.GetValue("ConcessionDesc") != null)
+                        {
+                            e.Cell.BackColor = System.Drawing.Color.Orange;
+                        }
+                        else
+                        {
+                            e.Cell.BackColor = System.Drawing.Color.Salmon;
+                        }
+                    }
+                }
+                if (Convert.ToDecimal(e.GetValue("ResultActualScore")) >= Convert.ToDecimal(e.GetValue("ResultMinScore")) & Convert.ToDecimal(e.GetValue("ResultActualScore")) <= Convert.ToDecimal(e.GetValue("ResultMaxScore")))
+                {
+                    if (Convert.ToDecimal(e.GetValue("ResultActualScore")) == Convert.ToDecimal("0"))
+                    {
+                        e.Cell.BackColor = System.Drawing.Color.White;
+                    }
+                    else
+                    {
+                        e.Cell.BackColor = System.Drawing.Color.LightGreen;
+                    }
+                }
+                if (Convert.ToDecimal(e.GetValue("ResultActualScore")) < Convert.ToDecimal(e.GetValue("ResultMinScore")))
+                {
+                    if (Convert.ToDecimal(e.GetValue("ResultActualScore")) == Convert.ToDecimal("0"))
+                    {
+                        e.Cell.BackColor = System.Drawing.Color.White;
+                    }
+                    else
+                    {
+                        if (e.GetValue("ConcessionDesc") != null)
+                        {
+                            e.Cell.BackColor = System.Drawing.Color.Orange;
+                        }
+                        else
+                        {
+                            e.Cell.BackColor = System.Drawing.Color.Salmon;
+                        }
+                    }
+                }
+            }
+        };
+
+        //GridViewCommandColumnCustomButton btnDeactivate = new GridViewCommandColumnCustomButton();
+        //btnDeactivate.ID = "btnDeactivate";
+        //btnDeactivate.Image.Url = "~/Content/Img/Delete_Icon_16.png";
+        //btnDeactivate.Image.ToolTip = "De-activate";
+        //settings.CommandColumn.CustomButtons.Add(btnDeactivate);
+
+        //GridViewCommandColumnCustomButton btnReactivate = new GridViewCommandColumnCustomButton();
+        //btnReactivate.ID = "btnReactivate";
+        //btnReactivate.Image.Url = "~/Content/Img/Button_Refresh_Icon_16.png";
+        //btnReactivate.Image.ToolTip = "Re-activate";
+        //settings.CommandColumn.CustomButtons.Add(btnReactivate);
+
+        //settings.CommandColumn.SetHeaderCaptionTemplateContent(c =>
+        //{
+        //    Html.DevExpress().HyperLink(hl =>
+        //    {
+        //        hl.Name = "hlNewOD_"; // + c.KeyValue.ToString();
+        //        hl.NavigateUrl = "javascript:;";
+        //        hl.Properties.Text = "New";
+        //        hl.ToolTip = "New";
+        //        hl.Properties.ImageUrl = "~/Content/Img/Button_Add_Icon_16.png";
+        //        hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ {0}.AddNewRow(); }}", settings.Name);
+        //    }).Render();
+        //});
+
+        //settings.ClientSideEvents.CustomButtonClick = string.Format("function(s, e) {{ OrderDetailLineClick(s, e, '{0}' ); }}", DevExpressHelper.GetUrl(new { Controller = "OrderDetail", Action = "ReActivateOrderLine" }));
+
+        //settings.Columns.Add(column =>
+        //{
+        //    column.Name = "ComColumn";
+        //    column.Caption = "#";
+        //    column.Width = 40;
+        //    column.EditFormSettings.Visible = DefaultBoolean.False;
+        //    column.VisibleIndex = 0;
+        //    column.SetHeaderTemplateContent(c =>
+        //    {
+        //        Html.DevExpress().HyperLink(hl =>
+        //        {
+        //            hl.Name = "hlNewOD_"; // + c.KeyValue.ToString();
+        //            hl.NavigateUrl = "javascript:;";
+        //            hl.Properties.Text = "New";
+        //            hl.ToolTip = "New";
+        //            hl.Properties.ImageUrl = "~/Content/Img/Button_Add_Icon_16.png";
+        //            hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ {0}.AddNewRow(); }}", settings.Name);
+        //        }).Render();
+        //    });
+        //column.SetDataItemTemplateContent(c =>
+        //{
+        //    Html.DevExpress().HyperLink(hl =>
+        //    {
+        //        hl.Name = "hlDeleteOD_" + c.VisibleIndex; //c.KeyValue.ToString();
+        //        hl.NavigateUrl = "javascript:;";
+        //        hl.Properties.Text = "Delete";
+        //        hl.ToolTip = "De-activate";
+        //        hl.Properties.ImageUrl = "~/Content/Img/Delete_Icon_16.png";
+        //        hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ if (confirm({2})) {0}.DeleteRow('{1}'); }}", settings.Name, c.VisibleIndex, "'Confirm De-active?'");
+        //    }).Render();
+        //});
+        //});
+        settings.CustomButtonInitialize = (s, e) =>
+        {
+            if (e.CellType == GridViewTableCommandCellType.Filter) return;
+            //MVCxGridView g = s as MVCxGridView;
+            //string AllreadyActive = "";
+            //AllreadyActive = (string)(g.GetRowValues(e.VisibleIndex, "ActiveFlag").ToString()) ?? "0";
+
+            if (e.ButtonID == "btnDeactivate")
+            {
+                e.Text = "";
+                if (User.IsInRole("Admin") || User.IsInRole("SOPSupervisor") || User.IsInRole("SOPBackoff"))
+                {
+                    //if (AllreadyActive == "1")
+                    //{
+                    e.Visible = DefaultBoolean.True;
+                    //}
+                    //else
+                    //{
+                    //    e.Visible = DefaultBoolean.False;
+                    //}
+
+                }
+                else
+                {
+                    e.Visible = DefaultBoolean.False;
+                }
+
+            }
+            if (e.ButtonID == "btnReactivate")
+            {
+                e.Text = "";
+                if (User.IsInRole("Admin") || User.IsInRole("SOPSupervisor") || User.IsInRole("SOPBackoff"))
+                {
+                    //if (AllreadyActive == "No")
+                    //{
+                    e.Visible = DefaultBoolean.True;
+                    //}
+                    //else
+                    //{
+                    //    e.Visible = DefaultBoolean.False;
+                    //}
+
+                }
+                else
+                {
+                    e.Visible = DefaultBoolean.False;
+                }
+
+            }
+        };
+        settings.Columns.AddBand(HeaderBand => {
+            HeaderBand.Caption = "Segregations";
+            HeaderBand.HeaderStyle.HorizontalAlign =  System.Web.UI.WebControls.HorizontalAlign.Center;
+
+            HeaderBand.Columns.Add(column =>
+            {
+                column.FieldName = "ResultMasterStdRecid";
+                column.Caption = "Standard Test";
+                //column.Width = 80;
+                column.Visible = true;
+                column.ColumnType = MVCxGridViewColumnType.ComboBox;
+                var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+                comboBoxProperties.DataSource = ViewBag.Standards;
+                comboBoxProperties.ValueType = typeof(int);
+                column.EditFormSettings.Visible = DefaultBoolean.False;
+                column.AdaptivePriority = 1;
+                column.Settings.SortMode = DevExpress.XtraGrid.ColumnSortMode.DisplayText;
+                //column.SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+            });
+            HeaderBand.Columns.Add(c =>
+            {
+                c.FieldName = "ResultActualScore";
+                c.Caption = "Test Score";
+                c.ColumnType = MVCxGridViewColumnType.TextBox;
+                //c.PropertiesEdit.DisplayFormatString = "{0:d}";
+                c.PropertiesEdit.DisplayFormatString = "####.##";
+                c.BatchEditModifiedCellStyle.BackColor = System.Drawing.Color.DarkCyan;
+                c.BatchEditModifiedCellStyle.ForeColor = System.Drawing.Color.White;
+                c.AdaptivePriority = 1;
+                //c.Width = 40;
+                //c.VisibleIndex = 6;
+            });
+            HeaderBand.Columns.Add(c =>
+            {
+                c.FieldName = "ResultComments";
+                c.Caption = "Comments";
+                c.AdaptivePriority = 2;
+                //c.Width = 42;
+                //c.VisibleIndex = 4;
+                //c.EditFormSettings.Visible = DefaultBoolean.False;
+            });
+            HeaderBand.Columns.Add(c =>
+            {
+                c.FieldName = "ResultMinScore";
+                c.Caption = "Min Score";
+                c.AdaptivePriority = 2;
+                //c.Width = 40;
+                //c.VisibleIndex = 3;
+                c.EditFormSettings.Visible = DefaultBoolean.False;
+            });
+            HeaderBand.Columns.Add(c =>
+            {
+                c.FieldName = "ResultTargetScore";
+                c.Caption = "Target";
+                c.AdaptivePriority = 2;
+                //c.Width = 42;
+                //c.VisibleIndex = 4;
+                c.EditFormSettings.Visible = DefaultBoolean.False;
+            });
+            HeaderBand.Columns.Add(c =>
+            {
+                c.FieldName = "ResultMaxScore";
+                c.Caption = "Max Score";
+                c.AdaptivePriority = 2;
+                //c.Width = 82;
+                //c.VisibleIndex = 5;
+                c.EditFormSettings.Visible = DefaultBoolean.False;
+                c.SortOrder = DevExpress.Data.ColumnSortOrder.Descending;
+            });
+
+            HeaderBand.Columns.Add(c => { c.FieldName = "ResultDetailLastChangedBy"; c.Caption = "Last Changed By"; c.Width = 150; c.Visible = false; c.AdaptivePriority = 2; });
+            HeaderBand.Columns.Add(c => { c.FieldName = "ResultDetailLastChangedDate"; c.Caption = "Last Changed Date"; c.Width = 150; c.Visible = false; c.AdaptivePriority = 2; });
+        });
+
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "ResultActualScore").DisplayFormat = "n2";
+        settings.Settings.ShowFooter = true;
+        settings.CellEditorInitialize = (s, e) =>
+        {
+            ASPxEdit editor = (ASPxEdit)e.Editor;
+            editor.ValidationSettings.Display = Display.Dynamic;
+        };
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

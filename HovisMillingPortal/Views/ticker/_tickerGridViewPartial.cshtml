@@ -1,0 +1,106 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridView";
+        settings.CallbackRouteValues = new { Controller = "ticker", Action = "tickerGridViewPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "ticker", Action = "tickerGridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ticker", Action = "tickerGridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ticker", Action = "tickerGridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+
+        settings.KeyFieldName = "tickerRecid";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+        settings.Columns.Add(column =>
+        {
+            column.Name = "ComColumn";
+            //column.Caption = "#";
+            column.SetHeaderTemplateContent(c =>
+            {
+                //Html.DevExpress().HyperLink(hl =>
+                //{
+                //    hl.Name = "hlNew_"; // + c.KeyValue.ToString();
+                //    hl.NavigateUrl = "javascript:;";
+                //    hl.Properties.Text = "New";
+                //    hl.ToolTip = "New";
+                //    hl.Properties.ImageUrl = "~/Content/Img/Button_Add_Icon_16.png";
+                //    hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ {0}.AddNewRow(); }}", settings.Name);
+                //}).Render();
+            });
+            column.SetDataItemTemplateContent(c =>
+            {
+                Html.DevExpress().HyperLink(hl =>
+                {
+                    hl.Name = "hlEdit_" + c.KeyValue.ToString();
+                    hl.NavigateUrl = "javascript:;";
+                    hl.Properties.Text = "Edit";
+                    hl.ToolTip = "Edit";
+                    hl.Properties.ImageUrl = "~/Content/Img/Edit_Icon_16.png";
+                    hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ {0}.StartEditRow('{1}'); }}", settings.Name, c.VisibleIndex);
+                }).Render();
+            });
+            column.SetEditItemTemplateContent(c =>
+            {
+
+            });
+
+            column.Width = 60;
+        });
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "tickerData";
+            c.Caption = "Enter text";
+            c.Width = 140;
+            //c.VisibleIndex = 2;
+            //c.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "LastChangedBy";
+            c.Caption = "Last Changed by";
+            c.Width = 80;
+            //c.VisibleIndex = 2;
+            //c.EditFormSettings.Visible = DefaultBoolean.False;
+            c.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "LastChangedDate";
+            column.Caption = "Last Changed date";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var dateeditProperties = column.PropertiesEdit as DateEditProperties;
+            dateeditProperties.DisplayFormatString = "dd/MM/yyyy HH:mm";
+            column.Width = 120;
+            //column.VisibleIndex = 10;
+            //column.ReadOnly = true;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        //settings.Columns.Add(c =>
+        //{
+        //    c.FieldName = "LastChangedDate";
+        //    c.Caption = "Last Changed date";
+        //    c.Width = 80;
+        //    //c.VisibleIndex = 2;
+        //    //c.EditFormSettings.Visible = DefaultBoolean.False;
+        //});
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

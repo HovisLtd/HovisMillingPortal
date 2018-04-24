@@ -1,0 +1,1413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HovisMillingPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_Hovis_Milling_User_Plant_Authorisation">
+          <Key>
+            <PropertyRef Name="UserPlantRecid" />
+          </Key>
+          <Property Name="UserPlantRecid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlantRecid" Type="int" />
+          <Property Name="UserName" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="t_Hovis_Milling_User_Site_Authorisation">
+          <Key>
+            <PropertyRef Name="UserSiteRecid" />
+          </Key>
+          <Property Name="UserSiteRecid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SiteRecid" Type="int" />
+          <Property Name="UserName" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="t_Milling_Bacs_Audit_Details">
+          <Key>
+            <PropertyRef Name="AuditRecid" />
+          </Key>
+          <Property Name="AuditRecid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BacsHeaderRecid" Type="bigint" />
+          <Property Name="CurrentStage" Type="int" />
+          <Property Name="NextStage" Type="int" />
+          <Property Name="LastChangedBy" Type="varchar" MaxLength="255" />
+          <Property Name="LastChangedDate" Type="datetime" />
+          <Property Name="AuditText" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="t_Milling_Bacs_Customers">
+          <Key>
+            <PropertyRef Name="CustomerRecid" />
+          </Key>
+          <Property Name="CustomerRecid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerNo" Type="varchar" MaxLength="255" />
+          <Property Name="SortingCode" Type="varchar" MaxLength="255" />
+          <Property Name="BankAccountNo" Type="varchar" MaxLength="255" />
+          <Property Name="BankAccountName" Type="varchar" MaxLength="255" />
+          <Property Name="Status" Type="int" />
+          <Property Name="BankMandateDate" Type="varchar" MaxLength="255" />
+          <Property Name="DDFrequency" Type="int" />
+          <Property Name="NewBankMandate" Type="int" />
+          <Property Name="FirstClaim" Type="int" />
+          <Property Name="SecondClaim" Type="int" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="255" />
+          <Property Name="LastChangedBy" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastChangedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_Milling_Bacs_DDFrequency">
+          <Key>
+            <PropertyRef Name="DDFreqRecid" />
+          </Key>
+          <Property Name="DDFreqRecid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DDFreqDesc" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="t_Milling_Bacs_Detail">
+          <Key>
+            <PropertyRef Name="DetailRecid" />
+          </Key>
+          <Property Name="DetailRecid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HeaderRecid" Type="bigint" />
+          <Property Name="CustomerNo" Type="varchar" MaxLength="255" />
+          <Property Name="SortingCode" Type="varchar" MaxLength="255" />
+          <Property Name="BankAccountNo" Type="varchar" MaxLength="255" />
+          <Property Name="BankAccountName" Type="varchar" MaxLength="255" />
+          <Property Name="Status" Type="int" />
+          <Property Name="BankMandateDate" Type="varchar" MaxLength="255" />
+          <Property Name="DDFrequency" Type="int" />
+          <Property Name="NewBankMandate" Type="int" />
+          <Property Name="FirstClaim" Type="int" />
+          <Property Name="SecondClaim" Type="int" />
+          <Property Name="ClaimedAmount" Type="float" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="255" />
+          <Property Name="LastChangedBy" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastChangedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_Milling_Bacs_Header">
+          <Key>
+            <PropertyRef Name="HeaderRecid" />
+          </Key>
+          <Property Name="HeaderRecid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime" />
+          <Property Name="StageFlag" Type="int" />
+          <Property Name="DDFrequency" Type="int" />
+          <Property Name="BacsID" Type="varchar" MaxLength="255" />
+          <Property Name="MasterBankSortCode" Type="varchar" MaxLength="255" />
+          <Property Name="MasterBankAccountNo" Type="varchar" MaxLength="255" />
+          <Property Name="MasterBankAccountName" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="255" />
+          <Property Name="LastChangedBy" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastChangedDate" Type="datetime" />
+          <Property Name="SentBy" Type="varchar" MaxLength="255" />
+          <Property Name="SentDate" Type="datetime" />
+          <Property Name="AuthorisedBy" Type="varchar" MaxLength="255" />
+          <Property Name="AuthorisedDate" Type="datetime" />
+          <Property Name="RejectedFlag" Type="int" />
+        </EntityType>
+        <EntityType Name="t_Milling_Bacs_Master_Data">
+          <Key>
+            <PropertyRef Name="MasterRecid" />
+          </Key>
+          <Property Name="MasterRecid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BacsID" Type="varchar" MaxLength="255" />
+          <Property Name="MasterBankSortCode" Type="varchar" MaxLength="255" />
+          <Property Name="MasterBankAccountNo" Type="varchar" MaxLength="255" />
+          <Property Name="MasterBankAccountName" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="255" />
+          <Property Name="LastChangedBy" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastChangedDate" Type="datetime" />
+          <Property Name="StreetName" Type="varchar" MaxLength="255" />
+          <Property Name="PostCode" Type="varchar" MaxLength="255" />
+          <Property Name="TownName" Type="varchar" MaxLength="255" />
+          <Property Name="CntrySubDiv" Type="varchar" MaxLength="255" />
+          <Property Name="Country" Type="varchar" MaxLength="255" />
+          <Property Name="Currency" Type="varchar" MaxLength="10" />
+          <Property Name="BIC" Type="varchar" MaxLength="255" />
+          <Property Name="IBAN" Type="varchar" MaxLength="255" />
+          <Property Name="MMBID" Type="varchar" MaxLength="255" />
+          <Property Name="TaxId" Type="varchar" MaxLength="255" />
+          <Property Name="InstrId" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="t_Milling_Bacs_NewBankMandate">
+          <Key>
+            <PropertyRef Name="MandateRecid" />
+          </Key>
+          <Property Name="MandateRecid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MandateDesc" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="t_Milling_Bacs_Stage">
+          <Key>
+            <PropertyRef Name="StageRecid" />
+          </Key>
+          <Property Name="StageRecid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StageDesc" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="t_Milling_Bacs_Status">
+          <Key>
+            <PropertyRef Name="StatusRecid" />
+          </Key>
+          <Property Name="StatusRecid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusDesc" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="t_Milling_Function">
+          <Key>
+            <PropertyRef Name="FuncRecid" />
+          </Key>
+          <Property Name="FuncRecid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FuncDesc" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="t_Milling_Plant">
+          <Key>
+            <PropertyRef Name="PlantRecid" />
+          </Key>
+          <Property Name="PlantRecid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SiteRecid" Type="int" />
+          <Property Name="PlantDesc" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="t_Milling_Shift">
+          <Key>
+            <PropertyRef Name="ShiftRecid" />
+          </Key>
+          <Property Name="ShiftRecid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShiftDesc" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="t_Milling_Site">
+          <Key>
+            <PropertyRef Name="SiteRecid" />
+          </Key>
+          <Property Name="SiteRecid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SiteDesc" Type="varchar" MaxLength="255" />
+          <Property Name="SiteEmail" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="t_Milling_ticker">
+          <Key>
+            <PropertyRef Name="tickerRecid" />
+          </Key>
+          <Property Name="tickerRecid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tickerData" Type="varchar(max)" />
+          <Property Name="LastChangedBy" Type="varchar" MaxLength="255" />
+          <Property Name="LastChangedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_Milling_UMQC_Category">
+          <Key>
+            <PropertyRef Name="CategoryRecid" />
+          </Key>
+          <Property Name="CategoryRecid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryDesc" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="t_Milling_UMQC_Item_Standards_Detail">
+          <Key>
+            <PropertyRef Name="StdDetailRecid" />
+          </Key>
+          <Property Name="StdDetailRecid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StdRecipe" Type="varchar" MaxLength="255" />
+          <Property Name="StdItem" Type="varchar" MaxLength="255" />
+          <Property Name="MasterStdRecid" Type="int" />
+          <Property Name="StdMinScore" Type="float" />
+          <Property Name="StdTargetScore" Type="float" />
+          <Property Name="StdMaxScore" Type="float" />
+          <Property Name="StdComments" Type="varchar" MaxLength="255" />
+          <Property Name="StdActiveFlag" Type="int" />
+          <Property Name="RecipeProductRecid" Type="bigint" />
+        </EntityType>
+        <EntityType Name="t_Milling_UMQC_Products_Master">
+          <Key>
+            <PropertyRef Name="ProductMasterRecid" />
+          </Key>
+          <Property Name="ProductMasterRecid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RecipeCode" Type="varchar" MaxLength="255" />
+          <Property Name="RecipeDesc" Type="varchar" MaxLength="255" />
+          <Property Name="ItemCode" Type="varchar" MaxLength="255" />
+          <Property Name="ItemDesc" Type="varchar" MaxLength="255" />
+          <Property Name="RecipeCreatedBy" Type="varchar" MaxLength="255" />
+          <Property Name="RecipeCreatedDate" Type="datetime" />
+          <Property Name="RecipeLastChangedBy" Type="varchar" MaxLength="255" />
+          <Property Name="RecipeLastChangedDate" Type="datetime" />
+          <Property Name="RecipeActiveFlag" Type="int" />
+        </EntityType>
+        <EntityType Name="t_Milling_UMQC_Results_Detail">
+          <Key>
+            <PropertyRef Name="ResultDetailRecid" />
+          </Key>
+          <Property Name="ResultDetailRecid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResultHeaderrecid" Type="bigint" />
+          <Property Name="ResultMasterStdRecid" Type="int" />
+          <Property Name="ResultStdDetailRecid" Type="bigint" />
+          <Property Name="ResultMinScore" Type="float" />
+          <Property Name="ResultTargetScore" Type="float" />
+          <Property Name="ResultMaxScore" Type="float" />
+          <Property Name="ResultActualScore" Type="float" />
+          <Property Name="ResultComments" Type="varchar" MaxLength="255" />
+          <Property Name="ResultDetailLastChangedBy" Type="varchar" MaxLength="255" />
+          <Property Name="ResultDetailLastChangedDate" Type="datetime" />
+          <Property Name="ResultDetailActiveFlag" Type="int" />
+        </EntityType>
+        <EntityType Name="t_Milling_UMQC_Results_Header">
+          <Key>
+            <PropertyRef Name="ResultHeaderRecid" />
+          </Key>
+          <Property Name="ResultHeaderRecid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResultPlantRecid" Type="int" />
+          <Property Name="ResultFuncRecid" Type="int" />
+          <Property Name="ResultCreationDate" Type="datetime" />
+          <Property Name="ResultShiftRecid" Type="int" />
+          <Property Name="ResultJobNo" Type="varchar" MaxLength="255" />
+          <Property Name="ResultRunStart" Type="datetime" />
+          <Property Name="ResultRunEnd" Type="datetime" />
+          <Property Name="ResultBinNumber" Type="varchar" MaxLength="255" />
+          <Property Name="ResultProductRecid" Type="bigint" />
+          <Property Name="ResultCreatedBy" Type="varchar" MaxLength="255" />
+          <Property Name="ResultLastChangedBy" Type="varchar" MaxLength="255" />
+          <Property Name="ResultLastChangedDate" Type="datetime" />
+          <Property Name="ResultActiveFlag" Type="int" />
+          <Property Name="ExcludeAverages" Type="int" />
+          <Property Name="ConcessionDesc" Type="varchar" MaxLength="255" />
+          <Property Name="ResultTestTaken" Type="datetime" />
+          <Property Name="WheatfeedBinNumber" Type="varchar" MaxLength="255" />
+          <Property Name="GristVersionNumber" Type="varchar" MaxLength="255" />
+          <Property Name="plannedJobtonnage" Type="float" />
+          <Property Name="finalJobtonnage" Type="float" />
+        </EntityType>
+        <EntityType Name="t_Milling_UMQC_Results_Standards_Master">
+          <Key>
+            <PropertyRef Name="ResultStdRecid" />
+          </Key>
+          <Property Name="ResultStdRecid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResultStdDescription" Type="varchar" MaxLength="255" />
+          <Property Name="ResultStdNoOfDecs" Type="int" />
+          <Property Name="ResultStdComments" Type="varchar" MaxLength="255" />
+          <Property Name="ResultStdCategoryRecid" Type="int" />
+          <Property Name="ResultStdActiveFlag" Type="int" />
+          <Property Name="HGCode" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="t_Milling_UMQC_Results_Standards_Master_ByFunction">
+          <Key>
+            <PropertyRef Name="ResultFuncStdRecid" />
+          </Key>
+          <Property Name="ResultFuncStdRecid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResultStdRecid" Type="int" />
+          <Property Name="ResultFuncRecid" Type="int" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="usp_Milling_Bacs_Audit_Creation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="headerrecid" Type="bigint" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="audittext" Type="varchar" Mode="In" />
+          <Parameter Name="currentstage" Type="int" Mode="In" />
+          <Parameter Name="nextstage" Type="int" Mode="In" />
+          <Parameter Name="currentdatetime" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="usp_Milling_Bacs_Detail_Creation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="headerrecid" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="usp_Milling_Bacs_Indivdual_Detail_Report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="headerrecid" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="usp_Milling_UMQC_Results_By_Recipe_and_Standard" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="resultmasterstdrRecid" Type="bigint" Mode="In" />
+          <Parameter Name="resultproductrecid" Type="bigint" Mode="In" />
+          <Parameter Name="startdate" Type="datetime" Mode="In" />
+          <Parameter Name="enddate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="usp_Milling_UMQC_Results_Detail_Creation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="resultheaderrecid" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="usp_Milling_UMQC_Results_Graph_by_Product_Day" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="startdate" Type="datetime" Mode="In" />
+          <Parameter Name="enddate" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="HovisMillingPortalModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Hovis_Milling_User_Plant_Authorisation" EntityType="Self.t_Hovis_Milling_User_Plant_Authorisation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Hovis_Milling_User_Site_Authorisation" EntityType="Self.t_Hovis_Milling_User_Site_Authorisation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_Bacs_Audit_Details" EntityType="Self.t_Milling_Bacs_Audit_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_Bacs_Customers" EntityType="Self.t_Milling_Bacs_Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_Bacs_DDFrequency" EntityType="Self.t_Milling_Bacs_DDFrequency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_Bacs_Detail" EntityType="Self.t_Milling_Bacs_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_Bacs_Header" EntityType="Self.t_Milling_Bacs_Header" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_Bacs_Master_Data" EntityType="Self.t_Milling_Bacs_Master_Data" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_Bacs_NewBankMandate" EntityType="Self.t_Milling_Bacs_NewBankMandate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_Bacs_Stage" EntityType="Self.t_Milling_Bacs_Stage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_Bacs_Status" EntityType="Self.t_Milling_Bacs_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_Function" EntityType="Self.t_Milling_Function" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_Plant" EntityType="Self.t_Milling_Plant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_Shift" EntityType="Self.t_Milling_Shift" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_Site" EntityType="Self.t_Milling_Site" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_ticker" EntityType="Self.t_Milling_ticker" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_UMQC_Category" EntityType="Self.t_Milling_UMQC_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_UMQC_Item_Standards_Detail" EntityType="Self.t_Milling_UMQC_Item_Standards_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_UMQC_Products_Master" EntityType="Self.t_Milling_UMQC_Products_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_UMQC_Results_Detail" EntityType="Self.t_Milling_UMQC_Results_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_UMQC_Results_Header" EntityType="Self.t_Milling_UMQC_Results_Header" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_UMQC_Results_Standards_Master" EntityType="Self.t_Milling_UMQC_Results_Standards_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Milling_UMQC_Results_Standards_Master_ByFunction" EntityType="Self.t_Milling_UMQC_Results_Standards_Master_ByFunction" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HovisMillingPortalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="HovisMillingPortalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="t_Milling_Bacs_Customers" EntityType="HovisMillingPortalModel.t_Milling_Bacs_Customers" />
+          <EntitySet Name="t_Milling_Bacs_DDFrequency" EntityType="HovisMillingPortalModel.t_Milling_Bacs_DDFrequency" />
+          <EntitySet Name="t_Milling_Bacs_Master_Data" EntityType="HovisMillingPortalModel.t_Milling_Bacs_Master_Data" />
+          <EntitySet Name="t_Milling_Bacs_NewBankMandate" EntityType="HovisMillingPortalModel.t_Milling_Bacs_NewBankMandate" />
+          <EntitySet Name="t_Milling_Bacs_Status" EntityType="HovisMillingPortalModel.t_Milling_Bacs_Status" />
+          <EntitySet Name="t_Milling_Bacs_Detail" EntityType="HovisMillingPortalModel.t_Milling_Bacs_Detail" />
+          <EntitySet Name="t_Milling_Bacs_Header" EntityType="HovisMillingPortalModel.t_Milling_Bacs_Header" />
+          <EntitySet Name="t_Milling_Bacs_Stage" EntityType="HovisMillingPortalModel.t_Milling_Bacs_Stage" />
+          <FunctionImport Name="usp_Milling_Bacs_Detail_Creation">
+          <Parameter Name="headerrecid" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <EntitySet Name="t_Milling_UMQC_Category" EntityType="HovisMillingPortalModel.t_Milling_UMQC_Category" />
+          <EntitySet Name="t_Milling_UMQC_Item_Standards_Detail" EntityType="HovisMillingPortalModel.t_Milling_UMQC_Item_Standards_Detail" />
+          <EntitySet Name="t_Milling_UMQC_Results_Standards_Master" EntityType="HovisMillingPortalModel.t_Milling_UMQC_Results_Standards_Master" />
+          <FunctionImport Name="usp_Milling_UMQC_Results_Detail_Creation">
+          <Parameter Name="resultheaderrecid" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <EntitySet Name="t_Milling_UMQC_Products_Master" EntityType="HovisMillingPortalModel.t_Milling_UMQC_Products_Master" />
+          <EntitySet Name="t_Milling_UMQC_Results_Detail" EntityType="HovisMillingPortalModel.t_Milling_UMQC_Results_Detail" />
+          <EntitySet Name="t_Milling_UMQC_Results_Header" EntityType="HovisMillingPortalModel.t_Milling_UMQC_Results_Header" />
+          <EntitySet Name="t_Milling_Function" EntityType="HovisMillingPortalModel.t_Milling_Function" />
+          <EntitySet Name="t_Milling_Plant" EntityType="HovisMillingPortalModel.t_Milling_Plant" />
+          <EntitySet Name="t_Milling_Shift" EntityType="HovisMillingPortalModel.t_Milling_Shift" />
+          <EntitySet Name="t_Milling_Site" EntityType="HovisMillingPortalModel.t_Milling_Site" />
+          <FunctionImport Name="usp_Milling_UMQC_Results_By_Recipe_and_Standard" ReturnType="Collection(HovisMillingPortalModel.usp_Milling_UMQC_Results_By_Recipe_and_Standard_Result)">
+            <Parameter Name="resultmasterstdrRecid" Mode="In" Type="Int64" />
+            <Parameter Name="resultproductrecid" Mode="In" Type="Int64" />
+            <Parameter Name="startdate" Mode="In" Type="DateTime" />
+            <Parameter Name="enddate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Milling_UMQC_Results_Graph_by_Product_Day" ReturnType="Collection(HovisMillingPortalModel.usp_Milling_UMQC_Results_Graph_by_Product_Day_Result)">
+            <Parameter Name="startdate" Mode="In" Type="DateTime" />
+            <Parameter Name="enddate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="t_Hovis_Milling_User_Plant_Authorisation" EntityType="HovisMillingPortalModel.t_Hovis_Milling_User_Plant_Authorisation" />
+          <EntitySet Name="t_Hovis_Milling_User_Site_Authorisation" EntityType="HovisMillingPortalModel.t_Hovis_Milling_User_Site_Authorisation" />
+          <EntitySet Name="t_Milling_Bacs_Audit_Details" EntityType="HovisMillingPortalModel.t_Milling_Bacs_Audit_Details" />
+          <FunctionImport Name="usp_Milling_Bacs_Audit_Creation">
+            <Parameter Name="headerrecid" Mode="In" Type="Int64" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="audittext" Mode="In" Type="String" />
+            <Parameter Name="currentstage" Mode="In" Type="Int32" />
+            <Parameter Name="nextstage" Mode="In" Type="Int32" />
+            <Parameter Name="currentdatetime" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Milling_Bacs_Indivdual_Detail_Report" ReturnType="Collection(HovisMillingPortalModel.usp_Milling_Bacs_Indivdual_Detail_Report_Result)">
+          <Parameter Name="headerrecid" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <EntitySet Name="t_Milling_UMQC_Results_Standards_Master_ByFunction" EntityType="HovisMillingPortalModel.t_Milling_UMQC_Results_Standards_Master_ByFunction" />
+          <EntitySet Name="t_Milling_ticker" EntityType="HovisMillingPortalModel.t_Milling_ticker" />
+        </EntityContainer>
+        <EntityType Name="t_Milling_Bacs_Customers">
+          <Key>
+            <PropertyRef Name="CustomerRecid" />
+          </Key>
+          <Property Name="CustomerRecid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SortingCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BankAccountNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BankAccountName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="BankMandateDate" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DDFrequency" Type="Int32" />
+          <Property Name="NewBankMandate" Type="Int32" />
+          <Property Name="FirstClaim" Type="Int32" />
+          <Property Name="SecondClaim" Type="Int32" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LastChangedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastChangedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="t_Milling_Bacs_DDFrequency">
+          <Key>
+            <PropertyRef Name="DDFreqRecid" />
+          </Key>
+          <Property Name="DDFreqRecid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DDFreqDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_Milling_Bacs_Master_Data">
+          <Key>
+            <PropertyRef Name="MasterRecid" />
+          </Key>
+          <Property Name="MasterRecid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BacsID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MasterBankSortCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MasterBankAccountNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MasterBankAccountName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LastChangedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="StreetName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PostCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TownName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CntrySubDiv" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Currency" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="BIC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IBAN" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MMBID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TaxId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="InstrId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_Milling_Bacs_NewBankMandate">
+          <Key>
+            <PropertyRef Name="MandateRecid" />
+          </Key>
+          <Property Name="MandateRecid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MandateDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_Milling_Bacs_Status">
+          <Key>
+            <PropertyRef Name="StatusRecid" />
+          </Key>
+          <Property Name="StatusRecid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_Milling_Bacs_Detail">
+          <Key>
+            <PropertyRef Name="DetailRecid" />
+          </Key>
+          <Property Name="DetailRecid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HeaderRecid" Type="Int64" />
+          <Property Name="CustomerNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SortingCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BankAccountNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BankAccountName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="BankMandateDate" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DDFrequency" Type="Int32" />
+          <Property Name="NewBankMandate" Type="Int32" />
+          <Property Name="FirstClaim" Type="Int32" />
+          <Property Name="SecondClaim" Type="Int32" />
+          <Property Name="ClaimedAmount" Type="Double" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LastChangedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastChangedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="t_Milling_Bacs_Header">
+          <Key>
+            <PropertyRef Name="HeaderRecid" />
+          </Key>
+          <Property Name="HeaderRecid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="StageFlag" Type="Int32" />
+          <Property Name="DDFrequency" Type="Int32" />
+          <Property Name="BacsID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MasterBankSortCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MasterBankAccountNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MasterBankAccountName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LastChangedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="SentBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SentDate" Type="DateTime" Precision="3" />
+          <Property Name="AuthorisedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="AuthorisedDate" Type="DateTime" Precision="3" />
+          <Property Name="RejectedFlag" Type="Int32" />
+        </EntityType>
+        <EntityType Name="t_Milling_Bacs_Stage">
+          <Key>
+            <PropertyRef Name="StageRecid" />
+          </Key>
+          <Property Name="StageRecid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StageDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_Milling_UMQC_Category">
+          <Key>
+            <PropertyRef Name="CategoryRecid" />
+          </Key>
+          <Property Name="CategoryRecid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_Milling_UMQC_Item_Standards_Detail">
+          <Key>
+            <PropertyRef Name="StdDetailRecid" />
+          </Key>
+          <Property Name="StdDetailRecid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StdRecipe" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="StdItem" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MasterStdRecid" Type="Int32" />
+          <Property Name="StdMinScore" Type="Double" />
+          <Property Name="StdTargetScore" Type="Double" />
+          <Property Name="StdMaxScore" Type="Double" />
+          <Property Name="StdComments" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="StdActiveFlag" Type="Int32" />
+          <Property Name="RecipeProductRecid" Type="Int64" />
+        </EntityType>
+        <EntityType Name="t_Milling_UMQC_Results_Standards_Master">
+          <Key>
+            <PropertyRef Name="ResultStdRecid" />
+          </Key>
+          <Property Name="ResultStdRecid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResultStdDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ResultStdNoOfDecs" Type="Int32" />
+          <Property Name="ResultStdComments" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ResultStdCategoryRecid" Type="Int32" />
+          <Property Name="ResultStdActiveFlag" Type="Int32" />
+          <Property Name="HGCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_Milling_UMQC_Products_Master">
+          <Key>
+            <PropertyRef Name="ProductMasterRecid" />
+          </Key>
+          <Property Name="ProductMasterRecid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RecipeCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RecipeDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ItemCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ItemDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RecipeCreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RecipeCreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="RecipeLastChangedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RecipeLastChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="RecipeActiveFlag" Type="Int32" />
+        </EntityType>
+        <EntityType Name="t_Milling_UMQC_Results_Detail">
+          <Key>
+            <PropertyRef Name="ResultDetailRecid" />
+          </Key>
+          <Property Name="ResultDetailRecid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResultHeaderrecid" Type="Int64" />
+          <Property Name="ResultMasterStdRecid" Type="Int32" />
+          <Property Name="ResultStdDetailRecid" Type="Int64" />
+          <Property Name="ResultMinScore" Type="Double" />
+          <Property Name="ResultTargetScore" Type="Double" />
+          <Property Name="ResultMaxScore" Type="Double" />
+          <Property Name="ResultActualScore" Type="Double" />
+          <Property Name="ResultComments" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ResultDetailLastChangedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ResultDetailLastChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="ResultDetailActiveFlag" Type="Int32" />
+        </EntityType>
+        <EntityType Name="t_Milling_UMQC_Results_Header">
+          <Key>
+            <PropertyRef Name="ResultHeaderRecid" />
+          </Key>
+          <Property Name="ResultHeaderRecid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResultPlantRecid" Type="Int32" />
+          <Property Name="ResultFuncRecid" Type="Int32" />
+          <Property Name="ResultCreationDate" Type="DateTime" Precision="3" />
+          <Property Name="ResultShiftRecid" Type="Int32" />
+          <Property Name="ResultJobNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ResultRunStart" Type="DateTime" Precision="3" />
+          <Property Name="ResultRunEnd" Type="DateTime" Precision="3" />
+          <Property Name="ResultBinNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ResultProductRecid" Type="Int64" />
+          <Property Name="ResultCreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ResultLastChangedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ResultLastChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="ResultActiveFlag" Type="Int32" />
+          <Property Name="ExcludeAverages" Type="Int32" />
+          <Property Name="ConcessionDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ResultTestTaken" Type="DateTime" Precision="3" />
+          <Property Name="WheatfeedBinNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="GristVersionNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="plannedJobtonnage" Type="Double" />
+          <Property Name="finalJobtonnage" Type="Double" />
+        </EntityType>
+        <EntityType Name="t_Milling_Function">
+          <Key>
+            <PropertyRef Name="FuncRecid" />
+          </Key>
+          <Property Name="FuncRecid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FuncDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_Milling_Plant">
+          <Key>
+            <PropertyRef Name="PlantRecid" />
+          </Key>
+          <Property Name="PlantRecid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SiteRecid" Type="Int32" />
+          <Property Name="PlantDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_Milling_Shift">
+          <Key>
+            <PropertyRef Name="ShiftRecid" />
+          </Key>
+          <Property Name="ShiftRecid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShiftDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_Milling_Site">
+          <Key>
+            <PropertyRef Name="SiteRecid" />
+          </Key>
+          <Property Name="SiteRecid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SiteDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SiteEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="usp_Milling_UMQC_Results_By_Recipe_and_Standard_Result">
+          <Property Type="Int32" Name="ResultMasterStdRecid" Nullable="true" />
+          <Property Type="String" Name="ResultStdDescription" Nullable="true" MaxLength="255" />
+          <Property Type="Int64" Name="ResultProductRecid" Nullable="true" />
+          <Property Type="String" Name="RecipeDesc" Nullable="true" MaxLength="255" />
+          <Property Type="Double" Name="ResultMinScore" Nullable="true" />
+          <Property Type="Double" Name="ResultTargetScore" Nullable="true" />
+          <Property Type="Double" Name="ResultMaxScore" Nullable="true" />
+          <Property Type="Double" Name="ResultActualScore" Nullable="true" />
+          <Property Type="DateTime" Name="ResultCreationDate" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_Milling_UMQC_Results_Graph_by_Product_Day_Result">
+          <Property Type="String" Name="RecipeDesc" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="NoOfTests" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="t_Hovis_Milling_User_Plant_Authorisation">
+          <Key>
+            <PropertyRef Name="UserPlantRecid" />
+          </Key>
+          <Property Name="UserPlantRecid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlantRecid" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_Hovis_Milling_User_Site_Authorisation">
+          <Key>
+            <PropertyRef Name="UserSiteRecid" />
+          </Key>
+          <Property Name="UserSiteRecid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SiteRecid" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_Milling_Bacs_Audit_Details">
+          <Key>
+            <PropertyRef Name="AuditRecid" />
+          </Key>
+          <Property Name="AuditRecid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BacsHeaderRecid" Type="Int64" />
+          <Property Name="CurrentStage" Type="Int32" />
+          <Property Name="NextStage" Type="Int32" />
+          <Property Name="LastChangedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LastChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="AuditText" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="usp_Milling_Bacs_Indivdual_Detail_Report_Result">
+          <Property Type="Int64" Name="DetailRecid" Nullable="false" />
+          <Property Type="Int64" Name="HeaderRecid" Nullable="false" />
+          <Property Type="String" Name="CustomerNo" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="SortingCode" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="BankAccountNo" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="BankAccountName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="BankMandateDate" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="DDFrequency" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="NewBankMandate" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="FirstClaim" Nullable="true" />
+          <Property Type="Int32" Name="SecondClaim" Nullable="true" />
+          <Property Type="Double" Name="ClaimedAmount" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDateDetail" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="PaymentDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="BacsID" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="MasterBankSortCode" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="MasterBankAccountNo" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="MasterBankAccountName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="StreetName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="PostCode" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="TownName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="CntrySubDiv" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Currency" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="BIC" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="IBAN" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="MMBID" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="TaxId" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="InstrId" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <EntityType Name="t_Milling_UMQC_Results_Standards_Master_ByFunction">
+          <Key>
+            <PropertyRef Name="ResultFuncStdRecid" />
+          </Key>
+          <Property Name="ResultFuncStdRecid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResultStdRecid" Type="Int32" />
+          <Property Name="ResultFuncRecid" Type="Int32" />
+        </EntityType>
+        <EntityType Name="t_Milling_ticker">
+          <Key>
+            <PropertyRef Name="tickerRecid" />
+          </Key>
+          <Property Name="tickerRecid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tickerData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LastChangedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LastChangedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HovisMillingPortalModelStoreContainer" CdmEntityContainer="HovisMillingPortalEntities">
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="HovisMillingPortalModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="t_Milling_Bacs_Customers">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_Bacs_Customers">
+              <MappingFragment StoreEntitySet="t_Milling_Bacs_Customers">
+                <ScalarProperty Name="LastChangedDate" ColumnName="LastChangedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="LastChangedBy" ColumnName="LastChangedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="SecondClaim" ColumnName="SecondClaim" />
+                <ScalarProperty Name="FirstClaim" ColumnName="FirstClaim" />
+                <ScalarProperty Name="NewBankMandate" ColumnName="NewBankMandate" />
+                <ScalarProperty Name="DDFrequency" ColumnName="DDFrequency" />
+                <ScalarProperty Name="BankMandateDate" ColumnName="BankMandateDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BankAccountName" ColumnName="BankAccountName" />
+                <ScalarProperty Name="BankAccountNo" ColumnName="BankAccountNo" />
+                <ScalarProperty Name="SortingCode" ColumnName="SortingCode" />
+                <ScalarProperty Name="CustomerNo" ColumnName="CustomerNo" />
+                <ScalarProperty Name="CustomerRecid" ColumnName="CustomerRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Milling_Bacs_DDFrequency">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_Bacs_DDFrequency">
+              <MappingFragment StoreEntitySet="t_Milling_Bacs_DDFrequency">
+                <ScalarProperty Name="DDFreqDesc" ColumnName="DDFreqDesc" />
+                <ScalarProperty Name="DDFreqRecid" ColumnName="DDFreqRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Milling_Bacs_Master_Data">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_Bacs_Master_Data">
+              <MappingFragment StoreEntitySet="t_Milling_Bacs_Master_Data">
+                <ScalarProperty Name="InstrId" ColumnName="InstrId" />
+                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+                <ScalarProperty Name="MMBID" ColumnName="MMBID" />
+                <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+                <ScalarProperty Name="BIC" ColumnName="BIC" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="CntrySubDiv" ColumnName="CntrySubDiv" />
+                <ScalarProperty Name="TownName" ColumnName="TownName" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+                <ScalarProperty Name="LastChangedDate" ColumnName="LastChangedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="LastChangedBy" ColumnName="LastChangedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="MasterBankAccountName" ColumnName="MasterBankAccountName" />
+                <ScalarProperty Name="MasterBankAccountNo" ColumnName="MasterBankAccountNo" />
+                <ScalarProperty Name="MasterBankSortCode" ColumnName="MasterBankSortCode" />
+                <ScalarProperty Name="BacsID" ColumnName="BacsID" />
+                <ScalarProperty Name="MasterRecid" ColumnName="MasterRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Milling_Bacs_NewBankMandate">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_Bacs_NewBankMandate">
+              <MappingFragment StoreEntitySet="t_Milling_Bacs_NewBankMandate">
+                <ScalarProperty Name="MandateDesc" ColumnName="MandateDesc" />
+                <ScalarProperty Name="MandateRecid" ColumnName="MandateRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Milling_Bacs_Status">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_Bacs_Status">
+              <MappingFragment StoreEntitySet="t_Milling_Bacs_Status">
+                <ScalarProperty Name="StatusDesc" ColumnName="StatusDesc" />
+                <ScalarProperty Name="StatusRecid" ColumnName="StatusRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Milling_Bacs_Detail">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_Bacs_Detail">
+              <MappingFragment StoreEntitySet="t_Milling_Bacs_Detail">
+                <ScalarProperty Name="LastChangedDate" ColumnName="LastChangedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="LastChangedBy" ColumnName="LastChangedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ClaimedAmount" ColumnName="ClaimedAmount" />
+                <ScalarProperty Name="SecondClaim" ColumnName="SecondClaim" />
+                <ScalarProperty Name="FirstClaim" ColumnName="FirstClaim" />
+                <ScalarProperty Name="NewBankMandate" ColumnName="NewBankMandate" />
+                <ScalarProperty Name="DDFrequency" ColumnName="DDFrequency" />
+                <ScalarProperty Name="BankMandateDate" ColumnName="BankMandateDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BankAccountName" ColumnName="BankAccountName" />
+                <ScalarProperty Name="BankAccountNo" ColumnName="BankAccountNo" />
+                <ScalarProperty Name="SortingCode" ColumnName="SortingCode" />
+                <ScalarProperty Name="CustomerNo" ColumnName="CustomerNo" />
+                <ScalarProperty Name="HeaderRecid" ColumnName="HeaderRecid" />
+                <ScalarProperty Name="DetailRecid" ColumnName="DetailRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Milling_Bacs_Header">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_Bacs_Header">
+              <MappingFragment StoreEntitySet="t_Milling_Bacs_Header">
+                <ScalarProperty Name="RejectedFlag" ColumnName="RejectedFlag" />
+                <ScalarProperty Name="AuthorisedDate" ColumnName="AuthorisedDate" />
+                <ScalarProperty Name="AuthorisedBy" ColumnName="AuthorisedBy" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="SentBy" ColumnName="SentBy" />
+                <ScalarProperty Name="LastChangedDate" ColumnName="LastChangedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="LastChangedBy" ColumnName="LastChangedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="MasterBankAccountName" ColumnName="MasterBankAccountName" />
+                <ScalarProperty Name="MasterBankAccountNo" ColumnName="MasterBankAccountNo" />
+                <ScalarProperty Name="MasterBankSortCode" ColumnName="MasterBankSortCode" />
+                <ScalarProperty Name="BacsID" ColumnName="BacsID" />
+                <ScalarProperty Name="DDFrequency" ColumnName="DDFrequency" />
+                <ScalarProperty Name="StageFlag" ColumnName="StageFlag" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="HeaderRecid" ColumnName="HeaderRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Milling_Bacs_Stage">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_Bacs_Stage">
+              <MappingFragment StoreEntitySet="t_Milling_Bacs_Stage">
+                <ScalarProperty Name="StageDesc" ColumnName="StageDesc" />
+                <ScalarProperty Name="StageRecid" ColumnName="StageRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_Milling_Bacs_Detail_Creation" FunctionName="HovisMillingPortalModel.Store.usp_Milling_Bacs_Detail_Creation" />
+          <EntitySetMapping Name="t_Milling_UMQC_Category">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_UMQC_Category">
+              <MappingFragment StoreEntitySet="t_Milling_UMQC_Category">
+                <ScalarProperty Name="CategoryDesc" ColumnName="CategoryDesc" />
+                <ScalarProperty Name="CategoryRecid" ColumnName="CategoryRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Milling_UMQC_Item_Standards_Detail">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_UMQC_Item_Standards_Detail">
+              <MappingFragment StoreEntitySet="t_Milling_UMQC_Item_Standards_Detail">
+                <ScalarProperty Name="RecipeProductRecid" ColumnName="RecipeProductRecid" />
+                <ScalarProperty Name="StdActiveFlag" ColumnName="StdActiveFlag" />
+                <ScalarProperty Name="StdComments" ColumnName="StdComments" />
+                <ScalarProperty Name="StdMaxScore" ColumnName="StdMaxScore" />
+                <ScalarProperty Name="StdTargetScore" ColumnName="StdTargetScore" />
+                <ScalarProperty Name="StdMinScore" ColumnName="StdMinScore" />
+                <ScalarProperty Name="MasterStdRecid" ColumnName="MasterStdRecid" />
+                <ScalarProperty Name="StdItem" ColumnName="StdItem" />
+                <ScalarProperty Name="StdRecipe" ColumnName="StdRecipe" />
+                <ScalarProperty Name="StdDetailRecid" ColumnName="StdDetailRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Milling_UMQC_Results_Standards_Master">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_UMQC_Results_Standards_Master">
+              <MappingFragment StoreEntitySet="t_Milling_UMQC_Results_Standards_Master">
+                <ScalarProperty Name="HGCode" ColumnName="HGCode" />
+                <ScalarProperty Name="ResultStdActiveFlag" ColumnName="ResultStdActiveFlag" />
+                <ScalarProperty Name="ResultStdCategoryRecid" ColumnName="ResultStdCategoryRecid" />
+                <ScalarProperty Name="ResultStdComments" ColumnName="ResultStdComments" />
+                <ScalarProperty Name="ResultStdNoOfDecs" ColumnName="ResultStdNoOfDecs" />
+                <ScalarProperty Name="ResultStdDescription" ColumnName="ResultStdDescription" />
+                <ScalarProperty Name="ResultStdRecid" ColumnName="ResultStdRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_Milling_UMQC_Results_Detail_Creation" FunctionName="HovisMillingPortalModel.Store.usp_Milling_UMQC_Results_Detail_Creation" />
+          <EntitySetMapping Name="t_Milling_UMQC_Products_Master">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_UMQC_Products_Master">
+              <MappingFragment StoreEntitySet="t_Milling_UMQC_Products_Master">
+                <ScalarProperty Name="RecipeActiveFlag" ColumnName="RecipeActiveFlag" />
+                <ScalarProperty Name="RecipeLastChangedDate" ColumnName="RecipeLastChangedDate" />
+                <ScalarProperty Name="RecipeLastChangedBy" ColumnName="RecipeLastChangedBy" />
+                <ScalarProperty Name="RecipeCreatedDate" ColumnName="RecipeCreatedDate" />
+                <ScalarProperty Name="RecipeCreatedBy" ColumnName="RecipeCreatedBy" />
+                <ScalarProperty Name="ItemDesc" ColumnName="ItemDesc" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="RecipeDesc" ColumnName="RecipeDesc" />
+                <ScalarProperty Name="RecipeCode" ColumnName="RecipeCode" />
+                <ScalarProperty Name="ProductMasterRecid" ColumnName="ProductMasterRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Milling_UMQC_Results_Detail">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_UMQC_Results_Detail">
+              <MappingFragment StoreEntitySet="t_Milling_UMQC_Results_Detail">
+                <ScalarProperty Name="ResultDetailActiveFlag" ColumnName="ResultDetailActiveFlag" />
+                <ScalarProperty Name="ResultDetailLastChangedDate" ColumnName="ResultDetailLastChangedDate" />
+                <ScalarProperty Name="ResultDetailLastChangedBy" ColumnName="ResultDetailLastChangedBy" />
+                <ScalarProperty Name="ResultComments" ColumnName="ResultComments" />
+                <ScalarProperty Name="ResultActualScore" ColumnName="ResultActualScore" />
+                <ScalarProperty Name="ResultMaxScore" ColumnName="ResultMaxScore" />
+                <ScalarProperty Name="ResultTargetScore" ColumnName="ResultTargetScore" />
+                <ScalarProperty Name="ResultMinScore" ColumnName="ResultMinScore" />
+                <ScalarProperty Name="ResultStdDetailRecid" ColumnName="ResultStdDetailRecid" />
+                <ScalarProperty Name="ResultMasterStdRecid" ColumnName="ResultMasterStdRecid" />
+                <ScalarProperty Name="ResultHeaderrecid" ColumnName="ResultHeaderrecid" />
+                <ScalarProperty Name="ResultDetailRecid" ColumnName="ResultDetailRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Milling_UMQC_Results_Header">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_UMQC_Results_Header">
+              <MappingFragment StoreEntitySet="t_Milling_UMQC_Results_Header">
+                <ScalarProperty Name="finalJobtonnage" ColumnName="finalJobtonnage" />
+                <ScalarProperty Name="plannedJobtonnage" ColumnName="plannedJobtonnage" />
+                <ScalarProperty Name="GristVersionNumber" ColumnName="GristVersionNumber" />
+                <ScalarProperty Name="WheatfeedBinNumber" ColumnName="WheatfeedBinNumber" />
+                <ScalarProperty Name="ResultTestTaken" ColumnName="ResultTestTaken" />
+                <ScalarProperty Name="ConcessionDesc" ColumnName="ConcessionDesc" />
+                <ScalarProperty Name="ExcludeAverages" ColumnName="ExcludeAverages" />
+                <ScalarProperty Name="ResultActiveFlag" ColumnName="ResultActiveFlag" />
+                <ScalarProperty Name="ResultLastChangedDate" ColumnName="ResultLastChangedDate" />
+                <ScalarProperty Name="ResultLastChangedBy" ColumnName="ResultLastChangedBy" />
+                <ScalarProperty Name="ResultCreatedBy" ColumnName="ResultCreatedBy" />
+                <ScalarProperty Name="ResultProductRecid" ColumnName="ResultProductRecid" />
+                <ScalarProperty Name="ResultBinNumber" ColumnName="ResultBinNumber" />
+                <ScalarProperty Name="ResultRunEnd" ColumnName="ResultRunEnd" />
+                <ScalarProperty Name="ResultRunStart" ColumnName="ResultRunStart" />
+                <ScalarProperty Name="ResultJobNo" ColumnName="ResultJobNo" />
+                <ScalarProperty Name="ResultShiftRecid" ColumnName="ResultShiftRecid" />
+                <ScalarProperty Name="ResultCreationDate" ColumnName="ResultCreationDate" />
+                <ScalarProperty Name="ResultFuncRecid" ColumnName="ResultFuncRecid" />
+                <ScalarProperty Name="ResultPlantRecid" ColumnName="ResultPlantRecid" />
+                <ScalarProperty Name="ResultHeaderRecid" ColumnName="ResultHeaderRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Milling_Function">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_Function">
+              <MappingFragment StoreEntitySet="t_Milling_Function">
+                <ScalarProperty Name="FuncDesc" ColumnName="FuncDesc" />
+                <ScalarProperty Name="FuncRecid" ColumnName="FuncRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Milling_Plant">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_Plant">
+              <MappingFragment StoreEntitySet="t_Milling_Plant">
+                <ScalarProperty Name="PlantDesc" ColumnName="PlantDesc" />
+                <ScalarProperty Name="SiteRecid" ColumnName="SiteRecid" />
+                <ScalarProperty Name="PlantRecid" ColumnName="PlantRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Milling_Shift">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_Shift">
+              <MappingFragment StoreEntitySet="t_Milling_Shift">
+                <ScalarProperty Name="ShiftDesc" ColumnName="ShiftDesc" />
+                <ScalarProperty Name="ShiftRecid" ColumnName="ShiftRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Milling_Site">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_Site">
+              <MappingFragment StoreEntitySet="t_Milling_Site">
+                <ScalarProperty Name="SiteEmail" ColumnName="SiteEmail" />
+                <ScalarProperty Name="SiteDesc" ColumnName="SiteDesc" />
+                <ScalarProperty Name="SiteRecid" ColumnName="SiteRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_Milling_UMQC_Results_By_Recipe_and_Standard" FunctionName="HovisMillingPortalModel.Store.usp_Milling_UMQC_Results_By_Recipe_and_Standard">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HovisMillingPortalModel.usp_Milling_UMQC_Results_By_Recipe_and_Standard_Result">
+                <ScalarProperty Name="ResultMasterStdRecid" ColumnName="ResultMasterStdRecid" />
+                <ScalarProperty Name="ResultStdDescription" ColumnName="ResultStdDescription" />
+                <ScalarProperty Name="ResultProductRecid" ColumnName="ResultProductRecid" />
+                <ScalarProperty Name="RecipeDesc" ColumnName="RecipeDesc" />
+                <ScalarProperty Name="ResultMinScore" ColumnName="ResultMinScore" />
+                <ScalarProperty Name="ResultTargetScore" ColumnName="ResultTargetScore" />
+                <ScalarProperty Name="ResultMaxScore" ColumnName="ResultMaxScore" />
+                <ScalarProperty Name="ResultActualScore" ColumnName="ResultActualScore" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Milling_UMQC_Results_Graph_by_Product_Day" FunctionName="HovisMillingPortalModel.Store.usp_Milling_UMQC_Results_Graph_by_Product_Day">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HovisMillingPortalModel.usp_Milling_UMQC_Results_Graph_by_Product_Day_Result">
+                <ScalarProperty Name="RecipeDesc" ColumnName="RecipeDesc" />
+                <ScalarProperty Name="NoOfTests" ColumnName="NoOfTests" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="t_Hovis_Milling_User_Plant_Authorisation">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Hovis_Milling_User_Plant_Authorisation">
+              <MappingFragment StoreEntitySet="t_Hovis_Milling_User_Plant_Authorisation">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PlantRecid" ColumnName="PlantRecid" />
+                <ScalarProperty Name="UserPlantRecid" ColumnName="UserPlantRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Hovis_Milling_User_Site_Authorisation">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Hovis_Milling_User_Site_Authorisation">
+              <MappingFragment StoreEntitySet="t_Hovis_Milling_User_Site_Authorisation">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="SiteRecid" ColumnName="SiteRecid" />
+                <ScalarProperty Name="UserSiteRecid" ColumnName="UserSiteRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Milling_Bacs_Audit_Details">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_Bacs_Audit_Details">
+              <MappingFragment StoreEntitySet="t_Milling_Bacs_Audit_Details">
+                <ScalarProperty Name="AuditText" ColumnName="AuditText" />
+                <ScalarProperty Name="LastChangedDate" ColumnName="LastChangedDate" />
+                <ScalarProperty Name="LastChangedBy" ColumnName="LastChangedBy" />
+                <ScalarProperty Name="NextStage" ColumnName="NextStage" />
+                <ScalarProperty Name="CurrentStage" ColumnName="CurrentStage" />
+                <ScalarProperty Name="BacsHeaderRecid" ColumnName="BacsHeaderRecid" />
+                <ScalarProperty Name="AuditRecid" ColumnName="AuditRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_Milling_Bacs_Audit_Creation" FunctionName="HovisMillingPortalModel.Store.usp_Milling_Bacs_Audit_Creation" />
+          <FunctionImportMapping FunctionImportName="usp_Milling_Bacs_Indivdual_Detail_Report" FunctionName="HovisMillingPortalModel.Store.usp_Milling_Bacs_Indivdual_Detail_Report">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HovisMillingPortalModel.usp_Milling_Bacs_Indivdual_Detail_Report_Result">
+                <ScalarProperty Name="DetailRecid" ColumnName="DetailRecid" />
+                <ScalarProperty Name="HeaderRecid" ColumnName="HeaderRecid" />
+                <ScalarProperty Name="CustomerNo" ColumnName="CustomerNo" />
+                <ScalarProperty Name="SortingCode" ColumnName="SortingCode" />
+                <ScalarProperty Name="BankAccountNo" ColumnName="BankAccountNo" />
+                <ScalarProperty Name="BankAccountName" ColumnName="BankAccountName" />
+                <ScalarProperty Name="BankMandateDate" ColumnName="BankMandateDate" />
+                <ScalarProperty Name="DDFrequency" ColumnName="DDFrequency" />
+                <ScalarProperty Name="NewBankMandate" ColumnName="NewBankMandate" />
+                <ScalarProperty Name="FirstClaim" ColumnName="FirstClaim" />
+                <ScalarProperty Name="SecondClaim" ColumnName="SecondClaim" />
+                <ScalarProperty Name="ClaimedAmount" ColumnName="ClaimedAmount" />
+                <ScalarProperty Name="CreatedDateDetail" ColumnName="CreatedDateDetail" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="BacsID" ColumnName="BacsID" />
+                <ScalarProperty Name="MasterBankSortCode" ColumnName="MasterBankSortCode" />
+                <ScalarProperty Name="MasterBankAccountNo" ColumnName="MasterBankAccountNo" />
+                <ScalarProperty Name="MasterBankAccountName" ColumnName="MasterBankAccountName" />
+                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="TownName" ColumnName="TownName" />
+                <ScalarProperty Name="CntrySubDiv" ColumnName="CntrySubDiv" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="BIC" ColumnName="BIC" />
+                <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+                <ScalarProperty Name="MMBID" ColumnName="MMBID" />
+                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+                <ScalarProperty Name="InstrId" ColumnName="InstrId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="t_Milling_UMQC_Results_Standards_Master_ByFunction">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_UMQC_Results_Standards_Master_ByFunction">
+              <MappingFragment StoreEntitySet="t_Milling_UMQC_Results_Standards_Master_ByFunction">
+                <ScalarProperty Name="ResultFuncRecid" ColumnName="ResultFuncRecid" />
+                <ScalarProperty Name="ResultStdRecid" ColumnName="ResultStdRecid" />
+                <ScalarProperty Name="ResultFuncStdRecid" ColumnName="ResultFuncStdRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Milling_ticker">
+            <EntityTypeMapping TypeName="HovisMillingPortalModel.t_Milling_ticker">
+              <MappingFragment StoreEntitySet="t_Milling_ticker">
+                <ScalarProperty Name="LastChangedDate" ColumnName="LastChangedDate" />
+                <ScalarProperty Name="LastChangedBy" ColumnName="LastChangedBy" />
+                <ScalarProperty Name="tickerData" ColumnName="tickerData" />
+                <ScalarProperty Name="tickerRecid" ColumnName="tickerRecid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

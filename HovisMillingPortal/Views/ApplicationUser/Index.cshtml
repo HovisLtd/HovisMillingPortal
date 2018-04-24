@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Users";
+}
+@using HovisMillingPortal.Helpers
+@model IEnumerable<HovisMillingPortal.Models.ApplicationUser>
+
+<header class="header">
+    <h3>Users</h3>
+</header>
+<!-- content wrapper -->
+<div class="content-wrap">
+    <div class="row">
+
+        <div class="col-md-12">
+
+            @Html.Alerts()
+
+            <a href="@Url.Action("New")" class="btn btn-success">Add New</a>
+
+            <br />
+            <br />
+
+            @if (Model.Any())
+            {
+                <section class="panel">
+                    <div class="panel-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table responsive" data-sortable="" data-sortable-initialized="true">
+                                <thead>
+                                    <tr>
+                                        <th data-sorted="true" data-sorted-direction="ascending">Email Address</th>
+                                        <th data-sorted="false">First Name</th>
+                                        <th data-sorted="false">Last Name</th>
+                                        <th data-sorted="false">Date Added</th>
+                                        <th data-sorted="false">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var user in Model)
+                                    {
+
+                                        <tr>
+                                            <td>@user.Email</td>
+                                            <td>@user.FirstName</td>
+                                            <td>@user.LastName</td>
+                                            <td>@user.CreatedDate</td>
+                                            <td>
+                                                @Html.ActionLink("Edit", "Edit", "ApplicationUser", new { @id = user.Id }, new { @class = "btn btn-success btn-xs" })
+                                                @Html.ActionLink("Delete", "Delete", "ApplicationUser", new { @id = user.Id }, new { @class = "btn btn-danger btn-xs" })
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            }
+        </div>
+    </div>
+</div>
+<!-- /content wrapper -->

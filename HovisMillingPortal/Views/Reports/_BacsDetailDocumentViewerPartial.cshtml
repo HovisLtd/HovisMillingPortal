@@ -1,0 +1,22 @@
+﻿@Html.DevExpress().DocumentViewer(
+    settings =>
+    {
+        settings.Name = "BacsDetailDocumentViewer";
+        //settings.Report = (HovisSOPV2.Views.OrderReports.MissingProduct)ViewData["Report"];
+        //settings.Report = new HovisSOPV2.Reports.MissingProduct() { DataSource = Model };
+        settings.CallbackRouteValues = new { Controller = "Reports", Action = "BacsDetailDocumentViewerPartial" };
+        settings.ExportRouteValues = new { Controller = "Reports", Action = "BacsDetailDocumentViewerExport" };
+        settings.Report = (XtraReport)Model;
+
+        settings.CacheReportDocument = (sender, e) =>
+        {
+            e.Key = Guid.NewGuid().ToString();
+            Session[e.Key] = e.SaveDocumentToMemoryStream();
+        };
+        settings.RestoreReportDocumentFromCache = (sender, e) =>
+        {
+            Stream stream = Session[e.Key] as Stream;
+            if (stream != null)
+                e.RestoreDocumentFromStream(stream);
+        };
+    }).GetHtml()

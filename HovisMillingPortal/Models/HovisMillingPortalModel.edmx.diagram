@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="705ae046a9b940449dbd1f42345c606f" Name="Diagram1">
+        <EntityTypeShape EntityType="HovisMillingPortalModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.AspNetUser" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="HovisMillingPortalModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="HovisMillingPortalModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="HovisMillingPortalModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_Bacs_Customers" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_Bacs_DDFrequency" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_Bacs_Master_Data" Width="1.5" PointX="4.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_Bacs_NewBankMandate" Width="1.5" PointX="6.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_Bacs_Status" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_Bacs_Detail" Width="1.5" PointX="9.375" PointY="3.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_Bacs_Header" Width="1.5" PointX="7.375" PointY="9.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_Bacs_Stage" Width="1.5" PointX="9.375" PointY="9.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_UMQC_Category" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_UMQC_Item_Standards_Detail" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_UMQC_Results_Standards_Master" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_UMQC_Products_Master" Width="1.5" PointX="3.375" PointY="12.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_UMQC_Results_Detail" Width="1.5" PointX="11.375" PointY="3.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_UMQC_Results_Header" Width="1.5" PointX="11.375" PointY="8.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_Function" Width="1.5" PointX="13.375" PointY="3.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_Plant" Width="1.5" PointX="13.375" PointY="6.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_Shift" Width="1.5" PointX="13.375" PointY="9.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_Site" Width="1.5" PointX="9.375" PointY="13.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Hovis_Milling_User_Plant_Authorisation" Width="1.5" PointX="13.375" PointY="12.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Hovis_Milling_User_Site_Authorisation" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_Bacs_Audit_Details" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_UMQC_Results_Standards_Master_ByFunction" Width="1.5" PointX="15.375" PointY="3.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_ticker" Width="1.5" PointX="5.375" PointY="15.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

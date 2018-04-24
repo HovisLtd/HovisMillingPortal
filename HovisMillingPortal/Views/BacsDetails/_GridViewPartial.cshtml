@@ -1,0 +1,443 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "BacsHeaderGrid";
+        settings.CallbackRouteValues = new { Controller = "BacsDetails", Action = "GridViewPartial" };
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+        settings.CommandColumn.AdaptivePriority = 1;
+        settings.CommandColumn.CustomButtons.Column.Width = System.Web.UI.WebControls.Unit.Pixel(35);
+        settings.CommandColumn.CustomButtons.Column.MinWidth = 52;
+
+        GridViewCommandColumnCustomButton btnEditHeader = new GridViewCommandColumnCustomButton();
+        btnEditHeader.ID = "btnEditHeader";
+        btnEditHeader.Image.Url = "~/Content/Img/Edit_Icon_16.png";
+        btnEditHeader.Image.ToolTip = "View/Edit Bacs Details";
+        settings.CommandColumn.CustomButtons.Add(btnEditHeader);
+
+        GridViewCommandColumnCustomButton btnAuthorise = new GridViewCommandColumnCustomButton();
+        btnAuthorise.ID = "btnAuthorise";
+        btnAuthorise.Image.Url = "~/Content/Img/Check_Icon_16.png";
+        btnAuthorise.Image.ToolTip = "Send To Finance";
+        settings.CommandColumn.CustomButtons.Add(btnAuthorise);
+
+        GridViewCommandColumnCustomButton btnTreasury = new GridViewCommandColumnCustomButton();
+        btnTreasury.ID = "btnTreasury";
+        btnTreasury.Image.Url = "~/Content/Img/Check_Icon_16.png";
+        btnTreasury.Image.ToolTip = "Authorise";
+        settings.CommandColumn.CustomButtons.Add(btnTreasury);
+
+        GridViewCommandColumnCustomButton btnTreasuryReject = new GridViewCommandColumnCustomButton();
+        btnTreasuryReject.ID = "btnTreasuryReject";
+        btnTreasuryReject.Image.Url = "~/Content/Img/Delete_Icon_16.png";
+        btnTreasuryReject.Image.ToolTip = "Reject";
+        settings.CommandColumn.CustomButtons.Add(btnTreasuryReject);
+
+        GridViewCommandColumnCustomButton btnFinance = new GridViewCommandColumnCustomButton();
+        btnFinance.ID = "btnFinance";
+        btnFinance.Image.Url = "~/Content/Img/Check_Icon_16.png";
+        btnFinance.Image.ToolTip = "Authorise";
+        settings.CommandColumn.CustomButtons.Add(btnFinance);
+
+        GridViewCommandColumnCustomButton btnFinanceReject = new GridViewCommandColumnCustomButton();
+        btnFinanceReject.ID = "btnFinanceReject";
+        btnFinanceReject.Image.Url = "~/Content/Img/Delete_Icon_16.png";
+        btnFinanceReject.Image.ToolTip = "Reject";
+        settings.CommandColumn.CustomButtons.Add(btnFinanceReject);
+
+        GridViewCommandColumnCustomButton btnView = new GridViewCommandColumnCustomButton();
+        btnView.ID = "btnView";
+        btnView.Image.Url = "~/Content/Img/if_search_16x16_9963.gif";
+        btnView.Image.ToolTip = "View Details";
+        settings.CommandColumn.CustomButtons.Add(btnView);
+
+        GridViewCommandColumnCustomButton btnReport = new GridViewCommandColumnCustomButton();
+        btnReport.ID = "btnReport";
+        btnReport.Image.Url = "~/Content/Img/if_reports_26957.png";
+        btnReport.Image.ToolTip = "Pre View Report";
+        settings.CommandColumn.CustomButtons.Add(btnReport);
+
+        settings.CommandColumn.SetHeaderCaptionTemplateContent(c => {
+            Html.DevExpress().HyperLink(hl =>
+            {
+                hl.Name = "hlNew_"; // + c.KeyValue.ToString();
+                hl.NavigateUrl = "javascript:;";
+                hl.Properties.Text = "New";
+                hl.ToolTip = "New Bacs Submission";
+                hl.Properties.ImageUrl = "~/Content/Img/Button_Add_Icon_16.png";
+                hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ window.location.href = '{0}' }}", DevExpressHelper.GetUrl(new { Controller = "BacsDetails", Action = "Create" }));
+            }).Render();
+        });
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowNewButtonInHeader = false;
+
+        settings.ClientSideEvents.CustomButtonClick = string.Format("function(s, e) {{ BacsHeaderbtn(s, e, '{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}'); }}", DevExpressHelper.GetUrl(new { Controller = "BacsDetails", Action = "IndexBacsDetails" }), DevExpressHelper.GetUrl(new { Controller = "BacsDetails", Action = "IndexAuthorise" }), DevExpressHelper.GetUrl(new { Controller = "BacsDetails", Action = "IndexTreasuryAuthorise" }), DevExpressHelper.GetUrl(new { Controller = "BacsDetails", Action = "IndexTreasuryReject" }), DevExpressHelper.GetUrl(new { Controller = "BacsDetails", Action = "IndexView" }), DevExpressHelper.GetUrl(new { Controller = "BacsDetails", Action = "IndexFinanceAuthorise" }), DevExpressHelper.GetUrl(new { Controller = "BacsDetails", Action = "IndexFinanceReject" }), DevExpressHelper.GetUrl(new { Controller = "Reports", Action = "BacsDetail" }));
+
+        settings.CustomButtonInitialize = (s, e) =>
+        {
+            if (e.CellType == GridViewTableCommandCellType.Filter) return;
+
+            MVCxGridView g = s as MVCxGridView;
+            var NeedsAuthorise = g.GetRowValues(e.VisibleIndex, "StageFlag").ToString();
+            if (e.ButtonID == "btnEditHeader")
+            {
+                if (NeedsAuthorise == "1")
+                {
+                    if (User.IsInRole("Admin") || User.IsInRole("BacsClerk") || User.IsInRole("BacsSupervisor"))
+                        e.Visible = DefaultBoolean.True;
+                    else
+                        e.Visible = DefaultBoolean.False;
+
+                    e.Text = "";
+                }
+                else
+                {
+                    e.Visible = DefaultBoolean.False;
+                    e.Text = "";
+                }
+
+            }
+            if (e.ButtonID == "btnAuthorise")
+            {
+                if (NeedsAuthorise == "1")
+                {
+                    if (User.IsInRole("BacsClerk"))
+                        e.Visible = DefaultBoolean.True;
+                    else
+                        e.Visible = DefaultBoolean.False;
+
+                    e.Text = "";
+                }
+                else
+                {
+                    e.Visible = DefaultBoolean.False;
+                    e.Text = "";
+                }
+            }
+            if (e.ButtonID == "btnTreasuryReject")
+            {
+                if (NeedsAuthorise == "7")
+                {
+                    if (User.IsInRole("BacsAuthorise"))
+                        e.Visible = DefaultBoolean.True;
+                    else
+                        e.Visible = DefaultBoolean.False;
+
+                    e.Text = "";
+                }
+                else
+                {
+                    e.Visible = DefaultBoolean.False;
+                    e.Text = "";
+                }
+            }
+            if (e.ButtonID == "btnTreasury")
+            {
+                if (NeedsAuthorise == "7")
+                {
+                    if (User.IsInRole("BacsAuthorise"))
+                        e.Visible = DefaultBoolean.True;
+                    else
+                        e.Visible = DefaultBoolean.False;
+
+                    e.Text = "";
+                }
+                else
+                {
+                    e.Visible = DefaultBoolean.False;
+                    e.Text = "";
+                }
+            }
+            if (e.ButtonID == "btnFinanceReject")
+            {
+                if (NeedsAuthorise == "2")
+                {
+                    if (User.IsInRole("BacsFinAuthorise"))
+                        e.Visible = DefaultBoolean.True;
+                    else
+                        e.Visible = DefaultBoolean.False;
+
+                    e.Text = "";
+                }
+                else
+                {
+                    e.Visible = DefaultBoolean.False;
+                    e.Text = "";
+                }
+            }
+            if (e.ButtonID == "btnFinance")
+            {
+                if (NeedsAuthorise == "2")
+                {
+                    if (User.IsInRole("BacsFinAuthorise"))
+                        e.Visible = DefaultBoolean.True;
+                    else
+                        e.Visible = DefaultBoolean.False;
+
+                    e.Text = "";
+                }
+                else
+                {
+                    e.Visible = DefaultBoolean.False;
+                    e.Text = "";
+                }
+            }
+            if (e.ButtonID == "btnView")
+            {
+                e.Visible = DefaultBoolean.True;
+                e.Text = "";
+            }
+            if (e.ButtonID == "btnReport")
+            {
+                e.Visible = DefaultBoolean.True;
+                e.Text = "";
+            }
+        };
+
+        settings.HtmlRowPrepared = (s, e) =>
+        {
+            if (e.KeyValue != null)
+            {
+                if (Convert.ToString(e.GetValue("RejectedFlag")) == "1")
+                {
+                    e.Row.BackColor = System.Drawing.Color.IndianRed;
+                    //e.Row.ForeColor = System.Drawing.Color.Salmon;
+                }
+                if (Convert.ToString(e.GetValue("StageFlag")) == "3")
+                {
+                    e.Row.BackColor = System.Drawing.Color.LightSeaGreen;
+                    //e.Row.ForeColor = System.Drawing.Color.Salmon;
+                }
+                if (Convert.ToString(e.GetValue("StageFlag")) == "4")
+                {
+                    e.Row.BackColor = System.Drawing.Color.LightGreen;
+                    //e.Row.ForeColor = System.Drawing.Color.Salmon;
+                }
+                if (Convert.ToString(e.GetValue("StageFlag")) == "2")
+                {
+                    e.Row.BackColor = System.Drawing.Color.Orange;
+                    //e.Row.ForeColor = System.Drawing.Color.Salmon;
+                }
+                if (Convert.ToString(e.GetValue("StageFlag")) == "7")
+                {
+                    e.Row.BackColor = System.Drawing.Color.YellowGreen;
+                    //e.Row.ForeColor = System.Drawing.Color.Salmon;
+                }
+            }
+        };
+
+        settings.KeyFieldName = "HeaderRecid";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+        //settings.SettingsBehavior.ColumnResizeMode = ColumnResizeMode.Disabled;
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsBehavior.AutoFilterRowInputDelay = 3600;
+
+        settings.SettingsCookies.Enabled = true;
+        settings.SettingsCookies.CookiesID = "BacsHeaderGridLayoutv2";
+
+        settings.ClientSideEvents.CustomizationWindowCloseUp = "BacsHeaderGrid_CustomizationWindowCloseUp";
+        settings.SettingsPager.PageSize = 20;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 600;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = true;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 600;
+
+        //settings.HtmlDataCellPrepared = (sender, e) =>
+        //{
+        //    if (e.DataColumn.FieldName == "AccountName")
+        //        if (e.CellValue != null)
+        //            e.Cell.ToolTip = e.CellValue.ToString();
+        //    if (e.DataColumn.FieldName == "Address1")
+        //        if (e.CellValue != null)
+        //            e.Cell.ToolTip = e.CellValue.ToString();
+        //};
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "StageFlag";
+            column.Caption = "StageFlag";
+
+            column.Visible = true;
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            comboBoxProperties.DataSource = ViewBag.StageFlag;
+            comboBoxProperties.ValueType = typeof(int);
+            column.Width = 30;
+            column.AllowTextTruncationInAdaptiveMode = false;
+            column.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "DDFrequency";
+            column.Caption = "DDFrequency";
+            column.Visible = true;
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            comboBoxProperties.DataSource = ViewBag.DDFrequency;
+            comboBoxProperties.ValueType = typeof(int);
+            column.Width = 30;
+            column.AllowTextTruncationInAdaptiveMode = true;
+            column.AdaptivePriority = 1;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "BacsID";
+            //c.Width = 80;
+            //c.VisibleIndex = 2;
+            column.Width = 20;
+            column.AllowTextTruncationInAdaptiveMode = false;
+            column.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "HeaderRecid";
+            column.Caption = "Unique ID";
+            //c.Width = 80;
+            //c.VisibleIndex = 2;
+            column.Width = 20;
+            column.AllowTextTruncationInAdaptiveMode = false;
+            column.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "PaymentDate";
+            column.Caption = "Payment Date";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var dateeditProperties = column.PropertiesEdit as DateEditProperties;
+            //column.Width = 80;
+            //column.Visible = false;
+            column.Width = 30;
+            column.AllowTextTruncationInAdaptiveMode = true;
+            column.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "SentBy";
+            //c.Width = 80;
+            //c.VisibleIndex = 3;
+            column.Visible = true;
+            column.Width = 30;
+            column.AllowTextTruncationInAdaptiveMode = true;
+            column.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "SentDate";
+            column.Caption = "Sent Date";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var dateeditProperties = column.PropertiesEdit as DateEditProperties;
+            dateeditProperties.DisplayFormatString = "dd/MM/yyyy HH:mm";
+            //column.Width = 80;
+            //column.Visible = false;
+            column.Width = 30;
+            column.AllowTextTruncationInAdaptiveMode = true;
+            column.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "AuthorisedBy";
+            column.Caption = "Authorised By";
+            column.Width = 30;
+            column.AllowTextTruncationInAdaptiveMode = true;
+            column.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "AuthorisedDate";
+            column.Caption = "Authorised Date";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var dateeditProperties = column.PropertiesEdit as DateEditProperties;
+            dateeditProperties.DisplayFormatString = "dd/MM/yyyy HH:mm";
+            //column.Width = 80;
+            column.Width = 30;
+            column.AllowTextTruncationInAdaptiveMode = true;
+            column.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "TotalValue";
+            column.Caption = "Total Value";
+            column.ColumnType = MVCxGridViewColumnType.TextBox;
+            var txtProperties = column.PropertiesEdit as TextBoxProperties;
+            txtProperties.Style.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Right;
+            column.Width = 20;
+            column.AllowTextTruncationInAdaptiveMode = true;
+            column.AdaptivePriority = 1;
+        });
+        //settings.Columns.Add(c => { c.FieldName = "HeaderRecid"; c.Caption = "Unique ID"; c.Visible = false; c.AdaptivePriority = 2; c.AllowTextTruncationInAdaptiveMode = true; });
+        settings.Columns.Add(c => { c.FieldName = "CreatedBy"; c.Caption = "CreatedBy"; c.Visible = false; c.AdaptivePriority = 2; c.AllowTextTruncationInAdaptiveMode = true; });
+        settings.Columns.Add(c => { c.FieldName = "LastChangedBy"; c.Caption = "LastChangedBy"; c.Visible = false; c.AdaptivePriority = 2; c.AllowTextTruncationInAdaptiveMode = true; });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "CreatedDate";
+            column.Caption = "Created Date";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var dateeditProperties = column.PropertiesEdit as DateEditProperties;
+            dateeditProperties.DisplayFormatString = "dd/MM/yyyy HH:mm";
+            column.Width = 30;
+            //column.Width = 80;
+            column.Visible = false;
+            column.AllowTextTruncationInAdaptiveMode = true;
+            column.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "LastChangedDate";
+            column.Caption = "Last Changed Date";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var dateeditProperties = column.PropertiesEdit as DateEditProperties;
+            dateeditProperties.DisplayFormatString = "dd/MM/yyyy HH:mm";
+            //column.Width = 80;
+            column.Width = 30;
+            column.Visible = false;
+            column.AllowTextTruncationInAdaptiveMode = true;
+            column.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "MasterBankSortCode";
+            //c.Width = 80;
+            //c.VisibleIndex = 3;
+            column.Visible = false;
+            column.Width = 20;
+            column.AllowTextTruncationInAdaptiveMode = true;
+            column.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "MasterBankAccountNo";
+            //c.Width = 280;
+            //c.VisibleIndex = 4;
+            column.Visible = false;
+            column.Width = 30;
+            column.AllowTextTruncationInAdaptiveMode = true;
+            column.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "MasterBankAccountName";
+            column.Visible = false;
+            column.Width = 20;
+            //c.VisibleIndex = 4;
+            column.AllowTextTruncationInAdaptiveMode = true;
+            column.AdaptivePriority = 2;
+        });
+
+        //settings.Columns.Add(c => { c.FieldName = "t_SOP_Customer_Group.CustGroupDesc"; c.Visible = false; });
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

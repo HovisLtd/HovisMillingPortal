@@ -1,0 +1,125 @@
+﻿@model HovisMillingPortal.ViewModels.SiteAuthModel
+@{
+    ViewBag.Title = "Site Authorisation";
+}
+@{ 
+    Html.EnableClientValidation();
+}
+@using (Html.BeginForm("IndexBySite", "SitePlantAuth", FormMethod.Post))
+{
+    @Html.DevExpress().ValidationSummary().GetHtml()
+    @Html.ValidationMessage("CustomError")
+    @Html.HiddenFor(model => model.Id)
+    @Html.DevExpress().FormLayout(s =>
+
+{
+    s.Name = "SiteAuthForm";
+    s.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+    s.ControlStyle.CssClass = "formLayout";
+    s.ColCount = 1;
+    s.UseDefaultPaddings = true;
+    s.AlignItemCaptionsInAllGroups = false;
+    s.Items.AddGroupItem(m =>
+    {
+        m.Caption = "User Details";
+        m.ColCount = 4;
+        m.GroupBoxDecoration = GroupBoxDecoration.HeadingLine;
+        m.SettingsItemCaptions.HorizontalAlign = FormLayoutHorizontalAlign.Right;
+
+        m.Items.Add(j => j.SelectedUserName, item =>
+        {
+            item.Caption = "User Name :";
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.TextBox;
+            item.NestedExtension().TextBox(i =>
+            {
+                i.ShowModelErrors = true;
+                //i.ReadOnly = true;
+            });
+        });
+
+        m.Items.Add(j => j.Authorised, item =>
+        {
+            item.Caption = "Authorised :";
+            item.NestedExtensionType = FormLayoutNestedExtensionItemType.CheckBoxList;
+            item.NestedExtension().CheckBoxList(i =>
+            {
+                i.ShowModelErrors = true;
+                i.Properties.DataSource = ViewData["UnSelectedList"];
+                i.Properties.ValueField = "ID";
+                i.Properties.ValueType = typeof(int);
+                i.Properties.TextField = "Name";
+                //i.ReadOnly = true;
+                i.PreRender = (sender, e) =>
+                {
+                    ASPxCheckBoxList cbl = (ASPxCheckBoxList)sender;
+                    foreach (ListEditItem listitem in cbl.Items)
+                    {
+                        if (cbl != null)
+                        {
+                            listitem.Selected = listitem.Value != null && Model.Authorised.Contains((int)listitem.Value);
+                        }
+                    }
+                };
+            });
+
+        });
+
+        Html.DevExpress().CheckBoxList(
+        settings =>
+        {
+            settings.Name = "checkBoxList1";
+            settings.Properties.ValueField = "ID";
+            settings.Properties.ValueType = typeof(int);
+            settings.Properties.TextField = "Name";
+
+            settings.PreRender = (sender, e) =>
+            {
+                ASPxCheckBoxList cbl = (ASPxCheckBoxList)sender;
+                foreach (ListEditItem item in cbl.Items)
+                {
+                    item.Selected = Model.Authorised.Contains((int)item.Value);
+                }
+            };
+
+        }).BindList(ViewData["UnSelectedList"]).GetHtml();
+
+
+    });
+
+    s.Items.AddGroupItem(m =>
+    {
+        m.Caption = "Options";
+        m.ColCount = 3;
+        //m.UseDefaultPaddings = false;
+        //m.Paddings.PaddingTop = System.Web.UI.WebControls.Unit.Pixel(0);
+        m.GroupBoxDecoration = GroupBoxDecoration.None;
+        m.SettingsItemCaptions.HorizontalAlign = FormLayoutHorizontalAlign.Right;
+
+        m.Items.Add(i =>
+        {
+            i.Caption = "Make choices below then press this button :";
+            //i.ShowCaption = DefaultBoolean.False;
+            i.Width = 70;
+            i.HorizontalAlign = FormLayoutHorizontalAlign.Center;
+            i.NestedExtension().Button(j =>
+            {
+                j.Name = "SiteAuthbtnSubmit";
+                j.Text = "Authorise user to Site";
+                j.UseSubmitBehavior = true;
+
+                j.ClientSideEvents.Click = "SiteAuthonSubmitClick";
+            });
+        });
+
+    });
+
+}
+).Bind(Model).GetHtml()
+}
+<br />
+
+
+
+
+
+

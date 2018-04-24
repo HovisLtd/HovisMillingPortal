@@ -1,0 +1,304 @@
+@model HovisMillingPortal.Models.t_Milling_UMQC_Results_Header
+
+@{
+    ViewBag.Title = "View Test Header";
+}
+
+<section class="panel panel-default">
+    @*<header class="panel-heading">Create Order</header>*@
+    <div class="panel-body">
+        @using (Html.BeginForm("ViewHeader", "UMQC", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.DevExpress().ValidationSummary().GetHtml()
+            @Html.ValidationMessage("CustomError")
+            @Html.HiddenFor(model => model.ResultLastChangedBy)
+            @Html.HiddenFor(model => model.ResultLastChangedDate)
+            @Html.HiddenFor(model => model.ResultCreatedBy)
+            @Html.HiddenFor(model => model.ResultCreationDate)
+            @Html.HiddenFor(model => model.ResultActiveFlag)
+            @*@Html.HiddenFor(model => model.SentBy)
+                @Html.HiddenFor(model => model.SentDate)*@
+
+            @Html.DevExpress().FormLayout(s =>
+       {
+           s.Name = "UMQCViewHeaderformLayout";
+           s.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+           //settings.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+           s.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 800;
+           s.ControlStyle.CssClass = "formLayout";
+           s.ColCount = 1;
+           s.UseDefaultPaddings = true;
+           s.AlignItemCaptionsInAllGroups = true;
+
+           s.Items.AddGroupItem(m =>
+           {
+               m.Caption = "UMQC Header Data";
+               m.ColCount = 4;
+               m.GroupBoxDecoration = GroupBoxDecoration.Box;
+               m.SettingsItemCaptions.HorizontalAlign = FormLayoutHorizontalAlign.Left;
+
+               m.Items.Add(j => j.ResultPlantRecid, item =>
+               {
+                   item.NestedExtensionType = FormLayoutNestedExtensionItemType.ComboBox;
+                   item.Caption = "Plant";
+                   item.NestedExtension().ComboBox(i =>
+                   {
+                       i.Properties.DataSource = ViewBag.Plant;
+                       i.Properties.ClientSideEvents.Init = "function(s,e){if(s.GetValue()==' '){ s.SetValue(null);}}";
+                       i.Properties.NullText = "-- Please Select --";
+                       i.Properties.NullDisplayText = "-- Please Select --";
+                       i.ShowModelErrors = true;
+                       i.ClientEnabled = false;
+                       //i.ReadOnly = true;
+                       i.Properties.DropDownButton.Visible = false;
+                   });
+               });
+
+               m.Items.Add(j => j.ResultFuncRecid, item =>
+               {
+                   item.NestedExtensionType = FormLayoutNestedExtensionItemType.ComboBox;
+                   item.Caption = "Function";
+                   item.NestedExtension().ComboBox(i =>
+                   {
+                       i.Properties.DataSource = ViewBag.Function;
+                       i.Properties.ClientSideEvents.Init = "function(s,e){if(s.GetValue()==' '){ s.SetValue(null);}}";
+                       i.Properties.NullText = "-- Please Select --";
+                       i.Properties.NullDisplayText = "-- Please Select --";
+                       i.ShowModelErrors = true;
+                       //i.ClientEnabled = false;
+                       //i.ReadOnly = true;
+                       //i.Properties.DropDownButton.Visible = false;
+                       i.ClientEnabled = false;
+                       i.Properties.DropDownButton.Visible = false;
+                   });
+               });
+
+               m.Items.Add(j => j.ResultShiftRecid, item =>
+               {
+                   item.NestedExtensionType = FormLayoutNestedExtensionItemType.ComboBox;
+                   item.Caption = "Shift";
+                   item.NestedExtension().ComboBox(i =>
+                   {
+                       i.Properties.DataSource = ViewBag.Shift;
+                       i.Properties.ClientSideEvents.Init = "function(s,e){if(s.GetValue()==' '){ s.SetValue(null);}}";
+                       i.Properties.NullText = "-- Please Select --";
+                       i.Properties.NullDisplayText = "-- Please Select --";
+                       i.ShowModelErrors = true;
+                       //i.ClientEnabled = false;
+                       //i.ReadOnly = true;
+                       //i.Properties.DropDownButton.Visible = false;
+                       i.ClientEnabled = false;
+                       i.Properties.DropDownButton.Visible = false;
+                   });
+               });
+
+               m.Items.Add(j => j.ResultJobNo, item =>
+               {
+                   item.Caption = "Job No";
+                   item.CaptionCellStyle.CssClass = "textbox";
+                   item.NestedExtensionType = FormLayoutNestedExtensionItemType.TextBox;
+                   item.NestedExtension().TextBox(i =>
+                   {
+                       i.ShowModelErrors = true;
+                       //i.ClientEnabled = false;
+                       //i.ReadOnly = true;
+                       i.ClientEnabled = false;
+                   });
+               });
+
+               m.Items.Add(j => j.ResultRunStart, item =>
+               {
+                   item.NestedExtensionType = FormLayoutNestedExtensionItemType.DateEdit;
+                   item.NestedExtension().DateEdit(i =>
+                   {
+                       i.Properties.UseMaskBehavior = true;
+                       i.Properties.EditFormat = EditFormat.Custom;
+                       i.Properties.EditFormatString = "dd/MM/yyyy HH:mm";
+                       i.Properties.TimeSectionProperties.Visible = true;
+                       i.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Custom;
+                       i.Properties.TimeSectionProperties.TimeEditProperties.EditFormatString = "HH:mm";
+                       i.ShowModelErrors = true;
+                       //i.Date = DateTime.Today();
+                       //i.Date = DateTime.Now;
+                       i.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       i.ClientEnabled = false;
+                       i.Properties.DropDownButton.Visible = false;
+                   });
+               });
+
+               m.Items.Add(j => j.ResultRunEnd, item =>
+               {
+                   item.NestedExtensionType = FormLayoutNestedExtensionItemType.DateEdit;
+                   item.NestedExtension().DateEdit(i =>
+                   {
+                       i.Properties.UseMaskBehavior = true;
+                       i.Properties.EditFormat = EditFormat.Custom;
+                       i.Properties.EditFormatString = "dd/MM/yyyy HH:mm";
+                       i.Properties.TimeSectionProperties.Visible = true;
+                       i.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Custom;
+                       i.Properties.TimeSectionProperties.TimeEditProperties.EditFormatString = "HH:mm";
+                       i.ShowModelErrors = true;
+                       //i.Date = DateTime.Today();
+                       //i.Date = DateTime.Now;
+                       i.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       i.ClientEnabled = false;
+                       i.Properties.DropDownButton.Visible = false;
+                   });
+               });
+
+               m.Items.Add(j => j.ResultBinNumber, item =>
+               {
+                   item.Caption = "Bin Number";
+                   item.CaptionCellStyle.CssClass = "textbox";
+                   item.NestedExtensionType = FormLayoutNestedExtensionItemType.TextBox;
+                   item.NestedExtension().TextBox(i =>
+                   {
+                       i.ShowModelErrors = true;
+                       i.ClientEnabled = false;
+                       //i.ReadOnly = true;
+                   });
+               });
+
+               m.Items.Add(j => j.WheatfeedBinNumber, item =>
+               {
+                   item.Caption = "Wheatfeed Bin Number";
+                   item.CaptionCellStyle.CssClass = "textbox";
+                   item.NestedExtensionType = FormLayoutNestedExtensionItemType.TextBox;
+                   item.NestedExtension().TextBox(i =>
+                   {
+                       i.ShowModelErrors = true;
+                       i.ClientEnabled = false;
+                       //i.ReadOnly = true;
+                   });
+               });
+
+               m.Items.Add(j => j.ResultProductRecid, item =>
+               {
+                   item.NestedExtensionType = FormLayoutNestedExtensionItemType.ComboBox;
+                   item.Caption = "Recipe";
+
+                   //itemSettings.NestedExtensionType = FormLayoutNestedExtensionItemType.ComboBox;
+                   ComboBoxSettings cbSettings = (ComboBoxSettings)item.NestedExtensionSettings;
+                   cbSettings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+                   cbSettings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.StartsWith;
+                   cbSettings.Properties.DataSource = ViewData["Recipe"];
+                   cbSettings.Properties.TextField = "RecipeDesc";
+                   cbSettings.Properties.ValueField = "ProductMasterRecid";
+                   cbSettings.Properties.ValueType = typeof(int);
+                   cbSettings.ClientEnabled = false;
+                   cbSettings.Properties.DropDownButton.Visible = false;
+                   //item.NestedExtension().ComboBox(i =>
+                   //{
+
+                   //    //i.Properties.DataSource = ViewBag.Product;
+                   //    //i.Properties.ClientSideEvents.Init = "function(s,e){if(s.GetValue()==' '){ s.SetValue(null);}}";
+                   //    //i.Properties.NullText = "-- Please Select --";
+                   //    //i.Properties.NullDisplayText = "-- Please Select --";
+                   //    //i.ShowModelErrors = true;
+                   //    //i.ClientEnabled = false;
+                   //    //i.ReadOnly = true;
+                   //    //i.Properties.DropDownButton.Visible = false;
+                   //});
+               });
+
+               m.Items.Add(j => j.GristVersionNumber, item =>
+               {
+                   item.Caption = "Grist Version Number";
+                   item.CaptionCellStyle.CssClass = "textbox";
+                   item.NestedExtensionType = FormLayoutNestedExtensionItemType.TextBox;
+                   item.NestedExtension().TextBox(i =>
+                   {
+                       i.ShowModelErrors = true;
+                       i.ClientEnabled = false;
+                       //i.ReadOnly = true;
+                   });
+               });
+
+               m.Items.Add(j => j.ConcessionDesc, item =>
+               {
+                   item.Caption = "Concession No";
+                   item.CaptionCellStyle.CssClass = "textbox";
+                   item.NestedExtensionType = FormLayoutNestedExtensionItemType.TextBox;
+                   item.NestedExtension().TextBox(i =>
+                   {
+                       i.ShowModelErrors = true;
+                       i.ClientEnabled = false;
+                       //i.ReadOnly = true;
+                   });
+               });
+               m.Items.Add(j => j.ExcludeAverages, item =>
+               {
+                   item.Caption = "";
+                   item.CaptionCellStyle.CssClass = "checkbox";
+                   item.NestedExtensionType = FormLayoutNestedExtensionItemType.CheckBox;
+                   item.NestedExtension().CheckBox(i =>
+                   {
+                       i.ShowModelErrors = true;
+                       i.ClientEnabled = false;
+                       i.Properties.ValueType = typeof(string);
+                       i.Properties.EnableClientSideAPI = true;
+                       //i.Properties.ClientSideEvents.CheckedChanged = "function(s,e) {ActiveFlagcheckoruncheck(s,e);}";
+                       if (Model.ExcludeAverages == 1)
+                       {
+                           i.Checked = true;
+                           i.Text = "Exclude from averages";
+                       }
+                       else
+                       {
+                           i.Text = "Exclude from averages";
+                       }
+
+                       i.Properties.ValueChecked = 1;
+                       i.Properties.ValueUnchecked = 0;
+                   });
+               });
+               m.Items.Add(j => j.ResultTestTaken, item =>
+               {
+                   item.NestedExtensionType = FormLayoutNestedExtensionItemType.DateEdit;
+                   item.Caption = "Time of Test";
+                   item.NestedExtension().DateEdit(i =>
+                   {
+                       i.Properties.UseMaskBehavior = true;
+                       i.Properties.EditFormat = EditFormat.Custom;
+                       i.Properties.EditFormatString = "dd/MM/yyyy HH:mm";
+                       i.Properties.TimeSectionProperties.Visible = true;
+                       i.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Custom;
+                       i.Properties.TimeSectionProperties.TimeEditProperties.EditFormatString = "HH:mm";
+                       i.ShowModelErrors = true;
+                       //i.Date = DateTime.Today();
+                       //i.Date = DateTime.Now;
+                       i.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       i.ClientEnabled = false;
+                       i.Properties.DropDownButton.Visible = false;
+                   });
+               });
+           });
+
+           //s.Items.AddGroupItem(m =>
+           //{
+           //    m.Caption = "Options";
+           //    m.ColCount = 3;
+           //    //m.UseDefaultPaddings = false;
+           //    //m.Paddings.PaddingTop = System.Web.UI.WebControls.Unit.Pixel(0);
+           //    m.GroupBoxDecoration = GroupBoxDecoration.Box;
+           //    m.SettingsItemCaptions.HorizontalAlign = FormLayoutHorizontalAlign.Right;
+
+           //    m.Items.Add(i =>
+           //    {
+           //        i.ShowCaption = DefaultBoolean.False;
+           //        i.Width = 70;
+           //        i.HorizontalAlign = FormLayoutHorizontalAlign.Center;
+           //        i.NestedExtension().Button(j =>
+           //        {
+           //            j.Name = "Save";
+           //            j.Text = "Generate Test Details";
+           //            j.UseSubmitBehavior = true;
+           //        });
+           //    });
+           //});
+
+       }).Bind(Model).GetHtml()
+        }
+    </div>
+</section>

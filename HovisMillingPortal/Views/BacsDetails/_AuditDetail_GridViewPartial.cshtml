@@ -1,0 +1,264 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "AuditDetailGridView";
+        settings.CallbackRouteValues = new { Controller = "BacsDetails", Action = "AuditDetail_GridViewPartial", AuditDateEdit = ViewBag.AuditDateEdit };
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        //settings.CommandColumn.AdaptivePriority = 1;
+        //settings.CommandColumn.CustomButtons.Column.Width = System.Web.UI.WebControls.Unit.Pixel(35);
+        //settings.CommandColumn.CustomButtons.Column.MinWidth = 82;
+
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+
+        settings.SettingsPager.Visible = true;
+        settings.SettingsPager.PageSize = 20;
+
+        settings.SettingsCookies.Enabled = true;
+        settings.SettingsCookies.CookiesID = "AuditDetailGridLayout";
+
+        //settings.ClientSideEvents.CustomizationWindowCloseUp = "ExceptionHeaderGridView_CustomizationWindowCloseUp";
+
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = false;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+        settings.SettingsBehavior.AllowClientEventsOnLoad = false;
+        //settings.SettingsBehavior.ColumnResizeMode = ColumnResizeMode.Disabled;
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 600;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = true;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 600;
+
+        settings.SettingsDetail.AllowOnlyOneMasterRowExpanded = true;
+        settings.SettingsDetail.ShowDetailRow = false;
+
+        //settings.CommandColumn.SetHeaderCaptionTemplateContent(c =>
+        //{
+        //    //c.Column.Width = 70;
+        //    Html.DevExpress().HyperLink(hl =>
+        //    {
+        //        hl.Name = "hlNew_"; // + c.KeyValue.ToString();
+        //        hl.NavigateUrl = "javascript:;";
+        //        hl.Properties.Text = "New";
+        //        hl.ToolTip = "New Activity";
+        //        hl.Properties.ImageUrl = "~/Content/Img/Button_Add_Icon_16.png";
+        //        hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ window.location.href = '{0}' }}", DevExpressHelper.GetUrl(new { Controller = "Journey", Action = "Create" }));
+        //        //hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ {0}.AddNewRow(); }}", settings.Name);
+        //        //hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ window.location.href = '{0}' }}", DevExpressHelper.GetUrl(new { Controller = "WeSupplyEDIAccount", Action = "AccountChangeGridViewPartialAddNew" }));
+        //    }).Render();
+        //});
+
+        settings.KeyFieldName = "AuditRecid";
+
+        //GridViewCommandColumnCustomButton btnEditError = new GridViewCommandColumnCustomButton();
+        //btnEditError.ID = "btnEditError";
+        //btnEditError.Image.Url = "~/Content/Img/Edit_Icon_16.png";
+        //btnEditError.Image.ToolTip = "Edit Activity";
+        //settings.CommandColumn.CustomButtons.Add(btnEditError);
+
+        //GridViewCommandColumnCustomButton btnClose = new GridViewCommandColumnCustomButton();
+        //btnClose.ID = "btnClose";
+        //btnClose.Image.Url = "~/Content/Img/Closed_Folder_Icon_16.png";
+        //btnClose.Image.ToolTip = "Close";
+        //settings.CommandColumn.CustomButtons.Add(btnClose);
+
+        //GridViewCommandColumnCustomButton btnPlus1week = new GridViewCommandColumnCustomButton();
+        //btnPlus1week.ID = "btnPlus1week";
+        //btnPlus1week.Image.Url = "~/Content/Img/Number_1_Icon_16.png";
+        //btnPlus1week.Image.ToolTip = "Add One week";
+        //settings.CommandColumn.CustomButtons.Add(btnPlus1week);
+
+        //GridViewCommandColumnCustomButton btnPlus2week = new GridViewCommandColumnCustomButton();
+        //btnPlus2week.ID = "btnPlus2week";
+        //btnPlus2week.Image.Url = "~/Content/Img/Number_2_Icon_16.png";
+        //btnPlus2week.Image.ToolTip = "Add two weeks";
+        //settings.CommandColumn.CustomButtons.Add(btnPlus2week);
+
+        //GridViewCommandColumnCustomButton btnPlus4week = new GridViewCommandColumnCustomButton();
+        //btnPlus4week.ID = "btnPlus4week";
+        //btnPlus4week.Image.Url = "~/Content/Img/Number_4_Icon_16.png";
+        //btnPlus4week.Image.ToolTip = "Add four weeks";
+        //settings.CommandColumn.CustomButtons.Add(btnPlus4week);
+
+        //GridViewCommandColumnCustomButton btnPlus6week = new GridViewCommandColumnCustomButton();
+        //btnPlus6week.ID = "btnPlus6week";
+        //btnPlus6week.Image.Url = "~/Content/Img/Number_6_Icon_16.png";
+        //btnPlus6week.Image.ToolTip = "Add six weeks";
+        //settings.CommandColumn.CustomButtons.Add(btnPlus6week);
+
+        //settings.ClientSideEvents.CustomButtonClick = "function (s, e) { OErrorOnEditClick(s, e); }";
+        //settings.ClientSideEvents.CustomButtonClick = string.Format("function(s, e) {{ TrackerHeaderClick(s, e, '{0}', '{1}', '{2}', '{3}', '{4}', '{5}' ); }}", DevExpressHelper.GetUrl(new { Controller = "Tracker", Action = "Edit" }), DevExpressHelper.GetUrl(new { Controller = "Tracker", Action = "Close" }), DevExpressHelper.GetUrl(new { Controller = "Tracker", Action = "Add1Week" }), DevExpressHelper.GetUrl(new { Controller = "Tracker", Action = "Add2Week" }), DevExpressHelper.GetUrl(new { Controller = "Tracker", Action = "Add4Week" }), DevExpressHelper.GetUrl(new { Controller = "Tracker", Action = "Add6Week" }));
+
+
+        //settings.CustomButtonInitialize = (s, e) =>
+        //{
+        //    if (e.CellType == GridViewTableCommandCellType.Filter) return;
+        //    if (e.ButtonID == "btnEditError")
+        //    {
+        //        e.Text = "";
+        //        if (User.IsInRole("Admin") || User.IsInRole("JourneyUser"))
+        //            e.Visible = DefaultBoolean.True;
+        //        else
+        //            e.Visible = DefaultBoolean.False;
+        //    }
+        //};
+
+        //settings.HtmlRowPrepared = (s, e) =>
+        //{
+        //    if (e.KeyValue != null)
+        //    {
+        //        //if (Convert.ToString(e.GetValue("ActiveFlag")) == "0")
+        //        if (Convert.ToDecimal(e.GetValue("ResultActualScore")) > Convert.ToDecimal(e.GetValue("ResultMaxScore")))
+        //        {
+        //            e.Row.BackColor = System.Drawing.Color.Salmon;
+
+        //            //e.Row.ForeColor = System.Drawing.Color.Salmon;
+        //        }
+        //        if (Convert.ToDecimal(e.GetValue("ResultActualScore")) >= Convert.ToDecimal(e.GetValue("ResultMinScore")) & Convert.ToDecimal(e.GetValue("ResultActualScore")) <= Convert.ToDecimal(e.GetValue("ResultMaxScore")))
+        //        {
+        //            //e.Row.BackColor = System.Drawing.Color.Orange;
+        //            e.Row.BackColor = System.Drawing.Color.LightGreen;
+        //            //e.Row.ForeColor = System.Drawing.Color.Salmon;
+        //        }
+        //        if (Convert.ToDecimal(e.GetValue("ResultActualScore")) < Convert.ToDecimal(e.GetValue("ResultMinScore")))
+        //        {
+        //            e.Row.BackColor = System.Drawing.Color.Salmon;
+        //            //e.Row.ForeColor = System.Drawing.Color.Salmon;
+        //        }
+        //    }
+        //};
+
+        //settings.HtmlDataCellPrepared = (sender, e) =>
+        //{
+
+        //    if (e.DataColumn.FieldName == "ResultActualScore")
+        //    {
+        //        if (Convert.ToDecimal(e.GetValue("ResultActualScore")) > Convert.ToDecimal(e.GetValue("ResultMaxScore")))
+        //        {
+        //            if (Convert.ToDecimal(e.GetValue("ResultActualScore")) == Convert.ToDecimal("0"))
+        //            {
+        //                e.Cell.BackColor = System.Drawing.Color.White;
+        //            }
+        //            else
+        //            {
+        //                if (e.GetValue("ConcessionDesc") != null)
+        //                {
+        //                    e.Cell.BackColor = System.Drawing.Color.Orange;
+        //                }
+        //                else
+        //                {
+        //                    e.Cell.BackColor = System.Drawing.Color.Salmon;
+        //                }
+        //            }
+        //        }
+        //        if (Convert.ToDecimal(e.GetValue("ResultActualScore")) >= Convert.ToDecimal(e.GetValue("ResultMinScore")) & Convert.ToDecimal(e.GetValue("ResultActualScore")) <= Convert.ToDecimal(e.GetValue("ResultMaxScore")))
+        //        {
+        //            if (Convert.ToDecimal(e.GetValue("ResultActualScore")) == Convert.ToDecimal("0"))
+        //            {
+        //                e.Cell.BackColor = System.Drawing.Color.White;
+        //            }
+        //            else
+        //            {
+        //                e.Cell.BackColor = System.Drawing.Color.LightGreen;
+        //            }
+        //        }
+        //        if (Convert.ToDecimal(e.GetValue("ResultActualScore")) < Convert.ToDecimal(e.GetValue("ResultMinScore")))
+        //        {
+        //            if (Convert.ToDecimal(e.GetValue("ResultActualScore")) == Convert.ToDecimal("0"))
+        //            {
+        //                e.Cell.BackColor = System.Drawing.Color.White;
+        //            }
+        //            else
+        //            {
+        //                if (e.GetValue("ConcessionDesc") != null)
+        //                {
+        //                    e.Cell.BackColor = System.Drawing.Color.Orange;
+        //                }
+        //                else
+        //                {
+        //                    e.Cell.BackColor = System.Drawing.Color.Salmon;
+        //                }
+        //            }
+        //        }
+        //    }
+        //};
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "BacsHeaderRecid";
+            column.Caption = "Bacs Header ID";
+            column.CellStyle.Wrap = DefaultBoolean.False;
+            column.Width = 20;
+            column.AllowTextTruncationInAdaptiveMode = true;
+            column.AdaptivePriority = 3;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "CurrentStage";
+            column.Caption = "Current Stage";
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            comboBoxProperties.DataSource = ViewBag.Stage;
+            comboBoxProperties.ValueType = typeof(int);
+            column.Width = 40;
+            column.AllowTextTruncationInAdaptiveMode = false;
+            column.AdaptivePriority = 2;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NextStage";
+            column.Caption = "Next Stage";
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            comboBoxProperties.DataSource = ViewBag.Stage;
+            comboBoxProperties.ValueType = typeof(int);
+            column.Width = 30;
+            column.AllowTextTruncationInAdaptiveMode = false;
+            column.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "LastChangedBy";
+            column.Caption = "Last Changed By";
+            column.CellStyle.Wrap = DefaultBoolean.False;
+            column.Width = 20;
+            column.AllowTextTruncationInAdaptiveMode = true;
+            column.AdaptivePriority = 3;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "LastChangedDate";
+            column.Caption = "Audit Date";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var dateeditProperties = column.PropertiesEdit as DateEditProperties;
+            dateeditProperties.DisplayFormatString = "dd/MM/yyyy HH:mm";
+            //column.Width = 70;
+            //column.VisibleIndex = 6;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.LessOrEqual;
+            column.Width = 40;
+            column.AllowTextTruncationInAdaptiveMode = true;
+            column.AdaptivePriority = 2;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "AuditText";
+            column.Caption = "Audit Text";
+            column.CellStyle.Wrap = DefaultBoolean.False;
+            column.Width = 20;
+            column.AllowTextTruncationInAdaptiveMode = true;
+            column.AdaptivePriority = 3;
+        });
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()
