@@ -254,6 +254,9 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\t_Hovis_Milling_User_Default_Site.cs">
+      <DependentUpon>HovisMillingPortalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\t_Hovis_Milling_User_Plant_Authorisation.cs">
       <DependentUpon>HovisMillingPortalModel.tt</DependentUpon>
     </Compile>

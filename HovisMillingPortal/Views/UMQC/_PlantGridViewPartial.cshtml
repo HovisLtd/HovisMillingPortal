@@ -73,6 +73,16 @@
             comboBoxProperties.ValueType = typeof(int);
 
         });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "PlantFuncRecid";
+            column.Caption = "Process";
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            comboBoxProperties.DataSource = ViewBag.Function;
+            comboBoxProperties.ValueType = typeof(int);
+
+        });
         settings.Columns.Add(c =>
         {
             c.FieldName = "PlantDesc";

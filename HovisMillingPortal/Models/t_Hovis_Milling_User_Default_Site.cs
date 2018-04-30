@@ -12,11 +12,10 @@ namespace HovisMillingPortal.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class t_Milling_Plant
+    public partial class t_Hovis_Milling_User_Default_Site
     {
-        public int PlantRecid { get; set; }
+        public int defaultSiteRecid { get; set; }
         public Nullable<int> SiteRecid { get; set; }
-        public string PlantDesc { get; set; }
-        public Nullable<int> PlantFuncRecid { get; set; }
+        public string UserName { get; set; }
     }
 }

@@ -35,6 +35,7 @@
         <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_Bacs_Audit_Details" Width="1.5" PointX="0.75" PointY="15.75" />
         <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_UMQC_Results_Standards_Master_ByFunction" Width="1.5" PointX="15.375" PointY="3.75" />
         <EntityTypeShape EntityType="HovisMillingPortalModel.t_Milling_ticker" Width="1.5" PointX="5.375" PointY="15.75" />
+        <EntityTypeShape EntityType="HovisMillingPortalModel.t_Hovis_Milling_User_Default_Site" Width="1.5" PointX="15.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -280,23 +280,25 @@ namespace HovisMillingPortal.Controllers
                 username = User.Identity.Name;
             }
 
-            var Sitelist = (from a in db.t_Hovis_Milling_User_Site_Authorisation
-                            join b in db.t_Milling_Site on a.SiteRecid equals b.SiteRecid
-                            where a.UserName == username
-                            select new
-                            {
-                                SiteRecid = a.SiteRecid,
-                                SiteDesc = b.SiteDesc,
-                                UserName = a.UserName
-                            });
+            //var Sitelist = (from a in db.t_Hovis_Milling_User_Site_Authorisation
+            //                join b in db.t_Milling_Site on a.SiteRecid equals b.SiteRecid
+            //                where a.UserName == username
+            //                select new
+            //                {
+            //                    SiteRecid = a.SiteRecid,
+            //                    SiteDesc = b.SiteDesc,
+            //                    UserName = a.UserName
+            //                });
 
-            var Plantlist = (from a in db.t_Milling_Plant
-                            join b in Sitelist on a.SiteRecid equals b.SiteRecid
-                              select new
-                            {
-                                PlantRecid = a.PlantRecid,
-                                PlantDesc = a.PlantDesc
-                            });
+            //var Plantlist = (from a in db.t_Milling_Plant
+            //                join b in Sitelist on a.SiteRecid equals b.SiteRecid
+            //                  select new
+            //                {
+            //                    PlantRecid = a.PlantRecid,
+            //                    PlantDesc = a.PlantDesc
+            //                });
+
+            var Plantlist = DefaultSite(username);
 
             ViewBag.Plant = new SelectList(Plantlist, "PlantRecid", "PlantDesc");
             ViewBag.Function = new SelectList(db.t_Milling_Function, "FuncRecid", "FuncDesc");
@@ -349,23 +351,25 @@ namespace HovisMillingPortal.Controllers
                 username = User.Identity.Name;
             }
 
-            var Sitelist = (from a in db.t_Hovis_Milling_User_Site_Authorisation
-                            join b in db.t_Milling_Site on a.SiteRecid equals b.SiteRecid
-                            where a.UserName == username
-                            select new
-                            {
-                                SiteRecid = a.SiteRecid,
-                                SiteDesc = b.SiteDesc,
-                                UserName = a.UserName
-                            });
+            //var Sitelist = (from a in db.t_Hovis_Milling_User_Site_Authorisation
+            //                join b in db.t_Milling_Site on a.SiteRecid equals b.SiteRecid
+            //                where a.UserName == username
+            //                select new
+            //                {
+            //                    SiteRecid = a.SiteRecid,
+            //                    SiteDesc = b.SiteDesc,
+            //                    UserName = a.UserName
+            //                });
 
-            var Plantlist = (from a in db.t_Milling_Plant
-                             join b in Sitelist on a.SiteRecid equals b.SiteRecid
-                             select new
-                             {
-                                 PlantRecid = a.PlantRecid,
-                                 PlantDesc = a.PlantDesc
-                             });
+            //var Plantlist = (from a in db.t_Milling_Plant
+            //                 join b in Sitelist on a.SiteRecid equals b.SiteRecid
+            //                 select new
+            //                 {
+            //                     PlantRecid = a.PlantRecid,
+            //                     PlantDesc = a.PlantDesc
+            //                 });
+
+            var Plantlist = DefaultSite(username);
 
             ViewBag.Plant = new SelectList(Plantlist, "PlantRecid", "PlantDesc");
             ViewBag.Function = new SelectList(db.t_Milling_Function, "FuncRecid", "FuncDesc");
@@ -989,6 +993,7 @@ namespace HovisMillingPortal.Controllers
         public ActionResult PlantGridViewPartial()
         {
             ViewBag.Site = new SelectList(db.t_Milling_Site, "SiteRecid", "SiteDesc");
+            ViewBag.Function = new SelectList(db.t_Milling_Function, "FuncRecid", "FuncDesc");
             var model = db.t_Milling_Plant.OrderBy(s => s.PlantDesc).ToList();
             return PartialView("_PlantGridViewPartial", model);
         }
@@ -997,7 +1002,18 @@ namespace HovisMillingPortal.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult PlantGridViewPartialAddNew(HovisMillingPortal.Models.t_Milling_Plant item)
         {
+            if (item.PlantFuncRecid == null)
+            {
+                ViewData["EditError"] = "You must choose a process.";
+                ModelState.AddModelError("PlantFuncRecid", "You must choose a process.");
+            }
+            if (item.SiteRecid == null)
+            {
+                ViewData["EditError"] = "You must choose a site.";
+                ModelState.AddModelError("SiteRecid", "You must choose a site.");
+            }
             ViewBag.Site = new SelectList(db.t_Milling_Site, "SiteRecid", "SiteDesc");
+            ViewBag.Function = new SelectList(db.t_Milling_Function, "FuncRecid", "FuncDesc");
             var model = db.t_Milling_Plant;
             if (ModelState.IsValid)
             {
@@ -1021,7 +1037,18 @@ namespace HovisMillingPortal.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult PlantGridViewPartialUpdate(HovisMillingPortal.Models.t_Milling_Plant item)
         {
+            if (item.PlantFuncRecid == null)
+            {
+                ViewData["EditError"] = "You must choose a process.";
+                ModelState.AddModelError("PlantFuncRecid", "You must choose a process.");
+            }
+            if (item.SiteRecid == null)
+            {
+                ViewData["EditError"] = "You must choose a site.";
+                ModelState.AddModelError("SiteRecid", "You must choose a site.");
+            }
             ViewBag.Site = new SelectList(db.t_Milling_Site, "SiteRecid", "SiteDesc");
+            ViewBag.Function = new SelectList(db.t_Milling_Function, "FuncRecid", "FuncDesc");
 
             var model = db.t_Milling_Plant;
             if (ModelState.IsValid)
@@ -1050,6 +1077,9 @@ namespace HovisMillingPortal.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult PlantGridViewPartialDelete(System.Int32 PlantRecid)
         {
+            ViewBag.Site = new SelectList(db.t_Milling_Site, "SiteRecid", "SiteDesc");
+            ViewBag.Function = new SelectList(db.t_Milling_Function, "FuncRecid", "FuncDesc");
+
             var model = db.t_Milling_Plant;
             if (PlantRecid >= 0)
             {
@@ -1420,5 +1450,88 @@ namespace HovisMillingPortal.Controllers
 
             return View(item);
         }
+
+
+        public List<AuthorisedSiteVM> AuthorisedSite(string username)
+        {
+                var usersite = (from a in db.t_Hovis_Milling_User_Default_Site
+                                join b in db.t_Milling_Site on a.SiteRecid equals b.SiteRecid
+                                where a.UserName == username
+                                select new
+                                {
+                                    SiteRecid = a.SiteRecid,
+                                    SiteDesc = b.SiteDesc,
+                                    UserName = a.UserName
+                                });
+
+                var Sitelist = (from a in db.t_Hovis_Milling_User_Site_Authorisation
+                            join b in db.t_Milling_Site on a.SiteRecid equals b.SiteRecid
+                            where a.UserName == username
+                            select new
+                            {
+                                SiteRecid = a.SiteRecid,
+                                SiteDesc = b.SiteDesc,
+                                UserName = a.UserName
+                            });
+
+            var model = (from a in db.t_Milling_Plant
+                             join b in Sitelist on a.SiteRecid equals b.SiteRecid
+                             select new AuthorisedSiteVM
+                             {
+                                 PlantRecid = a.PlantRecid,
+                                 SiteRecid = b.SiteRecid,
+                                 PlantDesc = a.PlantDesc
+                             }).ToList();
+ 
+            return model;
+        }
+
+        public List<DefaultSiteVM> DefaultSite(string username)
+        {
+            var usersite = (from a in db.t_Hovis_Milling_User_Default_Site
+                            join b in db.t_Milling_Site on a.SiteRecid equals b.SiteRecid
+                            where a.UserName == username
+                            select new
+                            {
+                                SiteRecid = a.SiteRecid,
+                                SiteDesc = b.SiteDesc,
+                                UserName = a.UserName
+                            });
+
+             var model = (from a in db.t_Milling_Plant
+                         join b in usersite on a.SiteRecid equals b.SiteRecid
+                         select new DefaultSiteVM
+                         {
+                             PlantRecid = a.PlantRecid,
+                             SiteRecid = b.SiteRecid,
+                             PlantDesc = a.PlantDesc
+                         }).ToList();
+
+            return model;
+        }
+
+        //public List<DefaultSiteVM> DefaultFunction(int siteno)
+        //{
+        //    var usersite = (from a in db.t_Milling_Plant
+        //                    join b in db.t_Milling_Site on a.SiteRecid equals b.SiteRecid
+        //                    where a.SiteRecid == siteno
+        //                    select new
+        //                    {
+        //                        SiteRecid = a.PlantRecid,
+        //                        SiteDesc = b.SiteDesc,
+        //                        UserName = a.UserName
+        //                    });
+
+        //    var model = (from a in db.t_Milling_Plant
+        //                 join b in usersite on a.SiteRecid equals b.SiteRecid
+        //                 select new DefaultSiteVM
+        //                 {
+        //                     PlantRecid = a.PlantRecid,
+        //                     SiteRecid = b.SiteRecid,
+        //                     PlantDesc = a.PlantDesc
+        //                 }).ToList();
+
+        //    return model;
+        //}
     }
 }

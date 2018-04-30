@@ -55,6 +55,7 @@ namespace HovisMillingPortal.Models
         public virtual DbSet<t_Milling_Bacs_Audit_Details> t_Milling_Bacs_Audit_Details { get; set; }
         public virtual DbSet<t_Milling_UMQC_Results_Standards_Master_ByFunction> t_Milling_UMQC_Results_Standards_Master_ByFunction { get; set; }
         public virtual DbSet<t_Milling_ticker> t_Milling_ticker { get; set; }
+        public virtual DbSet<t_Hovis_Milling_User_Default_Site> t_Hovis_Milling_User_Default_Site { get; set; }
     
         public virtual int usp_Milling_Bacs_Detail_Creation(Nullable<long> headerrecid)
         {

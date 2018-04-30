@@ -279,6 +279,7 @@ namespace HovisMillingPortal.Controllers
         public ActionResult PlantGridViewPartial()
         {
             ViewBag.Sites = new SelectList(db.t_Milling_Site, "SiteRecid", "SiteDesc");
+            ViewBag.Function = new SelectList(db.t_Milling_Function, "FuncRecid", "FuncDesc");
             var model = db.t_Milling_Plant.ToList();
             return PartialView("_PlantGridViewPartial", model);
         }
@@ -288,6 +289,7 @@ namespace HovisMillingPortal.Controllers
         public ActionResult PlantGridViewPartialAddNew(HovisMillingPortal.Models.t_Milling_Plant item)
         {
             ViewBag.Sites = new SelectList(db.t_Milling_Site, "SiteRecid", "SiteDesc");
+            ViewBag.Function = new SelectList(db.t_Milling_Function, "FuncRecid", "FuncDesc");
             var model = db.t_Milling_Plant;
             if (ModelState.IsValid)
             {

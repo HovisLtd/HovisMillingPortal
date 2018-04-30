@@ -70,4 +70,18 @@ namespace HovisMillingPortal.ViewModels
         public int? ExcludeAverages { get; set; }
     }
 
+    public class AuthorisedSiteVM
+    {
+        public int? PlantRecid { get; set; }
+        public int? SiteRecid { get; set; }
+        public string PlantDesc { get; set; }
+    }
+
+    public class DefaultSiteVM
+    {
+        public int? PlantRecid { get; set; }
+        public int? SiteRecid { get; set; }
+        public string PlantDesc { get; set; }
+    }
+
 }
