@@ -1,0 +1,19 @@
+﻿@model HovisMillingPortal.Models.t_Milling_UMQC_Results_Header
+
+@Html.DevExpress().ComboBox(settings =>
+{
+    settings.Name = "ResultPlantRecid";
+    settings.Properties.ClientSideEvents.Init = "function(s,e){if(s.GetValue()==' '){ s.SetValue(null);}}";
+    settings.Properties.NullText = "-- Please Select --";
+    settings.Properties.NullDisplayText = "-- Please Select --";
+    settings.CallbackRouteValues = new { Controller = "UMQC", Action = "PlantComboPartial" };
+    settings.Properties.ValueType = typeof(int);
+    settings.Properties.TextField = "PlantDesc";
+    settings.Properties.ValueField = "PlantRecid";
+    settings.Properties.EnableCallbackMode = true;
+    settings.ShowModelErrors = true;
+    settings.Properties.CallbackPageSize = 20;
+    settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['passbackfuncchoice'] = ResultFuncRecid.GetValue(); }";
+}
+).BindList(HovisMillingPortal.Controllers.UMQCController.DefaultPlantlist(ViewBag.DefaultSite, ViewBag.DefaultFunc)).Bind(Model.ResultPlantRecid).GetHtml()
+

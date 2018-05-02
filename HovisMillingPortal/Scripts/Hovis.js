@@ -223,3 +223,8 @@ function UMQCHeaderButtonText() {
 }
 
 
+function OnSelectedProcessChanged() {
+    UMQCHeaderformLayout.GetEditor("ResultPlantRecid").PerformCallback();
+}
+
+

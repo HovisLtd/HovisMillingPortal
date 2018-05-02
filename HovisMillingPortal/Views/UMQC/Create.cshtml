@@ -37,23 +37,6 @@
         m.GroupBoxDecoration = GroupBoxDecoration.Box;
         m.SettingsItemCaptions.HorizontalAlign = FormLayoutHorizontalAlign.Left;
 
-        m.Items.Add(j => j.ResultPlantRecid, item =>
-        {
-            item.NestedExtensionType = FormLayoutNestedExtensionItemType.ComboBox;
-            item.Caption = "Plant";
-            item.NestedExtension().ComboBox(i =>
-            {
-                i.Properties.DataSource = ViewBag.Plant;
-                i.Properties.ClientSideEvents.Init = "function(s,e){if(s.GetValue()==' '){ s.SetValue(null);}}";
-                i.Properties.NullText = "-- Please Select --";
-                i.Properties.NullDisplayText = "-- Please Select --";
-                i.ShowModelErrors = true;
-                //i.ClientEnabled = false;
-                //i.ReadOnly = true;
-                //i.Properties.DropDownButton.Visible = false;
-            });
-        });
-
         m.Items.Add(j => j.ResultFuncRecid, item =>
         {
             item.NestedExtensionType = FormLayoutNestedExtensionItemType.ComboBox;
@@ -68,8 +51,39 @@
                 //i.ClientEnabled = false;
                 //i.ReadOnly = true;
                 //i.Properties.DropDownButton.Visible = false;
+                //i.Properties.ClientSideEvents.SelectedIndexChanged = "OnSelectedProcessChanged";
+                i.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { ResultPlantRecid.PerformCallback(); }";
             });
         });
+
+        m.Items.Add(j => j.ResultPlantRecid, item =>
+        {
+            item.Caption = "Plant";
+            item.SetNestedContent(() =>
+            {
+                Html.RenderPartial("PlantComboPartial");
+            });
+        });
+
+        //m.Items.Add(j => j.ResultPlantRecid, item =>
+        //{
+        //    item.NestedExtensionType = FormLayoutNestedExtensionItemType.ComboBox;
+        //    item.Caption = "Plant";
+        //    item.NestedExtension().ComboBox(i =>
+        //    {
+        //        i.Properties.DataSource = ViewBag.Plant;
+        //        i.Properties.ClientSideEvents.Init = "function(s,e){if(s.GetValue()==' '){ s.SetValue(null);}}";
+        //        i.Properties.NullText = "-- Please Select --";
+        //        i.Properties.NullDisplayText = "-- Please Select --";
+        //        i.ShowModelErrors = true;
+        //        //i.ClientEnabled = false;
+        //        //i.ReadOnly = true;
+        //        //i.Properties.DropDownButton.Visible = false;
+        //        i.CallbackRouteValues = new { Controller = "UMQC", Action = "GetPlants", TextField = "PlantName" };
+
+        //        i.Properties.ClientSideEvents.BeginCallback = "PlantComboBox_BeginCallback";
+        //    });
+        //});
 
         m.Items.Add(j => j.ResultShiftRecid, item =>
         {
@@ -177,6 +191,7 @@
             cbSettings.Properties.ValueField = "ProductMasterRecid";
             cbSettings.Properties.ValueType = typeof(int);
 
+            cbSettings.ShowModelErrors = true;
             //item.NestedExtension().ComboBox(i =>
             //{
 

@@ -94,7 +94,8 @@
                           subItem.Items.Add("Master Data - Maintain Shifts", "Master Data - Maintain Shifts", null, DevExpressHelper.GetUrl(new { Controller = "UMQC", Action = "IndexShift" }));
                           subItem.Items.Add("Master Data - Maintain Plant", "Master Data - Maintain Plant", null, DevExpressHelper.GetUrl(new { Controller = "UMQC", Action = "IndexPlant" }));
                           subItem.Items.Add("Master Data - Maintain Site", "Master Data - Maintain Site", null, DevExpressHelper.GetUrl(new { Controller = "UMQC", Action = "IndexSite" }));
-                      });
+                          subItem.Items.Add("Master Data - User Default Site", "Master Data - User Default Site", null, DevExpressHelper.GetUrl(new { Controller = "UMQC", Action = "IndexAssignDefaultSite" }));
+                      }); 
                   }
               });
 

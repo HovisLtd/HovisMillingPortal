@@ -1,0 +1,90 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "AssignDefaultSiteGridView";
+        settings.CallbackRouteValues = new { Controller = "UMQC", Action = "AssignDefaultSiteGridViewPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "UMQC", Action = "AssignDefaultSiteGridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "UMQC", Action = "AssignDefaultSiteGridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "UMQC", Action = "AssignDefaultSiteGridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+
+        settings.KeyFieldName = "defaultSiteRecid";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+        settings.Columns.Add(column =>
+        {
+            column.Name = "ComColumn";
+            //column.Caption = "#";
+            column.SetHeaderTemplateContent(c =>
+            {
+                Html.DevExpress().HyperLink(hl =>
+                {
+                    hl.Name = "hlNew_"; // + c.KeyValue.ToString();
+                    hl.NavigateUrl = "javascript:;";
+                    hl.Properties.Text = "New";
+                    hl.ToolTip = "New";
+                    hl.Properties.ImageUrl = "~/Content/Img/Button_Add_Icon_16.png";
+                    hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ {0}.AddNewRow(); }}", settings.Name);
+                }).Render();
+            });
+            column.SetDataItemTemplateContent(c =>
+            {
+                Html.DevExpress().HyperLink(hl =>
+                {
+                    hl.Name = "hlEdit_" + c.KeyValue.ToString();
+                    hl.NavigateUrl = "javascript:;";
+                    hl.Properties.Text = "Edit";
+                    hl.ToolTip = "Edit";
+                    hl.Properties.ImageUrl = "~/Content/Img/Edit_Icon_16.png";
+                    hl.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ {0}.StartEditRow('{1}'); }}", settings.Name, c.VisibleIndex);
+                }).Render();
+            });
+            column.SetEditItemTemplateContent(c =>
+            {
+
+            });
+
+            column.Width = 60;
+        });
+
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "UserName";
+            c.Caption = "User Name";
+            c.Width = 40;
+            //c.VisibleIndex = 2;
+            //c.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "SiteRecid";
+            c.Caption = "Default Site";
+            c.Visible = true;
+            c.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = c.PropertiesEdit as ComboBoxProperties;
+            comboBoxProperties.DataSource = ViewBag.Site;
+            comboBoxProperties.ValueType = typeof(int);
+            c.AdaptivePriority = 2;
+        });
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

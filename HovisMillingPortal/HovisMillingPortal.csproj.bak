@@ -50,29 +50,29 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.Charts.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.CodeParser.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Data.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.DataAccess.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Office.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Pdf.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.PivotGrid.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.RichEdit.v17.2.Export, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Printing.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.RichEdit.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Sparkline.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Utils.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.ASPxThemes.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.Bootstrap.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Web.Mvc5.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.Resources.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Xpo.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraCharts.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraCharts.v17.2.Web, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraGauges.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraReports.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraReports.v17.2.Web, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Charts.v17.2.Core, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.CodeParser.v17.2, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.v17.2, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.DataAccess.v17.2, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v17.2.Core, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v17.2.Core, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.PivotGrid.v17.2.Core, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v17.2.Export, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v17.2.Core, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v17.2.Core, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v17.2.Core, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v17.2, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Web.ASPxThemes.v17.2, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Web.Bootstrap.v17.2, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.Mvc5.v17.2, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Web.Resources.v17.2, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Web.v17.2, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpo.v17.2, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v17.2, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v17.2.Web, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGauges.v17.2.Core, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v17.2, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v17.2.Web, Version=17.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -216,6 +216,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\SitePlantAuthController.cs" />
+    <Compile Include="Controllers\tickerController.cs" />
     <Compile Include="Controllers\UMQCController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -253,6 +254,9 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\t_Hovis_Milling_User_Default_Site.cs">
+      <DependentUpon>HovisMillingPortalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\t_Hovis_Milling_User_Plant_Authorisation.cs">
       <DependentUpon>HovisMillingPortalModel.tt</DependentUpon>
     </Compile>
@@ -298,6 +302,9 @@
     <Compile Include="Models\t_Milling_Site.cs">
       <DependentUpon>HovisMillingPortalModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\t_Milling_ticker.cs">
+      <DependentUpon>HovisMillingPortalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\t_Milling_UMQC_Category.cs">
       <DependentUpon>HovisMillingPortalModel.tt</DependentUpon>
     </Compile>
@@ -316,6 +323,12 @@
     <Compile Include="Models\t_Milling_UMQC_Results_Standards_Master.cs">
       <DependentUpon>HovisMillingPortalModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\t_Milling_UMQC_Results_Standards_Master_ByFunction.cs">
+      <DependentUpon>HovisMillingPortalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\usp_Milling_Bacs_Indivdual_Detail_Report_Result.cs">
+      <DependentUpon>HovisMillingPortalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\usp_Milling_UMQC_Results_By_Recipe_and_Standard_Result.cs">
       <DependentUpon>HovisMillingPortalModel.tt</DependentUpon>
     </Compile>
@@ -329,6 +342,9 @@
     <Compile Include="Models\ViewModels\SiteAuthorisationViewModel.cs" />
     <Compile Include="Models\ViewModels\UtilityViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\BacsDetailReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\ProductStandardMinMaxReport.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -355,7 +371,9 @@
     <Content Include="Content\img\Document_Add_Icon_16.png" />
     <Content Include="Content\img\Edit_Icon_16.png" />
     <Content Include="Content\img\HoVIS_New_IS_Logo_SMALL.png" />
+    <Content Include="Content\img\if_reports_26957.png" />
     <Content Include="Content\img\if_search_16x16_9963.gif" />
+    <Content Include="Content\img\NEW RH Logo.jpg" />
     <Content Include="Content\img\Number_1_Icon_16.png" />
     <Content Include="Content\img\Number_2_Icon_16.png" />
     <Content Include="Content\img\Number_4_Icon_16.png" />
@@ -365,6 +383,7 @@
     <Content Include="Content\img\Open_Folder_Info_Icon_16.png" />
     <Content Include="Content\img\Paperclip_Icon_16.png" />
     <Content Include="Content\img\QuestionMarks.jpg" />
+    <Content Include="Content\img\WheatImage.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -555,6 +574,13 @@
     <Content Include="Views\BacsDetails\IndexAudit.cshtml" />
     <Content Include="Views\BacsDetails\MainContentAudit.cshtml" />
     <Content Include="Views\BacsDetails\_AuditDetail_GridViewPartial.cshtml" />
+    <Content Include="Views\Reports\BacsDetail.cshtml" />
+    <Content Include="Views\Reports\_BacsDetailDocumentViewerPartial.cshtml" />
+    <Content Include="Views\UMQC\IndexTestByFunction.cshtml" />
+    <Content Include="Views\UMQC\_TestByFunctionGridViewPartial.cshtml" />
+    <Content Include="Views\ticker\tickerIndex.cshtml" />
+    <Content Include="Views\ticker\_tickerGridViewPartial.cshtml" />
+    <Content Include="Views\UMQC\GenerateNew.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -569,6 +595,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Reports\BacsDetailReport.resx">
+      <DependentUpon>BacsDetailReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\ProductStandardMinMaxReport.resx">
       <DependentUpon>ProductStandardMinMaxReport.cs</DependentUpon>
     </EmbeddedResource>

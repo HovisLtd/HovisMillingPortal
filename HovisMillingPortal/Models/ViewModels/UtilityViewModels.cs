@@ -79,9 +79,28 @@ namespace HovisMillingPortal.ViewModels
 
     public class DefaultSiteVM
     {
+        public int? SiteRecid { get; set; }
+        public string SiteDesc { get; set; }
+        public string UserName { get; set; }
+    }
+
+    public class DefaultFunctionVM
+    {
+        public int? FuncRecid { get; set; }
+        public string FuncDesc { get; set; }
+    }
+
+    public class DefaultPlantVM
+    {
         public int? PlantRecid { get; set; }
         public int? SiteRecid { get; set; }
         public string PlantDesc { get; set; }
+    }
+
+    public class LookupPlantListVM
+    {
+        public int? ResultPlantRecid { get; set; }
+        public int? SiteRecid { get; set; }
     }
 
 }
