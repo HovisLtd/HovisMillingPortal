@@ -65,8 +65,8 @@ namespace HovisMillingPortal
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "928704840192-q29qk3cuqdjs3pqok0h15e3fvi1h3b99.apps.googleusercontent.com",
-                ClientSecret = "0UlDtNugMQdI3IhqSTrwhsxT"
+                ClientId = "******.apps.googleusercontent.com",
+                ClientSecret = "******"
             });
         }
     }
